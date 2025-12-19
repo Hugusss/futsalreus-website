@@ -2,43 +2,72 @@ import teamImage from "@/assets/team-celebration.jpg";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, Trophy, Heart } from "lucide-react";
 
+type Language = "ca" | "es";
+
+interface QuiSomProps {
+  language?: Language;
+}
+
 const team = [
-  { name: "Marc Garcia", role: "Entrenador", icon: Users },
-  { name: "Jordi Puig", role: "Porter", icon: Trophy },
-  { name: "Pau Martí", role: "Ala", icon: Trophy },
-  { name: "Arnau Vila", role: "Pivot", icon: Trophy },
-  { name: "Oriol Roca", role: "Cierre", icon: Trophy },
-  { name: "Laia Ferrer", role: "Coordinadora", icon: Heart },
+  { name: "Marc Garcia", role: { ca: "Entrenador", es: "Entrenador" }, icon: Users },
+  { name: "Jordi Puig", role: { ca: "Porter", es: "Portero" }, icon: Trophy },
+  { name: "Pau Martí", role: { ca: "Ala", es: "Ala" }, icon: Trophy },
+  { name: "Arnau Vila", role: { ca: "Pivot", es: "Pívot" }, icon: Trophy },
+  { name: "Oriol Roca", role: { ca: "Cierre", es: "Cierre" }, icon: Trophy },
+  { name: "Laia Ferrer", role: { ca: "Coordinadora", es: "Coordinadora" }, icon: Heart },
 ];
 
-const stats = [
-  { value: "2024", label: "Any de Fundació" },
-  { value: "45+", label: "Jugadors" },
-  { value: "4", label: "Equips" },
-  { value: "100%", label: "Passió" },
-];
+const texts = {
+  ca: {
+    badge: "EL NOSTRE EQUIP",
+    title: "Qui Som",
+    description: "Som una família unida per l'amor al futsal. Des de Reus, treballem cada dia per formar jugadors i persones amb valors.",
+    stats: [
+      { value: "2024", label: "Any de Fundació" },
+      { value: "45+", label: "Jugadors" },
+      { value: "4", label: "Equips" },
+      { value: "100%", label: "Passió" },
+    ],
+    imageTitle: "Units per l'esport",
+    imageSubtitle: "Formant futurs campions",
+  },
+  es: {
+    badge: "NUESTRO EQUIPO",
+    title: "Quiénes Somos",
+    description: "Somos una familia unida por el amor al futsal. Desde Reus, trabajamos cada día para formar jugadores y personas con valores.",
+    stats: [
+      { value: "2024", label: "Año de Fundación" },
+      { value: "45+", label: "Jugadores" },
+      { value: "4", label: "Equipos" },
+      { value: "100%", label: "Pasión" },
+    ],
+    imageTitle: "Unidos por el deporte",
+    imageSubtitle: "Formando futuros campeones",
+  },
+};
 
-export function QuiSom() {
+export function QuiSom({ language = "ca" }: QuiSomProps) {
+  const t = texts[language];
+
   return (
     <section id="qui-som" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
           <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-bold rounded-full mb-4">
-            EL NOSTRE EQUIP
+            {t.badge}
           </span>
           <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
-            Qui Som
+            {t.title}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Som una família unida per l'amor al futsal. Des de Reus, treballem cada dia 
-            per formar jugadors i persones amb valors.
+            {t.description}
           </p>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-          {stats.map((stat, index) => (
+          {t.stats.map((stat, index) => (
             <Card key={index} className="border-none shadow-card text-center">
               <CardContent className="p-6">
                 <span className="block text-3xl md:text-4xl font-black text-primary mb-1">
@@ -66,7 +95,7 @@ export function QuiSom() {
                       <member.icon className="text-primary-foreground" size={24} />
                     </div>
                     <h3 className="font-bold text-foreground text-sm">{member.name}</h3>
-                    <p className="text-xs text-muted-foreground">{member.role}</p>
+                    <p className="text-xs text-muted-foreground">{member.role[language]}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -83,10 +112,10 @@ export function QuiSom() {
               <div className="absolute inset-0 bg-gradient-to-t from-maroon-dark/60 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <p className="text-primary-foreground font-bold text-lg">
-                  Units per l'esport
+                  {t.imageTitle}
                 </p>
                 <p className="text-primary-foreground/80 text-sm">
-                  Formant futurs campions
+                  {t.imageSubtitle}
                 </p>
               </div>
             </div>
