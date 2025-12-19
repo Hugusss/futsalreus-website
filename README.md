@@ -66,5 +66,3 @@ This project is configured to work as a Progressive Web App.
 * [ ] **Supabase Integration:** Backend implementation for user registration.
 * [ ] **Payments:** Stripe integration for online membership fees.
 * [ ] **Admin Panel:** Internal dashboard for updating match scores without code.
-
-```
