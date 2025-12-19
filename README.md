@@ -35,9 +35,10 @@ This project utilizes a bi-directional sync between **Lovable** and **GitHub**.
 If you prefer manual coding using VS Code or your preferred IDE:
 
 1. **Clone the repository:**
-   ```sh
-   git clone https://github.com/Hugusss/futsalreus.git
+```sh
+git clone https://github.com/Hugusss/futsalreus.git
 
+```
 
 2. **Install dependencies:**
 ```sh
