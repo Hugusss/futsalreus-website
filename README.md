@@ -36,13 +36,12 @@ If you prefer manual coding using VS Code or your preferred IDE:
 
 1. **Clone the repository:**
    ```sh
-   git clone <https://github.com/Hugusss/futsalreus.git>
+   git clone https://github.com/Hugusss/futsalreus.git
 
-```
 
 2. **Install dependencies:**
 ```sh
-cd <futsalreus-website>
+cd futsalreus-website
 npm install
 
 ```
