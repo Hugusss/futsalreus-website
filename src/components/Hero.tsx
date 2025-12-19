@@ -2,7 +2,28 @@ import heroImage from "@/assets/hero-futsal.jpg";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 
-export function Hero() {
+type Language = "ca" | "es";
+
+interface HeroProps {
+  language?: Language;
+}
+
+const texts = {
+  ca: {
+    slogan: "Som club, som futsal, som família i amics",
+    cta: "Uneix-te al club",
+    discover: "Descobreix-nos",
+  },
+  es: {
+    slogan: "Somos club, somos futsal, somos familia y amigos",
+    cta: "Únete al club",
+    discover: "Descúbrenos",
+  },
+};
+
+export function Hero({ language = "ca" }: HeroProps) {
+  const t = texts[language];
+
   return (
     <section
       id="inici"
@@ -28,15 +49,15 @@ export function Hero() {
           </h1>
           
           <p className="text-xl sm:text-2xl md:text-3xl font-medium text-primary-foreground/90 mb-8 animate-slide-up-delay-1">
-            Som club, som futsal, som família i amics
+            {t.slogan}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up-delay-2">
             <Button variant="hero" size="lg" asChild>
-              <a href="#contacte">Uneix-te al club</a>
+              <a href="#contacte">{t.cta}</a>
             </Button>
             <Button variant="heroOutline" size="lg" asChild>
-              <a href="#qui-som">Descobreix-nos</a>
+              <a href="#qui-som">{t.discover}</a>
             </Button>
           </div>
         </div>
