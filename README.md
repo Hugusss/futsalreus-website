@@ -1,73 +1,70 @@
-# Welcome to your Lovable project
+# Club Futsal Reus Website
 
-## Project info
+![Project Status](https://img.shields.io/badge/status-active-brightgreen)
+![Tech Stack](https://img.shields.io/badge/stack-React_Vite_Tailwind-blue)
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+A modern, responsive, and performance-optimized website designed for **Club Futsal Reus**, a local football club. This project is built to provide fans, players, and families with real-time match information, club news, and digital services.
 
-## How can I edit this code?
+## 🚀 Project Overview
 
-There are several ways of editing your application.
+This application focuses on a **mobile-first experience** (PWA ready), allowing users to install the website on their devices as a native-like app. It serves as the central digital hub for the club.
 
-**Use Lovable**
+### Key Features
+- **Match Dashboard:** Real-time display of latest results and upcoming fixtures using responsive cards.
+- **Squad Roster:** Dynamic grid layout displaying player and staff information ("Qui som").
+- **Merchandising:** Preview section for club kit and accessories.
+- **Contact & Socials:** Integrated contact options and social media links.
+- **PWA Support:** Configured with `manifest.json` for home screen installation on iOS and Android.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 🛠 Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+This project is built using a modern frontend ecosystem to ensure speed and scalability:
 
-**Use your preferred IDE**
+- **Core:** [React](https://reactjs.org/) (TypeScript)
+- **Build Tool:** [Vite](https://vitejs.dev/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **AI Development:** Powered & Scaffolded by [Lovable](https://lovable.dev/)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 💻 Development Workflow
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+This project utilizes a bi-directional sync between **Lovable** and **GitHub**.
 
-Follow these steps:
+### Local Development (Standard)
+If you prefer manual coding using VS Code or your preferred IDE:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. **Clone the repository:**
+   ```sh
+   git clone <https://github.com/Hugusss/futsalreus.git>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
 ```
 
-**Edit a file directly in GitHub**
+2. **Install dependencies:**
+```sh
+cd <futsalreus-website>
+npm install
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
 
-**Use GitHub Codespaces**
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+3. **Start the development server:**
+```sh
+npm run dev
 
-## What technologies are used for this project?
+```
 
-This project is built with:
+## 📱 PWA & Mobile Configuration
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+This project is configured to work as a Progressive Web App.
 
-## How can I deploy this project?
+* **Manifest:** Located in `public/manifest.json`.
+* **Assets:** Icons for different screen sizes are stored in `public/icons`.
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## 🔮 Future Roadmap
 
-## Can I connect a custom domain to my Lovable project?
+* [ ] **Supabase Integration:** Backend implementation for user registration.
+* [ ] **Payments:** Stripe integration for online membership fees.
+* [ ] **Admin Panel:** Internal dashboard for updating match scores without code.
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+```
