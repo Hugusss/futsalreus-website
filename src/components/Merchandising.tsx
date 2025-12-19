@@ -45,23 +45,25 @@ export function Merchandising() {
           {products.map((product, index) => (
             <Card 
               key={index}
-              className="border-none shadow-card hover:shadow-elevated transition-all hover:-translate-y-1 group overflow-hidden"
+              className="border-none shadow-card hover:shadow-elevated transition-all duration-300 hover:-translate-y-2 group overflow-hidden"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="bg-gradient-hero h-40 flex items-center justify-center">
+              <div className="bg-gradient-hero h-40 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gold/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
                 <product.icon 
-                  className="text-primary-foreground/80 group-hover:scale-110 transition-transform" 
+                  className="text-primary-foreground/80 group-hover:scale-125 group-hover:rotate-6 transition-all duration-300" 
                   size={64} 
                 />
               </div>
               <CardContent className="p-6">
                 <div className="flex items-start justify-between mb-2">
                   <h3 className="font-bold text-foreground">{product.name}</h3>
-                  <span className="text-lg font-black text-primary">{product.price}</span>
+                  <span className="text-lg font-black text-primary group-hover:scale-110 transition-transform">{product.price}</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
                   {product.description}
                 </p>
-                <Button variant="outline" size="sm" className="w-full">
+                <Button variant="outline" size="sm" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                   Més informació
                 </Button>
               </CardContent>

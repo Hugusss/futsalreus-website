@@ -39,9 +39,9 @@ export function QuiSom() {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
           {stats.map((stat, index) => (
-            <Card key={index} className="border-none shadow-card text-center">
+            <Card key={index} className="border-none shadow-card text-center group hover:shadow-elevated hover:-translate-y-1 transition-all duration-300">
               <CardContent className="p-6">
-                <span className="block text-3xl md:text-4xl font-black text-primary mb-1">
+                <span className="block text-3xl md:text-4xl font-black text-primary mb-1 group-hover:scale-110 transition-transform">
                   {stat.value}
                 </span>
                 <span className="text-sm text-muted-foreground font-medium">
@@ -74,14 +74,14 @@ export function QuiSom() {
           </div>
 
           <div className="order-1 md:order-2">
-            <div className="relative rounded-2xl overflow-hidden shadow-elevated">
+            <div className="relative rounded-2xl overflow-hidden shadow-elevated group">
               <img
                 src={teamImage}
                 alt="L'equip celebrant"
-                className="w-full h-auto"
+                className="w-full h-auto group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-maroon-dark/60 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
+              <div className="absolute bottom-0 left-0 right-0 p-6 transform group-hover:translate-y-0 transition-transform">
                 <p className="text-primary-foreground font-bold text-lg">
                   Units per l'esport
                 </p>
