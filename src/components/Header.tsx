@@ -18,7 +18,7 @@ const navLinks = [
 ];
 
 const languages = [
-  { code: "ca", label: "Català", flag: "🇨🇦​" },
+  { code: "ca", label: "Català", flag: "🇨🇦" },
   { code: "es", label: "Español", flag: "🇪🇸" },
 ];
 
