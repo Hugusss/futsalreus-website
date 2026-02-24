@@ -1,18 +1,19 @@
-import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { QuiSom } from "@/components/QuiSom";
 import { PartitsLink } from "@/components/PartitsLink";
 import { Footer } from "@/components/Footer";
+import type { Language } from "@/App";
 
-type Language = "ca" | "es";
+interface IndexProps {
+  language: Language;
+  onLanguageChange: (lang: Language) => void;
+}
 
-const Index = () => {
-  const [language, setLanguage] = useState<Language>("ca");
-
+const Index = ({ language, onLanguageChange }: IndexProps) => {
   return (
     <div className="min-h-screen bg-background">
-      <Header language={language} onLanguageChange={setLanguage} />
+      <Header language={language} onLanguageChange={onLanguageChange} />
       <main>
         <Hero language={language} />
         <QuiSom language={language} />
