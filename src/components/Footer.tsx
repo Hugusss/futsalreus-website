@@ -14,8 +14,8 @@ const socialLinks = [
 ];
 
 const contactInfo = [
-  { icon: Mail, text: "info@cfmontsant.cat", href: "mailto:info@cfmontsant.cat" },
-  { icon: Phone, text: "+34 977 000 000", href: "tel:+34977000000" },
+  { icon: Mail, text: "futsalmontsant@gmail.com", href: "mailto:futsalmontsant@gmail.com" },
+  { icon: Phone, text: "+34 683 386 660", href: "tel:+34683386660" },
   { icon: MapPin, text: "Reus, Tarragona", href: "#" },
 ];
 
@@ -90,7 +90,7 @@ export function Footer({ language = "ca" }: FooterProps) {
               ))}
             </div>
             <Button variant="hero" className="w-full" asChild>
-              <a href="mailto:info@cfmontsant.cat">{t.sendMessage}</a>
+              <a href="mailto:futsalmontsant@gmail.com">{t.sendMessage}</a>
             </Button>
           </div>
         </div>
