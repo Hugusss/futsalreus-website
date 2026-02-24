@@ -1,25 +1,71 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ArrowLeft, Trophy } from "lucide-react";
+import { ArrowLeft, Trophy, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import type { Language } from "@/App";
 
-const Competicions = () => {
+interface CompetitionsProps {
+  language: Language;
+  onLanguageChange: (lang: Language) => void;
+}
+
+const texts = {
+  ca: {
+    title: "Competicions",
+    subtitle: "Tornejos, lligues i resultats dels nostres equips",
+    back: "Tornar a l'inici",
+    introTitle: "Les nostres competicions",
+    intro:
+      "El Club Futsal Montsant de Reus participa en les competicions oficials de la Federació Catalana de Futbol. Els nostres equips competeixen amb il·lusió i compromís en cada partit.",
+    seasonTitle: "Temporada actual",
+    season:
+      "Aquesta temporada els nostres equips estan donant el millor de si mateixos tant a les lligues regulars com als tornejos amistosos. L'objectiu principal és que els jugadors gaudeixin del futsal mentre creixen com a esportistes i persones.",
+    calendarTitle: "Calendari oficial",
+    calendarDesc:
+      "Consulta el calendari de partits, resultats i classificacions al web oficial de la FCF:",
+    calendarButton: "Veure calendari FCF",
+    futureTitle: "Objectius de futur",
+    future:
+      "Volem expandir-nos a totes les categories posteriors al futbol escolar, competint amb excel·lència i portant els nostres valors a cada pista.",
+  },
+  es: {
+    title: "Competiciones",
+    subtitle: "Torneos, ligas y resultados de nuestros equipos",
+    back: "Volver al inicio",
+    introTitle: "Nuestras competiciones",
+    intro:
+      "El Club Futsal Montsant de Reus participa en las competiciones oficiales de la Federación Catalana de Fútbol. Nuestros equipos compiten con ilusión y compromiso en cada partido.",
+    seasonTitle: "Temporada actual",
+    season:
+      "Esta temporada nuestros equipos están dando lo mejor de sí mismos tanto en las ligas regulares como en los torneos amistosos. El objetivo principal es que los jugadores disfruten del futsal mientras crecen como deportistas y personas.",
+    calendarTitle: "Calendario oficial",
+    calendarDesc:
+      "Consulta el calendario de partidos, resultados y clasificaciones en la web oficial de la FCF:",
+    calendarButton: "Ver calendario FCF",
+    futureTitle: "Objetivos de futuro",
+    future:
+      "Queremos expandirnos a todas las categorías posteriores al fútbol escolar, compitiendo con excelencia y llevando nuestros valores a cada pista.",
+  },
+};
+
+const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
   const navigate = useNavigate();
+  const t = texts[language];
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header language={language} onLanguageChange={onLanguageChange} />
       <main className="pt-24 md:pt-28">
         {/* Hero Banner */}
         <div className="bg-gradient-hero py-16 md:py-24">
           <div className="container mx-auto px-4 text-center">
             <Trophy className="mx-auto mb-4 text-primary-foreground/80" size={48} />
             <h1 className="text-4xl md:text-5xl font-black text-primary-foreground mb-4">
-              Competicions
+              {t.title}
             </h1>
             <p className="text-lg text-primary-foreground/80 max-w-2xl mx-auto">
-              Tornejos, lligues i resultats dels nostres equips
+              {t.subtitle}
             </p>
           </div>
         </div>
@@ -32,61 +78,63 @@ const Competicions = () => {
             className="mb-8 gap-2 text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft size={18} />
-            Tornar a l'inici
+            {t.back}
           </Button>
 
           <article className="max-w-3xl mx-auto">
-            <div className="space-y-8">
+            <div className="space-y-10">
               <section>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  Les nostres competicions
+                  {t.introTitle}
                 </h2>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  El Club Futsal Montsant de Reus participa en les competicions oficials de la 
-                  Federació Catalana de Futbol. Els nostres equips competeixen amb il·lusió i 
-                  compromís en cada partit.
+                <p className="text-muted-foreground leading-relaxed text-lg">
+                  {t.intro}
                 </p>
               </section>
 
-              {/* Wide photo */}
+              {/* Photo placeholder */}
               <div className="rounded-2xl overflow-hidden bg-muted aspect-video flex items-center justify-center">
                 <p className="text-muted-foreground text-sm">📷 Espai per a foto</p>
               </div>
 
               <section>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  Temporada actual
+                  {t.seasonTitle}
                 </h2>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  Aquesta temporada els nostres equips estan donant el millor de si mateixos 
-                  tant a les lligues regulars com als tornejos amistosos.
+                <p className="text-muted-foreground leading-relaxed text-lg">
+                  {t.season}
                 </p>
               </section>
 
-              {/* Three-column photo layout */}
-              <div className="grid sm:grid-cols-3 gap-4">
-                <div className="rounded-2xl overflow-hidden bg-muted aspect-square flex items-center justify-center">
-                  <p className="text-muted-foreground text-sm">📷 Foto</p>
-                </div>
-                <div className="rounded-2xl overflow-hidden bg-muted aspect-square flex items-center justify-center">
-                  <p className="text-muted-foreground text-sm">📷 Foto</p>
-                </div>
-                <div className="rounded-2xl overflow-hidden bg-muted aspect-square flex items-center justify-center">
-                  <p className="text-muted-foreground text-sm">📷 Foto</p>
-                </div>
-              </div>
+              {/* FCF Calendar Link */}
+              <section className="bg-primary/5 rounded-2xl p-6 md:p-8 border border-primary/20 text-center">
+                <Trophy className="mx-auto mb-3 text-primary" size={36} />
+                <h2 className="text-xl font-bold text-foreground mb-3">
+                  {t.calendarTitle}
+                </h2>
+                <p className="text-muted-foreground mb-6">{t.calendarDesc}</p>
+                <a
+                  href="https://www.fcf.cat/ff-pb-minipb-fs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="cta" size="lg" className="gap-2">
+                    {t.calendarButton}
+                    <ExternalLink size={18} />
+                  </Button>
+                </a>
+              </section>
 
               <section>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  Històric de resultats
+                  {t.futureTitle}
                 </h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  Des de la fundació del club, hem anat creixent i millorant temporada rere temporada. 
-                  Aquí trobaràs el resum de les nostres participacions.
+                <p className="text-muted-foreground leading-relaxed text-lg">
+                  {t.future}
                 </p>
               </section>
 
-              {/* Two photos side by side */}
+              {/* Photo placeholders */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="rounded-2xl overflow-hidden bg-muted aspect-[4/3] flex items-center justify-center">
                   <p className="text-muted-foreground text-sm">📷 Espai per a foto</p>
@@ -99,7 +147,7 @@ const Competicions = () => {
           </article>
         </div>
       </main>
-      <Footer />
+      <Footer language={language} />
     </div>
   );
 };
