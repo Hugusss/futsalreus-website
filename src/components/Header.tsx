@@ -13,7 +13,6 @@ const navLinks = [
   { href: "#inici", label: { ca: "Inici", es: "Inicio" } },
   { href: "#qui-som", label: { ca: "Qui Som", es: "Quiénes Somos" } },
   { href: "#partits", label: { ca: "Partits", es: "Partidos" } },
-  { href: "#botiga", label: { ca: "Botiga", es: "Tienda" } },
   { href: "#contacte", label: { ca: "Contacte", es: "Contacto" } },
 ];
 
