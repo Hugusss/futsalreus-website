@@ -90,7 +90,7 @@ export function Footer({ language = "ca" }: FooterProps) {
               ))}
             </div>
             <Button variant="hero" className="w-full" asChild>
-              <a href="mailto:info@cfmontsant.cat">{t.sendMessage}</a>
+              <a href="mailto:futsalmontsant@gmail.com">{t.sendMessage}</a>
             </Button>
           </div>
         </div>
