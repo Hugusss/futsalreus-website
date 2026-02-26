@@ -3,6 +3,10 @@ import { Footer } from "@/components/Footer";
 import { ArrowLeft, CalendarHeart, Users, PartyPopper, Tent } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import teamActMain from "@/assets/activitats/act-Main.jpg";
+import teamAct1 from "@/assets/activitats/act-sub1.jpg";
+import teamAct2 from "@/assets/activitats/act-sub2.jpg";
+import teamAct3 from "@/assets/activitats/act-sub3.jpeg";
 import type { Language } from "@/App";
 
 interface ActivitatsProps {
@@ -20,7 +24,7 @@ const texts = {
       "Al Club Futsal Montsant organitzem diferents activitats al llarg de la temporada per fomentar la cohesió del grup i la diversió dels nostres jugadors i les seves famílies.",
     socialTitle: "Esdeveniments socials",
     socialDesc:
-      "Sopars d'equip, celebracions, jornades de portes obertes i molt més. Perquè som club, som futsal, som família i amics. Busquem espais de trobada i convivència per enfortir el sentiment de pertinença al club.",
+      "Menjars d'equip, celebracions, jornades de portes obertes i molt més. Perquè som club, som futsal, som família i amics. Busquem espais de trobada i convivència per enfortir el sentiment de pertinença al club.",
     campusTitle: "Campus i tecnificació",
     campusDesc:
       "Oferim campus durant les vacances escolars i sessions de tecnificació per a tots els nivells. Una oportunitat per millorar i gaudir del futsal en un ambient d'amistat i aprenentatge.",
@@ -40,7 +44,7 @@ const texts = {
       "En el Club Futsal Montsant organizamos diferentes actividades a lo largo de la temporada para fomentar la cohesión del grupo y la diversión de nuestros jugadores y sus familias.",
     socialTitle: "Eventos sociales",
     socialDesc:
-      "Cenas de equipo, celebraciones, jornadas de puertas abiertas y mucho más. Porque somos club, somos futsal, somos familia y amigos. Buscamos espacios de encuentro y convivencia para fortalecer el sentimiento de pertenencia al club.",
+      "Comidas de equipo, celebraciones, jornadas de puertas abiertas y mucho más. Porque somos club, somos futsal, somos familia y amigos. Buscamos espacios de encuentro y convivencia para fortalecer el sentimiento de pertenencia al club.",
     campusTitle: "Campus y tecnificación",
     campusDesc:
       "Ofrecemos campus durante las vacaciones escolares y sesiones de tecnificación para todos los niveles. Una oportunidad para mejorar y disfrutar del futsal en un ambiente de amistad y aprendizaje.",
@@ -96,10 +100,10 @@ const Activitats = ({ language, onLanguageChange }: ActivitatsProps) => {
                 </p>
               </section>
 
-              {/* Photo placeholder */}
-              <div className="rounded-2xl overflow-hidden bg-muted aspect-video flex items-center justify-center">
-                <p className="text-muted-foreground text-sm">📷 Espai per a foto</p>
-              </div>
+              <img 
+                src={teamActMain} 
+                className="w-full h-96 object-cover rounded-2xl"
+              />
 
               {/* Activity cards */}
               <div className="grid sm:grid-cols-3 gap-6">
@@ -122,15 +126,9 @@ const Activitats = ({ language, onLanguageChange }: ActivitatsProps) => {
 
               {/* Gallery placeholders */}
               <div className="grid sm:grid-cols-3 gap-4">
-                <div className="rounded-2xl overflow-hidden bg-muted aspect-square flex items-center justify-center">
-                  <p className="text-muted-foreground text-sm">📷 Foto</p>
-                </div>
-                <div className="rounded-2xl overflow-hidden bg-muted aspect-square flex items-center justify-center">
-                  <p className="text-muted-foreground text-sm">📷 Foto</p>
-                </div>
-                <div className="rounded-2xl overflow-hidden bg-muted aspect-square flex items-center justify-center">
-                  <p className="text-muted-foreground text-sm">📷 Foto</p>
-                </div>
+                <img src={teamAct1} className="w-full h-full object-cover rounded-2xl" />
+                <img src={teamAct2} className="w-full h-full object-cover rounded-2xl" />
+                <img src={teamAct3} className="w-full h-full object-cover rounded-2xl" />
               </div>
 
               <section className="bg-muted/50 rounded-2xl p-6 md:p-8 border border-border text-center">

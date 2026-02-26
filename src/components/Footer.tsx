@@ -49,7 +49,7 @@ export function Footer({ language = "ca" }: FooterProps) {
           {/* Left - Info */}
           <div>
             <div className="flex items-center gap-4 mb-6">
-              <img src={logo} alt="Club Futsal Montsant Reus" className="h-16 w-auto" />
+              <img src={logo} alt="Club Futsal Montsant Reus" className="h-24 w-auto" />
               <div>
                 <h2 className="text-2xl font-black">CLUB FUTSAL</h2>
                 <p className="text-primary-foreground/80 font-semibold">MONTSANT REUS</p>

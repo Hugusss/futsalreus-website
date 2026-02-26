@@ -3,6 +3,9 @@ import { Footer } from "@/components/Footer";
 import { ArrowLeft, Trophy, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import teamCompetiMain from "@/assets/competicions/team-competi.jpg";
+import teamCeleb1 from "@/assets/competicions/team-celeb1.jpg";
+import teamCeleb2 from "@/assets/competicions/team-celeb2.jpg";
 import type { Language } from "@/App";
 
 interface CompetitionsProps {
@@ -92,10 +95,7 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
                 </p>
               </section>
 
-              {/* Photo placeholder */}
-              <div className="rounded-2xl overflow-hidden bg-muted aspect-video flex items-center justify-center">
-                <p className="text-muted-foreground text-sm">📷 Espai per a foto</p>
-              </div>
+              <img src={teamCompetiMain} className="w-full h-full object-cover rounded-2xl" />
 
               <section>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
@@ -134,14 +134,15 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
                 </p>
               </section>
 
-              {/* Photo placeholders */}
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="rounded-2xl overflow-hidden bg-muted aspect-[4/3] flex items-center justify-center">
-                  <p className="text-muted-foreground text-sm">📷 Espai per a foto</p>
-                </div>
-                <div className="rounded-2xl overflow-hidden bg-muted aspect-[4/3] flex items-center justify-center">
-                  <p className="text-muted-foreground text-sm">📷 Espai per a foto</p>
-                </div>
+                <img
+                  src={teamCeleb1}
+                  className="w-full aspect-square object-cover rounded-2xl"
+                />
+                <img
+                  src={teamCeleb2}
+                  className="w-full aspect-square object-cover rounded-2xl"
+                />
               </div>
             </div>
           </article>

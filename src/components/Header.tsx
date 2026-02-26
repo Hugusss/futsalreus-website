@@ -58,7 +58,7 @@ export function Header({ language = "ca", onLanguageChange }: HeaderProps) {
             <img 
               src={logo} 
               alt="Club Futsal Montsant Reus" 
-              className="h-14 md:h-16 w-auto transition-transform group-hover:scale-105"
+              className="h-20 md:h-24 w-auto transition-transform group-hover:scale-105"
             />
             <div className="hidden sm:block">
               <span className="block text-base md:text-lg font-bold text-primary leading-tight">

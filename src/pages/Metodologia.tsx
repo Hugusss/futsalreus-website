@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { ArrowLeft, BookOpen, Heart, Users, MessageCircle, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import teamMethod from "@/assets/metodologia/team-train.jpg";
 import type { Language } from "@/App";
 
 interface MetodologiaProps {
@@ -222,10 +223,10 @@ const Metodologia = ({ language, onLanguageChange }: MetodologiaProps) => {
                 </div>
               </section>
 
-              {/* Photo placeholder */}
-              <div className="rounded-2xl overflow-hidden bg-muted aspect-video flex items-center justify-center">
-                <p className="text-muted-foreground text-sm">📷 Espai per a foto</p>
-              </div>
+              <img 
+                src={teamMethod}
+                className="w-full h-96 object-cover rounded-2xl"
+              />
             </div>
           </article>
         </div>
