@@ -121,7 +121,7 @@ export function QuiSom({ language = "ca" }: QuiSomProps) {
         </div>
 
         {/* Team Image + Founders */}
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-[1.3fr_1fr] gap-8 items-center">
           {/* Image */}
           <div className="relative rounded-2xl overflow-hidden shadow-elevated">
             <img
