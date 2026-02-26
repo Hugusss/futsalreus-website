@@ -153,7 +153,7 @@ export function Header({ language = "ca", onLanguageChange }: HeaderProps) {
                 </div>
               </div>
 
-              <Button variant="cta" className="mt-2 mx-4 text-lg py-4">
+              <Button variant="cta" className="mt-2 mx-4 text-lg py-4" onClick={() => handleNavClick("#contacte")}>
                 {language === "ca" ? "Uneix-te al club" : "Únete al club"}
               </Button>
             </div>
