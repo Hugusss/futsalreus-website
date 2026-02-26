@@ -21,18 +21,18 @@ const contactInfo = [
 
 const texts = {
   ca: {
-    description: "Som un club de futsal de Reus fundat el 2024 amb l'objectiu de promoure l'esport i els valors entre els més joves de la nostra comunitat.",
+    description: "Som un club de futsal de Reus fundat el 2025 amb l'objectiu de promoure l'esport i els valors entre els més joves de la nostra comunitat.",
     contact: "Contacta'ns",
     sendMessage: "Envia'ns un missatge",
-    copyright: "© 2024 Club Futsal Montsant Reus. Tots els drets reservats.",
+    copyright: "© 2025 Club Futsal Montsant Reus. Tots els drets reservats.",
     madeWith: "Fet amb",
     inReus: "a Reus",
   },
   es: {
-    description: "Somos un club de futsal de Reus fundado en 2024 con el objetivo de promover el deporte y los valores entre los más jóvenes de nuestra comunidad.",
+    description: "Somos un club de futsal de Reus fundado en 2025 con el objetivo de promover el deporte y los valores entre los más jóvenes de nuestra comunidad.",
     contact: "Contáctanos",
     sendMessage: "Envíanos un mensaje",
-    copyright: "© 2024 Club Futsal Montsant Reus. Todos los derechos reservados.",
+    copyright: "© 2025 Club Futsal Montsant Reus. Todos los derechos reservados.",
     madeWith: "Hecho con",
     inReus: "en Reus",
   },

@@ -9,6 +9,7 @@ import Metodologia from "./pages/Metodologia";
 import Competicions from "./pages/Competicions";
 import Activitats from "./pages/Activitats";
 import NotFound from "./pages/NotFound";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 export type Language = "ca" | "es";
 
@@ -23,6 +24,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index language={language} onLanguageChange={setLanguage} />} />
             <Route path="/metodologia" element={<Metodologia language={language} onLanguageChange={setLanguage} />} />
