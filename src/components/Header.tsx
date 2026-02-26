@@ -104,7 +104,7 @@ export function Header({ language = "ca", onLanguageChange }: HeaderProps) {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button variant="cta" size="default" className="ml-4 text-base px-6 py-3">
+            <Button variant="cta" size="default" className="ml-4 text-base px-6 py-3" onClick={() => handleNavClick("#contacte")}>
               {language === "ca" ? "Uneix-te" : "Únete"}
             </Button>
           </nav>
