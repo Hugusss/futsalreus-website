@@ -8,15 +8,55 @@ interface FooterProps {
   language?: Language;
 }
 
+interface ContactItem {
+  icon: React.ComponentType<{ size?: string | number; className?: string }>;
+  text: string;
+  href: string;
+  target?: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => false;
+}
+
+// Function to get the appropriate map link based on device
+const getMapLink = (): string => {
+  const userAgent = navigator.userAgent.toLowerCase();
+  const isIOS = /iphone|ipad|ipod/.test(userAgent);
+
+  if (isIOS) {
+    // Apple Maps for iOS
+    return "maps://maps.apple.com/?address=Reus,Tarragona";
+  } else {
+    // Google Maps for Android and other devices
+    return "geo:41.1534,1.1055?q=Reus,Tarragona";
+  }
+};
+
+// Function to handle map link click with fallback
+const handleMapClick = (e: React.MouseEvent<HTMLAnchorElement>): false => {
+  e.preventDefault();
+  const mapUrl = getMapLink();
+  const fallbackUrl = "https://maps.google.com/?q=Reus,Tarragona";
+
+  // Try to open the native map app
+  setTimeout(() => {
+    // If app doesn't open after 1 second, fallback to browser
+    window.open(fallbackUrl, "_blank");
+  }, 500);
+
+  window.location.href = mapUrl;
+
+  // Clear timeout if the link worked (app opened)
+  return false;
+};
+
 const socialLinks = [
   { icon: Instagram, href: "#", label: "Instagram" },
   { icon: Facebook, href: "#", label: "Facebook" },
 ];
 
-const contactInfo = [
+const contactInfo: ContactItem[] = [
   { icon: Mail, text: "futsalmontsant@gmail.com", href: "mailto:futsalmontsant@gmail.com" },
   { icon: Phone, text: "+34 683 386 660", href: "tel:+34683386660" },
-  { icon: MapPin, text: "Reus, Tarragona", href: "#" },
+  { icon: MapPin, text: "Reus, Tarragona", href: "#", onClick: handleMapClick },
 ];
 
 const texts = {
@@ -82,6 +122,9 @@ export function Footer({ language = "ca" }: FooterProps) {
                 <a
                   key={index}
                   href={item.href}
+                  onClick={item.onClick}
+                  target={item.target}
+                  rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
                   className="flex items-center gap-3 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                 >
                   <item.icon size={18} className="text-accent" />
