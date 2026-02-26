@@ -40,7 +40,7 @@ const handleMapClick = (e: React.MouseEvent<HTMLAnchorElement>): false => {
   setTimeout(() => {
     // If app doesn't open after 1 second, fallback to browser
     window.open(fallbackUrl, "_blank");
-  }, 500);
+  }, 1000);
 
   window.location.href = mapUrl;
 
