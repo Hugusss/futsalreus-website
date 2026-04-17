@@ -112,12 +112,36 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
               <img src={teamCompetiMain} className="w-full h-full object-cover rounded-2xl" />
 
               <section>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  {t.seasonTitle}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed text-lg">
-                  {t.season}
+                <div className="flex items-center gap-3 mb-4">
+                  <Users className="text-primary" size={28} />
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+                    {t.categoriesTitle}
+                  </h2>
+                </div>
+                <p className="text-muted-foreground leading-relaxed text-lg mb-6">
+                  {t.categoriesDesc}
                 </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {t.categories.map((cat) => (
+                    <div
+                      key={cat.key}
+                      className="group relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-card to-card p-5 shadow-card transition-all hover:-translate-y-1 hover:shadow-lg hover:border-primary/40"
+                    >
+                      <Sparkles
+                        className="absolute -right-2 -top-2 text-primary/10 transition-all group-hover:text-primary/30 group-hover:rotate-12"
+                        size={64}
+                      />
+                      <div className="relative">
+                        <span className="block text-xs font-semibold uppercase tracking-wider text-primary/70 mb-1">
+                          {language === "ca" ? "Categoria" : "Categoría"}
+                        </span>
+                        <span className="block text-xl font-black text-foreground">
+                          {cat.label}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </section>
 
               {/* FCF Calendar Link */}
