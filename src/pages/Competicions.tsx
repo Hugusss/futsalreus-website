@@ -25,11 +25,11 @@ const texts = {
     categoriesDesc:
       "Iniciem el camí amb la voluntat d'obrir, progressivament, les següents categories perquè tothom pugui formar part del club:",
     categories: [
-      { key: "infantil", label: "Infantil" },
-      { key: "cadet", label: "Cadet" },
-      { key: "juvenil", label: "Juvenil" },
-      { key: "senior", label: "Sènior" },
-      { key: "femeni", label: "Femení" },
+      { key: "infantil", label: "Infantil", Icon: Baby },
+      { key: "cadet", label: "Cadet", Icon: Bike },
+      { key: "juvenil", label: "Juvenil", Icon: Zap },
+      { key: "senior", label: "Sènior", Icon: Shield },
+      { key: "femeni", label: "Femení", Icon: Heart },
     ],
     calendarTitle: "Calendari oficial",
     calendarDesc:
@@ -50,11 +50,11 @@ const texts = {
     categoriesDesc:
       "Iniciamos el camino con la voluntad de abrir, progresivamente, las siguientes categorías para que todos puedan formar parte del club:",
     categories: [
-      { key: "infantil", label: "Infantil" },
-      { key: "cadet", label: "Cadete" },
-      { key: "juvenil", label: "Juvenil" },
-      { key: "senior", label: "Senior" },
-      { key: "femeni", label: "Femenino" },
+      { key: "infantil", label: "Infantil", Icon: Baby },
+      { key: "cadet", label: "Cadete", Icon: Bike },
+      { key: "juvenil", label: "Juvenil", Icon: Zap },
+      { key: "senior", label: "Senior", Icon: Shield },
+      { key: "femeni", label: "Femenino", Icon: Heart },
     ],
     calendarTitle: "Calendario oficial",
     calendarDesc:
@@ -122,25 +122,28 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
                   {t.categoriesDesc}
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                  {t.categories.map((cat) => (
-                    <div
-                      key={cat.key}
-                      className="group relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-card to-card p-5 shadow-card transition-all hover:-translate-y-1 hover:shadow-lg hover:border-primary/40"
-                    >
-                      <Sparkles
-                        className="absolute -right-2 -top-2 text-primary/10 transition-all group-hover:text-primary/30 group-hover:rotate-12"
-                        size={64}
-                      />
-                      <div className="relative">
-                        <span className="block text-xs font-semibold uppercase tracking-wider text-primary/70 mb-1">
-                          {language === "ca" ? "Categoria" : "Categoría"}
-                        </span>
-                        <span className="block text-xl font-black text-foreground">
-                          {cat.label}
-                        </span>
+                  {t.categories.map((cat) => {
+                    const CatIcon = cat.Icon;
+                    return (
+                      <div
+                        key={cat.key}
+                        className="group relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-card to-card p-5 shadow-card transition-all hover:-translate-y-1 hover:shadow-lg hover:border-primary/40"
+                      >
+                        <CatIcon
+                          className="absolute -right-2 -top-2 text-primary/10 transition-all group-hover:text-primary/30 group-hover:rotate-12 group-hover:scale-110"
+                          size={64}
+                        />
+                        <div className="relative">
+                          <span className="block text-xs font-semibold uppercase tracking-wider text-primary/70 mb-1">
+                            {language === "ca" ? "Categoria" : "Categoría"}
+                          </span>
+                          <span className="block text-xl font-black text-foreground">
+                            {cat.label}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </section>
 
