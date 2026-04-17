@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ArrowLeft, Trophy, Users, Baby, Rabbit, Squirrel, Sparkles, Flower2 } from "lucide-react";
+import { ArrowLeft, Trophy, Users, Baby, Rabbit, Squirrel, Sparkles, Venus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import teamCompetiMain from "@/assets/competicions/team-competi.jpg";
@@ -29,7 +29,7 @@ const texts = {
       { key: "cadet", label: "Cadet", Icon: Rabbit },
       { key: "juvenil", label: "Juvenil", Icon: Squirrel },
       { key: "senior", label: "Sènior", Icon: Sparkles },
-      { key: "femeni", label: "Femení", Icon: Flower2 },
+      { key: "femeni", label: "Femení", Icon: Venus },
     ],
     calendarTitle: "Calendari oficial",
     calendarDesc:
@@ -54,7 +54,7 @@ const texts = {
       { key: "cadet", label: "Cadete", Icon: Rabbit },
       { key: "juvenil", label: "Juvenil", Icon: Squirrel },
       { key: "senior", label: "Senior", Icon: Sparkles },
-      { key: "femeni", label: "Femenino", Icon: Flower2 },
+      { key: "femeni", label: "Femenino", Icon: Venus },
     ],
     calendarTitle: "Calendario oficial",
     calendarDesc:
