@@ -144,25 +144,6 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
                 </div>
               </section>
 
-              {/* FCF Calendar Link */}
-              <section className="bg-primary/5 rounded-2xl p-6 md:p-8 border border-primary/20 text-center">
-                <Trophy className="mx-auto mb-3 text-primary" size={36} />
-                <h2 className="text-xl font-bold text-foreground mb-3">
-                  {t.calendarTitle}
-                </h2>
-                <p className="text-muted-foreground mb-6">{t.calendarDesc}</p>
-                <a
-                  href="https://www.fcf.cat/ff-pb-minipb-fs"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button variant="cta" size="lg" className="gap-2">
-                    {t.calendarButton}
-                    <ExternalLink size={18} />
-                  </Button>
-                </a>
-              </section>
-
               <section>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                   {t.futureTitle}
