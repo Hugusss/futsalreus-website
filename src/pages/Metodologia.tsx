@@ -55,7 +55,7 @@ const texts = {
       {
         icon: Users,
         title: "Equip i comunitat",
-        text: "Cada equip comptarà amb un responsable de comunicació entre famílies i club. Es buscaran espais de trobada i convivència per enfortir el sentiment de pertinença al club.",
+        text: "Es buscaran espais de trobada i convivència per enfortir el sentiment de pertinença al club.",
       },
     ],
     dedicationTitle: "Dedicació principal",
@@ -105,7 +105,7 @@ const texts = {
       {
         icon: Users,
         title: "Equipo y comunidad",
-        text: "Cada equipo contará con un responsable de comunicación entre familias y club. Se buscarán espacios de encuentro y convivencia para fortalecer el sentimiento de pertenencia al club.",
+        text: "Se buscarán espacios de encuentro y convivencia para fortalecer el sentimiento de pertenencia al club.",
       },
     ],
     dedicationTitle: "Dedicación principal",

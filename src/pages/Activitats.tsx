@@ -30,7 +30,7 @@ const texts = {
       "Oferim campus durant les vacances escolars i sessions de tecnificació per a tots els nivells. Una oportunitat per millorar i gaudir del futsal en un ambient d'amistat i aprenentatge.",
     communityTitle: "Comunitat i famílies",
     communityDesc:
-      "Fomentem una relació propera i constant entre les famílies, els entrenadors i la junta directiva. Cada equip comptarà amb un responsable de comunicació entre famílies i club.",
+      "Fomentem una relació propera i constant entre les famílies, els entrenadors i la junta directiva.",
     upcoming: "Properes activitats",
     upcomingDesc:
       "Estigues atent a les nostres xarxes socials per conèixer les properes activitats i esdeveniments del club. T'hi esperem!",
@@ -50,7 +50,7 @@ const texts = {
       "Ofrecemos campus durante las vacaciones escolares y sesiones de tecnificación para todos los niveles. Una oportunidad para mejorar y disfrutar del futsal en un ambiente de amistad y aprendizaje.",
     communityTitle: "Comunidad y familias",
     communityDesc:
-      "Fomentamos una relación cercana y constante entre las familias, los entrenadores y la junta directiva. Cada equipo contará con un responsable de comunicación entre familias y club.",
+      "Fomentamos una relación cercana y constante entre las familias, los entrenadores y la junta directiva.",
     upcoming: "Próximas actividades",
     upcomingDesc:
       "Permanece atento a nuestras redes sociales para conocer las próximas actividades y eventos del club. ¡Te esperamos!",
