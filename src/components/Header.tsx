@@ -19,8 +19,8 @@ const navLinks = [
 ];
 
 const languages = [
-  { code: "ca", label: "Català", flag: "🇨🇦" },
-  { code: "es", label: "Español", flag: "🇪🇸" },
+  { code: "ca", label: "Català" },
+  { code: "es", label: "Español" },
 ];
 
 interface HeaderProps {
@@ -97,7 +97,6 @@ export function Header({ language = "ca", onLanguageChange }: HeaderProps) {
                     onClick={() => handleLanguageChange(lang.code as Language)}
                     className={`text-base ${language === lang.code ? "bg-primary/10 text-primary" : ""}`}
                   >
-                    <span className="mr-2">{lang.flag}</span>
                     {lang.label}
                   </DropdownMenuItem>
                 ))}

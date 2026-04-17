@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ArrowLeft, Trophy, ExternalLink } from "lucide-react";
+import { ArrowLeft, Trophy, ExternalLink, Users, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import teamCompetiMain from "@/assets/competicions/team-competi.jpg";
@@ -21,9 +21,16 @@ const texts = {
     introTitle: "Les nostres competicions",
     intro:
       "El Club Futsal Montsant de Reus participa en les competicions oficials de la Federació Catalana de Futbol. Els nostres equips competeixen amb il·lusió i compromís en cada partit.",
-    seasonTitle: "Temporada actual",
-    season:
-      "Aquesta temporada els nostres equips estan donant el millor de si mateixos tant a les lligues regulars com als tornejos amistosos. L'objectiu principal és que els jugadors gaudeixin del futsal mentre creixen com a esportistes i persones.",
+    categoriesTitle: "Categories d'equip",
+    categoriesDesc:
+      "Iniciem el camí amb la voluntat d'obrir, progressivament, les següents categories perquè tothom pugui formar part del club:",
+    categories: [
+      { key: "infantil", label: "Infantil" },
+      { key: "cadet", label: "Cadet" },
+      { key: "juvenil", label: "Juvenil" },
+      { key: "senior", label: "Sènior" },
+      { key: "femeni", label: "Femení" },
+    ],
     calendarTitle: "Calendari oficial",
     calendarDesc:
       "Consulta el calendari de partits, resultats i classificacions al web oficial de la FCF:",
@@ -39,9 +46,16 @@ const texts = {
     introTitle: "Nuestras competiciones",
     intro:
       "El Club Futsal Montsant de Reus participa en las competiciones oficiales de la Federación Catalana de Fútbol. Nuestros equipos compiten con ilusión y compromiso en cada partido.",
-    seasonTitle: "Temporada actual",
-    season:
-      "Esta temporada nuestros equipos están dando lo mejor de sí mismos tanto en las ligas regulares como en los torneos amistosos. El objetivo principal es que los jugadores disfruten del futsal mientras crecen como deportistas y personas.",
+    categoriesTitle: "Categorías de equipo",
+    categoriesDesc:
+      "Iniciamos el camino con la voluntad de abrir, progresivamente, las siguientes categorías para que todos puedan formar parte del club:",
+    categories: [
+      { key: "infantil", label: "Infantil" },
+      { key: "cadet", label: "Cadete" },
+      { key: "juvenil", label: "Juvenil" },
+      { key: "senior", label: "Senior" },
+      { key: "femeni", label: "Femenino" },
+    ],
     calendarTitle: "Calendario oficial",
     calendarDesc:
       "Consulta el calendario de partidos, resultados y clasificaciones en la web oficial de la FCF:",
@@ -98,12 +112,36 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
               <img src={teamCompetiMain} className="w-full h-full object-cover rounded-2xl" />
 
               <section>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  {t.seasonTitle}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed text-lg">
-                  {t.season}
+                <div className="flex items-center gap-3 mb-4">
+                  <Users className="text-primary" size={28} />
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+                    {t.categoriesTitle}
+                  </h2>
+                </div>
+                <p className="text-muted-foreground leading-relaxed text-lg mb-6">
+                  {t.categoriesDesc}
                 </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {t.categories.map((cat) => (
+                    <div
+                      key={cat.key}
+                      className="group relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-card to-card p-5 shadow-card transition-all hover:-translate-y-1 hover:shadow-lg hover:border-primary/40"
+                    >
+                      <Sparkles
+                        className="absolute -right-2 -top-2 text-primary/10 transition-all group-hover:text-primary/30 group-hover:rotate-12"
+                        size={64}
+                      />
+                      <div className="relative">
+                        <span className="block text-xs font-semibold uppercase tracking-wider text-primary/70 mb-1">
+                          {language === "ca" ? "Categoria" : "Categoría"}
+                        </span>
+                        <span className="block text-xl font-black text-foreground">
+                          {cat.label}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </section>
 
               {/* FCF Calendar Link */}
