@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ArrowLeft, Trophy, ExternalLink, Users, Sparkles, Baby, Bike, Zap, Shield, Heart } from "lucide-react";
+import { ArrowLeft, Trophy, Users, Baby, Rabbit, Squirrel, Sparkles, Flower2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import teamCompetiMain from "@/assets/competicions/team-competi.jpg";
@@ -26,10 +26,10 @@ const texts = {
       "Iniciem el camí amb la voluntat d'obrir, progressivament, les següents categories perquè tothom pugui formar part del club:",
     categories: [
       { key: "infantil", label: "Infantil", Icon: Baby },
-      { key: "cadet", label: "Cadet", Icon: Bike },
-      { key: "juvenil", label: "Juvenil", Icon: Zap },
-      { key: "senior", label: "Sènior", Icon: Shield },
-      { key: "femeni", label: "Femení", Icon: Heart },
+      { key: "cadet", label: "Cadet", Icon: Rabbit },
+      { key: "juvenil", label: "Juvenil", Icon: Squirrel },
+      { key: "senior", label: "Sènior", Icon: Sparkles },
+      { key: "femeni", label: "Femení", Icon: Flower2 },
     ],
     calendarTitle: "Calendari oficial",
     calendarDesc:
@@ -51,10 +51,10 @@ const texts = {
       "Iniciamos el camino con la voluntad de abrir, progresivamente, las siguientes categorías para que todos puedan formar parte del club:",
     categories: [
       { key: "infantil", label: "Infantil", Icon: Baby },
-      { key: "cadet", label: "Cadete", Icon: Bike },
-      { key: "juvenil", label: "Juvenil", Icon: Zap },
-      { key: "senior", label: "Senior", Icon: Shield },
-      { key: "femeni", label: "Femenino", Icon: Heart },
+      { key: "cadet", label: "Cadete", Icon: Rabbit },
+      { key: "juvenil", label: "Juvenil", Icon: Squirrel },
+      { key: "senior", label: "Senior", Icon: Sparkles },
+      { key: "femeni", label: "Femenino", Icon: Flower2 },
     ],
     calendarTitle: "Calendario oficial",
     calendarDesc:
