@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ArrowLeft, Trophy, ExternalLink } from "lucide-react";
+import { ArrowLeft, Trophy, ExternalLink, Users, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import teamCompetiMain from "@/assets/competicions/team-competi.jpg";
