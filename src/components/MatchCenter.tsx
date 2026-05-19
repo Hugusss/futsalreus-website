@@ -17,15 +17,15 @@ interface Match {
 }
 
 const matches: Match[] = [
-  // Novembre 2025
-  { id: 1, date: "8 Novembre 2025", time: "18:00h", rival: "El Vendrell", location: "Pavelló Vendrell", isHome: false, month: 10, year: 2025 },
-  { id: 2, date: "15 Novembre 2025", time: "18:00h", rival: "Valls FS", location: "Pavelló Valls", isHome: false, month: 10, year: 2025 },
-  { id: 3, date: "22 Novembre 2025", time: "19:00h", rival: "Mont-roig FS", location: "Pavelló Municipal de Reus", isHome: true, month: 10, year: 2025 },
-  // Desembre 2025
-  { id: 4, date: "6 Desembre 2025", time: "17:30h", rival: "Constantí FC", location: "Pavelló Municipal de Reus", isHome: true, month: 11, year: 2025 },
-  { id: 5, date: "13 Desembre 2025", time: "18:00h", rival: "La Selva FS", location: "Pavelló La Selva", isHome: false, month: 11, year: 2025 },
-  { id: 6, date: "20 Desembre 2025", time: "18:00h", rival: "FS Salou", location: "Pavelló Municipal de Reus", isHome: true, month: 11, year: 2025 },
-  { id: 7, date: "27 Desembre 2025", time: "19:00h", rival: "Tarragona FS", location: "Pavelló Tarragona", isHome: false, month: 11, year: 2025 },
+  // Novembre 2024
+  { id: 1, date: "8 Novembre 2024", time: "18:00h", rival: "El Vendrell", location: "Pavelló Vendrell", isHome: false, month: 10, year: 2024 },
+  { id: 2, date: "15 Novembre 2024", time: "18:00h", rival: "Valls FS", location: "Pavelló Valls", isHome: false, month: 10, year: 2024 },
+  { id: 3, date: "22 Novembre 2024", time: "19:00h", rival: "Mont-roig FS", location: "Pavelló Municipal de Reus", isHome: true, month: 10, year: 2024 },
+  // Desembre 2024
+  { id: 4, date: "6 Desembre 2024", time: "17:30h", rival: "Constantí FC", location: "Pavelló Municipal de Reus", isHome: true, month: 11, year: 2024 },
+  { id: 5, date: "13 Desembre 2024", time: "18:00h", rival: "La Selva FS", location: "Pavelló La Selva", isHome: false, month: 11, year: 2024 },
+  { id: 6, date: "20 Desembre 2024", time: "18:00h", rival: "FS Salou", location: "Pavelló Municipal de Reus", isHome: true, month: 11, year: 2024 },
+  { id: 7, date: "27 Desembre 2024", time: "19:00h", rival: "Tarragona FS", location: "Pavelló Tarragona", isHome: false, month: 11, year: 2024 },
   // Gener 2026
   { id: 8, date: "3 Gener 2026", time: "17:30h", rival: "Cambrils FC", location: "Pavelló Municipal de Reus", isHome: true, month: 0, year: 2026 },
   { id: 9, date: "10 Gener 2026", time: "18:00h", rival: "Vila-seca FS", location: "Pavelló Vila-seca", isHome: false, month: 0, year: 2026 },
