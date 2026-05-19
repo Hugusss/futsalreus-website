@@ -10,8 +10,9 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38BDF8?logo=tailwindcss&logoColor=white)
 ![Built with Lovable](https://img.shields.io/badge/Built_with-Lovable-FF5C8A)
+![Deploy with CloudFlare Pages](https://img.shields.io/badge/Deploy_with-Cloudflare_Pages-0690FA?logo=cloudflare&logoColor=white)
 
-🌐 **Live site:** [futsalreus.lovable.app](https://futsalreus.lovable.app)
+🌐 **Live site:** [fsmontsant.reus.workers.dev](https://fsmontsant.reus.workers.dev/)
 
 ---
 
@@ -22,8 +23,8 @@ and community. This website is its central digital hub: a fast, accessible,
 and bilingual experience designed to bring the club closer to players,
 families, and supporters — on any device.
 
-The site is **mobile-first** and **installable as a PWA**, so visitors can add
-it to their home screen and use it like a native app.
+The site is **mobile-first**, so visitors can add
+it to their home screen and use it.
 
 ---
 
@@ -31,10 +32,7 @@ it to their home screen and use it like a native app.
 
 - 🌍 **Bilingual interface** — Catalan (primary) and Spanish, with a global
   language switcher.
-- 📱 **Mobile-first & PWA-ready** — Installable on iOS and Android, optimized
-  for small screens first.
-- 🏟️ **Match Center** — Latest results and upcoming fixtures presented in
-  responsive cards.
+- 🏟️ **Match Center** — Latest results and upcoming fixtures in the link button.
 - 👥 **Qui Som** — Founders and people behind the club, with a custom desktop
   grid layout.
 - 🧠 **Metodologia** — The club's training philosophy and community approach.
@@ -43,7 +41,6 @@ it to their home screen and use it like a native app.
   identity.
 - 🎉 **Activitats** — Events, community moments, and family-oriented
   initiatives.
-- 👕 **Merchandising** — Preview of the club's kit and accessories.
 - 🎨 **Energetic design system** — Maroon & white palette, animated
   interactions, and a vibrant, community-driven aesthetic.
 - 📣 **Social presence** — Direct links to Instagram, TikTok, and Twitch.
@@ -65,9 +62,7 @@ it to their home screen and use it like a native app.
 | Data / state     | [TanStack Query](https://tanstack.com/query)              |
 | Forms            | [react-hook-form](https://react-hook-form.com/) + [zod](https://zod.dev/) |
 | Notifications    | [sonner](https://sonner.emilkowal.ski/)                   |
-| PWA              | `public/manifest.json` + icon set                         |
 | Tooling          | ESLint, TypeScript                                        |
-| Platform         | Designed and maintained with [Lovable](https://lovable.dev/) |
 
 ---
 
@@ -118,41 +113,6 @@ and themable.
 The app ships in **Catalan (default)** and **Spanish**. Language is held in
 global state at `src/App.tsx` and propagated to each page through props, so
 the switch is instant and persistent across navigation.
-
----
-
-## Progressive Web App
-
-The site is configured to behave like a native application on mobile devices:
-
-- Manifest: `public/manifest.json`
-- Icons: `public/icons/`
-- Mobile-first responsive layouts across every page
-
-Users can install the site to their home screen on iOS and Android.
-
----
-
-## Roadmap
-
-- [ ] **Lovable Cloud** integration for member registration and authentication
-- [ ] **Payments** for online membership fees
-- [ ] **Admin dashboard** to update match results without touching the code
-- [ ] **News & blog** section for club announcements
-
----
-
-## Credits
-
-Built with care for **FS Montsant Reus**.
-
-- 📞 +34 683 386 660
-- ✉️ futsalmontsant@gmail.com
-- 📸 [@fsmontsantreus on Instagram](https://www.instagram.com/fsmontsantreus/)
-- 🎵 [TikTok](https://www.tiktok.com/@fsmontsantreus)
-- 🎮 [Twitch](https://www.twitch.tv/fsmontsantreus)
-
-Crafted and maintained with [Lovable](https://lovable.dev/).
 
 ---
 
