@@ -27,13 +27,14 @@ interface ContactItem {
 const getMapLink = (): string => {
   const userAgent = navigator.userAgent.toLowerCase();
   const isIOS = /iphone|ipad|ipod/.test(userAgent);
+  const encodedAddress = encodeURIComponent("Escola Montsant, Carrer de les Borges del Camp, 2, 43203 Reus, Tarragona");
 
   if (isIOS) {
     // Apple Maps for iOS
-    return "maps://maps.apple.com/?address=Reus,Tarragona";
+    return `maps://maps.apple.com/?q=${encodedAddress}`;
   } else {
-    // Google Maps for Android and other devices
-    return "geo:41.1534,1.1055?q=Reus,Tarragona";
+    // Google Maps for Android and other mobile devices
+    return `geo:0,0?q=${encodedAddress}`;
   }
 };
 
@@ -41,17 +42,16 @@ const getMapLink = (): string => {
 const handleMapClick = (e: React.MouseEvent<HTMLAnchorElement>): false => {
   e.preventDefault();
   const mapUrl = getMapLink();
-  const fallbackUrl = "https://maps.google.com/?q=Reus,Tarragona";
+  // If the user is on a desktop or if the map app fails to open, fallback URL to Google Maps in the browser
+  const fallbackUrl = "https://www.google.com/maps/search/?api=1&query=Escola+Montsant,+Carrer+de+les+Borges+del+Camp,+2,+43203+Reus,+Tarragona";
 
-  // Try to open the native map app
+  // Try to open the map link, and if it fails (e.g., on desktop), open the fallback URL after a short delay
   setTimeout(() => {
-    // If app doesn't open after 1 second, fallback to browser
     window.open(fallbackUrl, "_blank");
   }, 1000);
 
   window.location.href = mapUrl;
 
-  // Clear timeout if the link worked (app opened)
   return false;
 };
 
@@ -64,7 +64,7 @@ const socialLinks = [
 const contactInfo: ContactItem[] = [
   { icon: Mail, text: "futsalmontsant@gmail.com", href: "mailto:futsalmontsant@gmail.com" },
   { icon: Phone, text: "+34 683 386 660", href: "tel:+34683386660" },
-  { icon: MapPin, text: "Reus, Tarragona", href: "#", onClick: handleMapClick },
+  { icon: MapPin, text: "Carrer de les Borges del Camp, 2, 43203 Reus, Tarragona", href: "#", onClick: handleMapClick },
 ];
 
 const texts = {
