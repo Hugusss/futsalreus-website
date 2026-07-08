@@ -134,12 +134,11 @@ export function QuiSom({ language = "ca" }: QuiSomProps) {
           
           {/* Left Column: Images */}
           <div className="flex flex-col gap-6">
-            {/* Primera Foto */}
+            {/* Children photo */}
             <div className="relative rounded-2xl overflow-hidden shadow-elevated group">
               <img
                 src={quiSomPhoto}
                 alt="Joves jugadors a l'Escola Montsant"
-                // Aquí está el cambio: forzamos alturas panorámicas según la pantalla
                 className="w-full h-64 lg:h-56 xl:h-64 object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-maroon-dark/70 to-transparent opacity-90" />
@@ -153,12 +152,12 @@ export function QuiSom({ language = "ca" }: QuiSomProps) {
               </div>
             </div>
 
-            {/* Foto Bosses */}
+            {/* Bosses photo */}
             <div className="relative rounded-2xl overflow-hidden shadow-elevated group">
               <img
                 src={bossesImg}
                 alt="Directiva del Club"
-                className="w-full h-64 lg:h-56 xl:h-64 object-cover object-[center_20%] transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-64 lg:h-56 xl:h-64 object-cover object-top transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-maroon-dark/70 to-transparent opacity-90" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
