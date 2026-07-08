@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import quiSomPhoto from "@/assets/quiSom-photo.jpg";
-import bossesImg from "@/assets/fundadors/bosses_pic.jpg";
-import angelImg from "@/assets/fundadors/angel_pfp.png";
-import lupeImg from "@/assets/fundadors/lupe_pfp.png";
-import navarroImg from "@/assets/fundadors/navarro_pfp.jpg";
-import ricouImg from "@/assets/fundadors/ricou_pfp.jpg";
+import quiSomPhoto from "@/assets/quiSom-photo.webp";
+import bossesImg from "@/assets/fundadors/bosses_pic.webp";
+import angelImg from "@/assets/fundadors/angel_pfp.webp";
+import lupeImg from "@/assets/fundadors/lupe_pfp.webp";
+import navarroImg from "@/assets/fundadors/navarro_pfp.webp";
+import ricouImg from "@/assets/fundadors/ricou_pfp.webp";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Trophy, CalendarHeart, Users } from "lucide-react";
 
@@ -140,6 +140,8 @@ export function QuiSom({ language = "ca" }: QuiSomProps) {
                 src={quiSomPhoto}
                 alt="Joves jugadors a l'Escola Montsant"
                 className="w-full h-64 lg:h-56 xl:h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-maroon-dark/70 to-transparent opacity-90" />
               <div className="absolute bottom-0 left-0 right-0 p-6">

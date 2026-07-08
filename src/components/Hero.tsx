@@ -1,4 +1,4 @@
-import heroImage from "@/assets/hero-futsal.jpg";
+import heroImage from "@/assets/hero-futsal.webp";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 
@@ -35,6 +35,8 @@ export function Hero({ language = "ca" }: HeroProps) {
           src={heroImage}
           alt="Joves jugant futsal"
           className="w-full h-full object-cover"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-maroon-dark/80 via-maroon/70 to-maroon-dark/90" />
       </div>

@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 import { ArrowLeft, CalendarHeart, Users, PartyPopper, Tent } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import teamActMain from "@/assets/activitats/act-Main.jpg";
+import teamActMain from "@/assets/activitats/act-Main.webp";
 import teamAct1 from "@/assets/activitats/act-sub1.jpg";
 import teamAct2 from "@/assets/activitats/act-sub2.jpg";
 import teamAct3 from "@/assets/activitats/act-sub3.jpeg";
@@ -103,6 +103,8 @@ const Activitats = ({ language, onLanguageChange }: ActivitatsProps) => {
               <img 
                 src={teamActMain} 
                 className="w-full h-96 object-cover rounded-2xl"
+                loading="lazy"
+                decoding="async"
               />
 
               {/* Activity cards */}
