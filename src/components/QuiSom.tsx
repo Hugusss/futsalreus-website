@@ -1,5 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import quiSomPhoto from "@/assets/quiSom-photo.jpg";
+import bossesImg from "@/assets/fundadors/bosses_pic.jpg";
+import angelImg from "@/assets/fundadors/angel_pfp.png";
+import lupeImg from "@/assets/fundadors/lupe_pfp.png";
+import navarroImg from "@/assets/fundadors/navarro_pfp.jpg";
+import ricouImg from "@/assets/fundadors/ricou_pfp.jpg";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Trophy, CalendarHeart, Users } from "lucide-react";
 
@@ -43,10 +48,10 @@ const categories = [
 ];
 
 const founders = [
-  "Àngel Borràs Barberà",
-  "Marc López Garreta",
-  "Alex Navarro Ramos",
-  "Aleix Ricou Boza",
+  { name: "Àngel Borràs Barberà", image: angelImg },
+  { name: "Marc López Garreta", image: lupeImg },
+  { name: "Àlex Navarro Ramos", image: navarroImg },
+  { name: "Aleix Ricou Boza", image: ricouImg },
 ];
 
 const texts = {
@@ -57,6 +62,8 @@ const texts = {
       "Som una família unida per l'amor al futsal. Des de Reus, treballem cada dia per formar jugadors i persones amb valors.",
     imageTitle: "Som club, som futsal, som família i amics",
     imageSubtitle: "Escola Montsant · Reus",
+    bossesTitle: "La Directiva",
+    bossesSubtitle: "Liderant el projecte",
     foundersTitle: "Fundadors",
     foundersDescription:
       "Quatre amics que van compartir els anys d'escola a l'Escola Montsant, no només com a alumnes sinó també com a jugadors de futbol sala. Avui, aquest vincle es transforma en un projecte compartit.",
@@ -68,6 +75,8 @@ const texts = {
       "Somos una familia unida por el amor al futsal. Desde Reus, trabajamos cada día para formar jugadores y personas con valores.",
     imageTitle: "Somos club, somos futsal, somos familia y amigos",
     imageSubtitle: "Escola Montsant · Reus",
+    bossesTitle: "La Directiva",
+    bossesSubtitle: "Liderando el proyecto",
     foundersTitle: "Fundadores",
     foundersDescription:
       "Cuatro amigos que compartieron los años de escuela en la Escola Montsant, no solo como alumnos sino también como jugadores de fútbol sala. Hoy, ese vínculo se transforma en un proyecto compartido.",
@@ -120,51 +129,80 @@ export function QuiSom({ language = "ca" }: QuiSomProps) {
           ))}
         </div>
 
-        {/* Team Image + Founders */}
-        <div className="max-w-5xl mx-auto grid md:grid-cols-[1.3fr_1fr] gap-8 items-center">
-          {/* Image */}
-          <div className="relative rounded-2xl overflow-hidden shadow-elevated">
-            <img
-              src={quiSomPhoto}
-              alt="Joves jugadors a l'Escola Montsant"
-              className="w-full h-auto"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-maroon-dark/60 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <p className="text-primary-foreground font-bold text-lg">
-                {t.imageTitle}
-              </p>
-              <p className="text-primary-foreground/80 text-sm">
-                {t.imageSubtitle}
-              </p>
+        {/* Team Images + Founders */}
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
+          
+          {/* Left Column: Images */}
+          <div className="flex flex-col gap-6">
+            {/* Primera Foto */}
+            <div className="relative rounded-2xl overflow-hidden shadow-elevated group">
+              <img
+                src={quiSomPhoto}
+                alt="Joves jugadors a l'Escola Montsant"
+                // Aquí está el cambio: forzamos alturas panorámicas según la pantalla
+                className="w-full h-64 lg:h-56 xl:h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-maroon-dark/70 to-transparent opacity-90" />
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <p className="text-primary-foreground font-bold text-lg md:text-xl">
+                  {t.imageTitle}
+                </p>
+                <p className="text-primary-foreground/80 text-sm font-medium">
+                  {t.imageSubtitle}
+                </p>
+              </div>
+            </div>
+
+            {/* Foto Bosses */}
+            <div className="relative rounded-2xl overflow-hidden shadow-elevated group">
+              <img
+                src={bossesImg}
+                alt="Directiva del Club"
+                className="w-full h-64 lg:h-56 xl:h-64 object-cover object-[center_20%] transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-maroon-dark/70 to-transparent opacity-90" />
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <p className="text-primary-foreground font-bold text-lg md:text-xl">
+                  {t.bossesTitle}
+                </p>
+                <p className="text-primary-foreground/80 text-sm font-medium">
+                  {t.bossesSubtitle}
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Founders */}
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <Users className="text-primary" size={28} />
-              <h3 className="text-2xl font-bold text-foreground">
+          {/* Right Column: Founders */}
+          <div className="flex flex-col justify-center h-full">
+            <div className="flex items-center gap-3 mb-6">
+              <Users className="text-primary" size={32} />
+              <h3 className="text-3xl font-black text-foreground">
                 {t.foundersTitle}
               </h3>
             </div>
-            <p className="text-muted-foreground leading-relaxed mb-6">
+            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
               {t.foundersDescription}
             </p>
-            <div className="space-y-3">
-              {founders.map((name) => (
+            
+            {/* Founders Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {founders.map((founder) => (
                 <div
-                  key={name}
-                  className="flex items-center gap-3 p-3 rounded-xl bg-muted/50 border border-border"
+                  key={founder.name}
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-card border border-border shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
                 >
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                    <span className="text-primary font-bold text-sm">
-                      {name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
-                    </span>
+                  <div className="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-primary/20 bg-muted">
+                    <img
+                      src={founder.image}
+                      alt={`Foto de ${founder.name}`}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <div>
-                    <p className="font-semibold text-foreground text-sm">{name}</p>
-                    <p className="text-xs text-muted-foreground">
+                  <div className="flex flex-col">
+                    <p className="font-bold text-foreground text-base leading-tight">
+                      {founder.name}
+                    </p>
+                    <p className="text-sm text-primary font-medium mt-0.5">
                       {language === "ca" ? "Co-fundador" : "Co-fundador"}
                     </p>
                   </div>
