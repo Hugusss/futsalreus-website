@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, ClipboardList, CheckCircle2, Loader2, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ClipboardList, CheckCircle2, Loader2, ShieldCheck, Download } from "lucide-react";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -412,7 +412,25 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
             ) : (
               <>
                 <p className="text-muted-foreground mb-8 leading-relaxed">{t.intro}</p>
-
+                {/* Banner Opción Física PDF */}
+                <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div>
+                    <h3 className="font-bold text-foreground mb-1">
+                      {language === "ca" ? "Opció manual" : "Opción manual"}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {language === "ca" 
+                        ? "Prefereixes omplir les dades a mà? Descarrega el document PDF i envia-ho per correu: futsalmontsant@gmail.com ; o imprimeix-lo i porta'l al club." 
+                        : "¿Prefieres rellenar los datos a mano? Descarga el documento PDF y envíalo por correo: futsalmontsant@gmail.com ; o imprímelo y tráelo al club."}
+                    </p>
+                  </div>
+                  <Button variant="outline" className="w-full sm:w-auto shrink-0 border-primary/20 hover:bg-primary/10" asChild>
+                    <a href="/inscripcio.pdf" download="Inscripcio_Futsal_Montsant.pdf" target="_blank" rel="noopener noreferrer">
+                      <Download className="mr-2 h-4 w-4" />
+                      {language === "ca" ? "Descarregar PDF" : "Descargar PDF"}
+                    </a>
+                  </Button>
+                </div>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10" noValidate>
                     {/* Honeypot field — hidden from real users, bots tend to fill it */}
