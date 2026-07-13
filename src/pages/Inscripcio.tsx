@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, ClipboardList, CheckCircle2, Loader2, ShieldCheck, Download } from "lucide-react";
+import { ArrowLeft, ClipboardList, CheckCircle2, Loader2, ShieldCheck, Download, FileText, Mail } from "lucide-react";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -66,6 +66,10 @@ interface Texts {
   subtitle: string;
   back: string;
   intro: string;
+  pdfAlternativeTitle: string;
+  pdfAlternativeText: string;
+  pdfAlternativeButton: string;
+  pdfAlternativeNote: string;
   playerSection: string;
   guardianSection: string;
   bankSection: string;
@@ -124,6 +128,10 @@ const texts: Record<Language, Texts> = {
     back: "Tornar a l'inici",
     intro:
       "Tots els camps marcats amb * són obligatoris. Les dades es tractaran de forma confidencial i només s'utilitzaran per a la gestió esportiva i administrativa del club.",
+    pdfAlternativeTitle: "Prefereixes fer-ho a mà?",
+    pdfAlternativeText: "Descarrega el full, imprimeix-lo, signa'l i fes-nos-el arribar.",
+    pdfAlternativeButton: "Descarregar PDF",
+    pdfAlternativeNote: "També pots portar-lo signat directament al club.",
     playerSection: "Dades del jugador/a",
     guardianSection: "Dades del pare/mare o representant legal",
     bankSection: "Autorització de domiciliació bancària",
@@ -184,6 +192,10 @@ const texts: Record<Language, Texts> = {
     back: "Volver al inicio",
     intro:
       "Todos los campos marcados con * son obligatorios. Los datos se tratarán de forma confidencial y solo se usarán para la gestión deportiva y administrativa del club.",
+    pdfAlternativeTitle: "¿Prefieres hacerlo a mano?",
+    pdfAlternativeText: "Descarga la hoja, imprímela, fírmala y hazla llegar.",
+    pdfAlternativeButton: "Descargar PDF",
+    pdfAlternativeNote: "También puedes traerla firmada directamente al club.",
     playerSection: "Datos del jugador/a",
     guardianSection: "Datos del padre/madre o representante legal",
     bankSection: "Autorización de domiciliación bancaria",
@@ -412,24 +424,41 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
             ) : (
               <>
                 <p className="text-muted-foreground mb-8 leading-relaxed">{t.intro}</p>
-                {/* Banner Opción Física PDF */}
-                <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div>
-                    <h3 className="font-bold text-foreground mb-1">
-                      {language === "ca" ? "Opció manual" : "Opción manual"}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {language === "ca" 
-                        ? "Prefereixes omplir les dades a mà? Descarrega el document PDF i envia-ho per correu: futsalmontsant@gmail.com ; o imprimeix-lo i porta'l al club." 
-                        : "¿Prefieres rellenar los datos a mano? Descarga el documento PDF y envíalo por correo: futsalmontsant@gmail.com ; o imprímelo y tráelo al club."}
-                    </p>
+                {/* Alternative path: download, sign by hand, send back */}
+                <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/[0.07] via-primary/[0.03] to-transparent p-6 md:p-7 mb-10">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-5">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-xl bg-primary/10 text-primary shrink-0">
+                      <FileText size={22} />
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-foreground mb-1">{t.pdfAlternativeTitle}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-2.5">
+                        {t.pdfAlternativeText}
+                      </p>
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+                        <a
+                          href="mailto:futsalmontsant@gmail.com"
+                          className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline underline-offset-2"
+                        >
+                          <Mail size={14} />
+                          futsalmontsant@gmail.com
+                        </a>
+                        <span className="text-sm text-muted-foreground">{t.pdfAlternativeNote}</span>
+                      </div>
+                    </div>
+
+                    <Button
+                      variant="outline"
+                      className="w-full sm:w-auto shrink-0 border-primary/30 hover:bg-primary/10 hover:border-primary/50"
+                      asChild
+                    >
+                      <a href="/inscripcio.pdf" download="Inscripcio_Futsal_Montsant.pdf" target="_blank" rel="noopener noreferrer">
+                        <Download className="mr-2 h-4 w-4" />
+                        {t.pdfAlternativeButton}
+                      </a>
+                    </Button>
                   </div>
-                  <Button variant="outline" className="w-full sm:w-auto shrink-0 border-primary/20 hover:bg-primary/10" asChild>
-                    <a href="/inscripcio.pdf" download="Inscripcio_Futsal_Montsant.pdf" target="_blank" rel="noopener noreferrer">
-                      <Download className="mr-2 h-4 w-4" />
-                      {language === "ca" ? "Descarregar PDF" : "Descargar PDF"}
-                    </a>
-                  </Button>
                 </div>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10" noValidate>
