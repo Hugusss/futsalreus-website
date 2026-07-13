@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Instagram, Twitch, Mail, Phone, MapPin } from "lucide-react";
 
 // TikTok icon (not in lucide-react)
@@ -71,6 +72,7 @@ const texts = {
   ca: {
     description: "Som un club de futsal de Reus fundat el 2024 amb l'objectiu de promoure l'esport i els valors entre els més joves de la nostra comunitat.",
     contact: "Contacta'ns",
+    joinClub: "Inscriu-te al club",
     sendMessage: "Envia'ns un missatge",
     copyright: "© 2024 Club Futsal Montsant Reus. Tots els drets reservats.",
     madeWith: "Fet amb",
@@ -79,6 +81,7 @@ const texts = {
   es: {
     description: "Somos un club de futsal de Reus fundado en 2024 con el objetivo de promover el deporte y los valores entre los más jóvenes de nuestra comunidad.",
     contact: "Contáctanos",
+    joinClub: "Inscríbete al club",
     sendMessage: "Envíanos un mensaje",
     copyright: "© 2024 Club Futsal Montsant Reus. Todos los derechos reservados.",
     madeWith: "Hecho con",
@@ -142,6 +145,9 @@ export function Footer({ language = "ca" }: FooterProps) {
                 </a>
               ))}
             </div>
+            <Button variant="cta" className="w-full mb-3" asChild>
+              <Link to="/inscripcio">{t.joinClub}</Link>
+            </Button>
             <Button variant="hero" className="w-full" asChild>
               <a href="mailto:futsalmontsant@gmail.com">{t.sendMessage}</a>
             </Button>

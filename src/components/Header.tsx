@@ -49,6 +49,11 @@ export function Header({ language = "ca", onLanguageChange }: HeaderProps) {
     }
   };
 
+  const handleJoinClick = () => {
+    setIsOpen(false);
+    navigate("/inscripcio");
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-card">
       <div className="container mx-auto px-4">
@@ -103,7 +108,7 @@ export function Header({ language = "ca", onLanguageChange }: HeaderProps) {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button variant="cta" size="default" className="ml-4 text-base px-6 py-3" onClick={() => handleNavClick("#contacte")}>
+            <Button variant="cta" size="default" className="ml-4 text-base px-6 py-3" onClick={handleJoinClick}>
               {language === "ca" ? "Uneix-te" : "Únete"}
             </Button>
           </nav>
@@ -152,7 +157,7 @@ export function Header({ language = "ca", onLanguageChange }: HeaderProps) {
                 </div>
               </div>
 
-              <Button variant="cta" className="mt-2 mx-4 text-lg py-4" onClick={() => handleNavClick("#contacte")}>
+              <Button variant="cta" className="mt-2 mx-4 text-lg py-4" onClick={handleJoinClick}>
                 {language === "ca" ? "Uneix-te al club" : "Únete al club"}
               </Button>
             </div>

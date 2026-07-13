@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Metodologia from "./pages/Metodologia";
 import Competicions from "./pages/Competicions";
 import Activitats from "./pages/Activitats";
+import Inscripcio from "./pages/Inscripcio";
 import NotFound from "./pages/NotFound";
 import { ScrollToTop } from "./components/ScrollToTop";
 
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/metodologia" element={<Metodologia language={language} onLanguageChange={setLanguage} />} />
             <Route path="/competicions" element={<Competicions language={language} onLanguageChange={setLanguage} />} />
             <Route path="/activitats" element={<Activitats language={language} onLanguageChange={setLanguage} />} />
+            <Route path="/inscripcio" element={<Inscripcio language={language} onLanguageChange={setLanguage} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
