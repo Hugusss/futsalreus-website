@@ -40,14 +40,14 @@ const forceUpper = (val: string) => val.toUpperCase();
 
 const formatIBAN = (val: string) => {
   // Quita todo lo que no sea número o letra y pasa a mayúsculas
-  const cleaned = val.replace(/[^\dA-Za-z]/g, "").toUpperCase();
+  const cleaned = val.replace(/[^\dA-Za-z]/g, "").toUpperCase().slice(0, 24); // ES + 22 digits
   // Agrupa de 4 en 4 con un espacio
   return cleaned.replace(/(.{4})(?=.)/g, "$1 ").trim();
 };
 
 const formatPhone = (val: string) => {
   // Quita todo lo que no sea un número o el signo +
-  let cleaned = val.replace(/[^\d+]/g, "");
+  const cleaned = val.replace(/[^\d+]/g, "").slice(0, 12); // +34 + 9 digits, generous cap
   
   // Si empieza por +34, lo separamos para formatear el resto de 3 en 3
   if (cleaned.startsWith("+34")) {
@@ -487,7 +487,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                             <FormItem>
                               <FormLabel>{t.fields.playerDni} *</FormLabel>
                               <FormControl>
-                                <Input placeholder={t.placeholders.playerDni} {...field}
+                                <Input placeholder={t.placeholders.playerDni} maxLength={9} {...field}
                                 onChange={(e) => field.onChange(forceUpper(e.target.value))}
                                 />
                               </FormControl>
@@ -515,7 +515,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                             <FormItem className="sm:col-span-2">
                               <FormLabel>{t.fields.playerPhone}</FormLabel>
                               <FormControl>
-                                <Input placeholder={t.placeholders.guardianPhone} {...field}
+                                <Input type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} {...field}
                                 onChange={(e) => field.onChange(formatPhone(e.target.value))}
                                 />
                               </FormControl>
@@ -569,7 +569,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                             <FormItem>
                               <FormLabel>{t.fields.guardianDni} *</FormLabel>
                               <FormControl>
-                                <Input placeholder={t.placeholders.guardianDni} {...field} 
+                                <Input placeholder={t.placeholders.guardianDni} maxLength={9} {...field} 
                                 onChange={(e) => field.onChange(forceUpper(e.target.value))}
                                 />
                               </FormControl>
@@ -584,7 +584,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                             <FormItem>
                               <FormLabel>{t.fields.guardianPhone} *</FormLabel>
                               <FormControl>
-                                <Input placeholder={t.placeholders.guardianPhone} {...field} 
+                                <Input type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} {...field} 
                                 onChange={(e) => field.onChange(formatPhone(e.target.value))}
                                 />
                               </FormControl>
@@ -628,6 +628,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                               <FormLabel>{t.fields.iban} *</FormLabel>
                               <FormControl>
                                 <Input placeholder={t.placeholders.iban}
+                                maxLength={29}
                                 {...field}
                                 onChange={(e) => field.onChange(formatIBAN(e.target.value))}
                                 />
