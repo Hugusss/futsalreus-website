@@ -1,121 +1,88 @@
-# FS Montsant Reus — Official Club Website
+# FS Montsant Reus — Club Website
 
-> The digital home of **FS Montsant Reus**, a grassroots futsal club from Reus.
-> Community-first, bilingual, mobile-first, PWA-ready.
+Official website of Club Futsal Montsant, a grassroots futsal club in Reus
+(Catalonia). Bilingual Catalan/Spanish single-page application with club
+information and an online player registration form.
 
-![Status](https://img.shields.io/badge/status-active-brightgreen)
-![PWA](https://img.shields.io/badge/PWA-ready-5A0F0F)
+**Live:** https://fsmontsant.reus.workers.dev
+
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38BDF8?logo=tailwindcss&logoColor=white)
-![Built with Lovable](https://img.shields.io/badge/Built_with-Lovable-FF5C8A)
-![Deploy with CloudFlare Pages](https://img.shields.io/badge/Deploy_with-Cloudflare_Pages-0690FA?logo=cloudflare&logoColor=white)
+![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-F38020?logo=cloudflare&logoColor=white)
 
-🌐 **Live site:** [fsmontsant.reus.workers.dev](https://fsmontsant.reus.workers.dev/)
+## Stack
 
----
+- React 18 + TypeScript, built with Vite (SWC)
+- Tailwind CSS 3, shadcn/ui primitives on Radix UI, lucide-react icons
+- react-router-dom v6 client-side routing
+- react-hook-form + zod validation; submissions go to [Web3Forms](https://web3forms.com)
+- Installable as a home-screen app on iOS and Android via `public/manifest.webmanifest`
+  (no service worker — see `docs/pwa-standalone-research.md` for the platform notes)
+- Hosted on Cloudflare Workers (static assets, SPA fallback)
 
-## About the Project
+## Development
 
-FS Montsant Reus is a local futsal club rooted in grassroots values, family,
-and community. This website is its central digital hub: a fast, accessible,
-and bilingual experience designed to bring the club closer to players,
-families, and supporters — on any device.
+Requires [Bun](https://bun.sh).
 
-The site is **mobile-first**, so visitors can add
-it to their home screen and use it.
+```sh
+bun install
+cp .env.example .env    # then fill in the Web3Forms key
+bun run dev             # http://localhost:8080
+```
 
----
+Other scripts:
 
-## Key Features
+```sh
+bun run build           # production build to dist/
+bun run preview         # serve the production build locally
+bun run lint            # ESLint
+```
 
-- 🌍 **Bilingual interface** — Catalan (primary) and Spanish, with a global
-  language switcher.
-- 🏟️ **Match Center** — Latest results and upcoming fixtures in the link button.
-- 👥 **Qui Som** — Founders and people behind the club, with a custom desktop
-  grid layout.
-- 🧠 **Metodologia** — The club's training philosophy and community approach.
-- 🏆 **Competicions** — Showcase of the team categories we want to open:
-  *Infantil, Cadet, Juvenil, Sènior* and *Femení*, each with its own visual
-  identity.
-- 🎉 **Activitats** — Events, community moments, and family-oriented
-  initiatives.
-- 🎨 **Energetic design system** — Maroon & white palette, animated
-  interactions, and a vibrant, community-driven aesthetic.
-- 📣 **Social presence** — Direct links to Instagram, TikTok, and Twitch.
-- 🔎 **SEO foundations** — Semantic HTML, descriptive metadata, and
-  accessibility-friendly markup.
+### Environment
 
----
+| Variable | Purpose |
+| --- | --- |
+| `VITE_WEB3FORMS_ACCESS_KEY` | Web3Forms access key for the registration form. Public by design (baked into the client bundle); it identifies the destination inbox. Without it the form renders a "not configured" notice and refuses to submit. |
 
-## Tech Stack
-
-| Layer            | Technology                                                |
-| ---------------- | --------------------------------------------------------- |
-| Framework        | [React 18](https://react.dev/) + TypeScript               |
-| Build tool       | [Vite 7](https://vitejs.dev/) with SWC                    |
-| Styling          | [Tailwind CSS 3](https://tailwindcss.com/) + `tailwindcss-animate` |
-| UI primitives    | [shadcn/ui](https://ui.shadcn.com/) on [Radix UI](https://www.radix-ui.com/) |
-| Icons            | [lucide-react](https://lucide.dev/)                       |
-| Routing          | [react-router-dom v6](https://reactrouter.com/)           |
-| Data / state     | [TanStack Query](https://tanstack.com/query)              |
-| Forms            | [react-hook-form](https://react-hook-form.com/) + [zod](https://zod.dev/) |
-| Notifications    | [sonner](https://sonner.emilkowal.ski/)                   |
-| Tooling          | ESLint, TypeScript                                        |
-
----
-
-## Project Structure
+## Project structure
 
 ```text
 src/
-├── App.tsx               # Router + global language state
-├── main.tsx              # App entry point
-├── index.css             # Design tokens (HSL) and global styles
+├── App.tsx              # Routes + language state (persisted to localStorage)
 ├── pages/
-│   ├── Index.tsx         # Landing page
-│   ├── Metodologia.tsx   # Training philosophy
-│   ├── Competicions.tsx  # Team categories
-│   ├── Activitats.tsx    # Events & community
+│   ├── Index.tsx        # Landing: hero, club presentation, matches link
+│   ├── Metodologia.tsx  # Training philosophy
+│   ├── Competicions.tsx # Team categories, FCF calendar link
+│   ├── Activitats.tsx   # Club activities and events
+│   ├── Inscripcio.tsx   # Registration form (Web3Forms) + printable PDF option
 │   └── NotFound.tsx
-├── components/
-│   ├── Header.tsx        # Navigation + language switcher
-│   ├── Hero.tsx
-│   ├── MatchCenter.tsx
-│   ├── QuiSom.tsx
-│   ├── Merchandising.tsx
-│   ├── Footer.tsx        # Socials & contact
-│   └── ui/               # shadcn/ui primitives
-├── hooks/                # Custom React hooks
-└── lib/                  # Utilities
+├── components/          # Header, Hero, QuiSom, PartitsLink, Footer, ScrollToTop
+│   └── ui/              # shadcn/ui primitives in use
+├── hooks/               # use-page-title
+├── lib/                 # cn() class-merge utility
+└── assets/              # Optimized images (WebP/JPEG)
+public/
+├── _headers             # Security headers (CSP, HSTS, …)
+├── .well-known/security.txt
+├── robots.txt, sitemap.xml
+└── inscripcio.pdf       # Printable registration form
 ```
-
----
-
-## Design System
-
-The visual language is defined through **HSL-based semantic tokens** in
-`src/index.css` and `tailwind.config.ts`, so the entire UI stays consistent
-and themable.
-
-- **Palette:** Maroon / dark red as the primary identity color, paired with
-  white surfaces for a clean, energetic feel.
-- **Tone:** Community-focused, grassroots, family-friendly. No corporate or
-  professional-stadium imagery.
-- **Motion:** Subtle hover effects, icon micro-animations, and dynamic
-  transitions to reinforce the club's energy.
-
----
 
 ## Internationalization
 
-The app ships in **Catalan (default)** and **Spanish**. Language is held in
-global state at `src/App.tsx` and propagated to each page through props, so
-the switch is instant and persistent across navigation.
+Catalan (default) and Spanish. The selected language is React state in
+`App.tsx`, persisted to `localStorage` and mirrored to `<html lang>`; each
+page keeps its copy in a local `texts` record keyed by language.
 
----
+## Deployment
+
+Pushes to `main` are built and deployed by Cloudflare Workers Builds using
+`wrangler.json` (static assets with single-page-app fallback). Response
+headers — including the Content-Security-Policy — are defined in
+`public/_headers`.
 
 ## License
 
-© FS Montsant Reus. All rights reserved.
+© Club Futsal Montsant Reus. All rights reserved.
