@@ -30,8 +30,10 @@ interface InscripcioProps {
 // Loose but useful patterns. They catch typos without being overly strict
 // about edge cases (NIE, non-standard formatting, etc.).
 const DNI_REGEX = /^\d{8}[A-Za-z]$/;
-const PHONE_REGEX = /^(?:\+34|0034)?[6789]\d{8}$/;
+const PHONE_REGEX = /^(?:\+34)?[6789]\d{8}$/;
 const IBAN_REGEX = /^ES\d{22}$/;
+
+const TODAY_ISO = new Date().toISOString().slice(0, 10);
 
 const normalizeSpaces = (value: string) => value.replace(/\s+/g, "");
 
@@ -116,6 +118,7 @@ interface Texts {
     email: string;
     iban: string;
     checkbox: string;
+    birthdate: string;
   };
 }
 
@@ -182,6 +185,7 @@ const texts: Record<Language, Texts> = {
       email: "Introdueix un e-mail vàlid.",
       iban: "Introdueix un IBAN vàlid (ES + 22 dígits).",
       checkbox: "Cal acceptar aquesta condició per continuar.",
+      birthdate: "La data de naixement no pot ser futura.",
     },
   },
   es: {
@@ -246,6 +250,7 @@ const texts: Record<Language, Texts> = {
       email: "Introduce un e-mail válido.",
       iban: "Introduce un IBAN válido (ES + 22 dígitos).",
       checkbox: "Debes aceptar esta condición para continuar.",
+      birthdate: "La fecha de nacimiento no puede ser futura.",
     },
   },
 };
@@ -260,7 +265,10 @@ function buildSchema(t: Texts) {
       .trim()
       .toUpperCase()
       .refine((v) => DNI_REGEX.test(v), t.errors.dni),
-    playerBirthdate: z.string().min(1, t.errors.required),
+    playerBirthdate: z
+      .string()
+      .min(1, t.errors.required)
+      .refine((v) => v <= TODAY_ISO, t.errors.birthdate),
     playerPhone: z
       .string()
       .trim()
@@ -300,7 +308,6 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
   const navigate = useNavigate();
   const t = texts[language];
   const schema = useMemo(() => buildSchema(t), [t]);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const honeypotRef = useRef<HTMLInputElement>(null);
 
@@ -326,9 +333,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
     mode: "onBlur",
   });
 
-  // Vigilamos los checkboxes en tiempo real
-  const { acceptSepa, acceptPrivacy } = form.watch();
-  const canSubmit = acceptSepa && acceptPrivacy;
+  const { isSubmitting } = form.formState;
 
   const onSubmit = async (data: FormValues) => {
     // Silently drop likely-bot submissions (hidden honeypot field).
@@ -339,7 +344,6 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
       return;
     }
 
-    setIsSubmitting(true);
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -378,8 +382,6 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
     } catch (error) {
       console.error("Inscripció submission failed:", error);
       toast.error(t.toastError);
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -455,7 +457,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                       className="w-full sm:w-auto shrink-0 border-primary/30 hover:bg-primary/10 hover:border-primary/50"
                       asChild
                     >
-                      <a href="/inscripcio.pdf" download="Inscripcio_Futsal_Montsant.pdf" target="_blank" rel="noopener noreferrer">
+                      <a href="/inscripcio.pdf" download="Inscripcio_Futsal_Montsant.pdf">
                         <Download className="mr-2 h-4 w-4" />
                         {t.pdfAlternativeButton}
                       </a>
@@ -489,7 +491,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                               <FormLabel>{t.fields.playerName} *</FormLabel>
                               <FormControl>
                                 <Input {...field}
-                                onChange={(e) => field.onChange(forceUpper(e.target.value))}
+                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -504,7 +506,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                               <FormLabel>{t.fields.playerSurname} *</FormLabel>
                               <FormControl>
                                 <Input {...field}
-                                onChange={(e) => field.onChange(forceUpper(e.target.value))}
+                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -519,7 +521,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                               <FormLabel>{t.fields.playerDni} *</FormLabel>
                               <FormControl>
                                 <Input placeholder={t.placeholders.playerDni} maxLength={9} {...field}
-                                onChange={(e) => field.onChange(forceUpper(e.target.value))}
+                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -533,7 +535,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                             <FormItem>
                               <FormLabel>{t.fields.playerBirthdate} *</FormLabel>
                               <FormControl>
-                                <Input type="date" {...field} />
+                                <Input type="date" max={TODAY_ISO} {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -547,7 +549,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                               <FormLabel>{t.fields.playerPhone}</FormLabel>
                               <FormControl>
                                 <Input type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} {...field}
-                                onChange={(e) => field.onChange(formatPhone(e.target.value))}
+                                onBlur={() => { field.onChange(formatPhone(field.value ?? "")); field.onBlur(); }}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -571,7 +573,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                               <FormLabel>{t.fields.guardianName} *</FormLabel>
                               <FormControl>
                                 <Input {...field} 
-                                onChange={(e) => field.onChange(forceUpper(e.target.value))}
+                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -586,7 +588,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                               <FormLabel>{t.fields.guardianSurname} *</FormLabel>
                               <FormControl>
                                 <Input {...field} 
-                                onChange={(e) => field.onChange(forceUpper(e.target.value))}
+                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -601,7 +603,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                               <FormLabel>{t.fields.guardianDni} *</FormLabel>
                               <FormControl>
                                 <Input placeholder={t.placeholders.guardianDni} maxLength={9} {...field} 
-                                onChange={(e) => field.onChange(forceUpper(e.target.value))}
+                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -616,7 +618,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                               <FormLabel>{t.fields.guardianPhone} *</FormLabel>
                               <FormControl>
                                 <Input type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} {...field} 
-                                onChange={(e) => field.onChange(formatPhone(e.target.value))}
+                                onBlur={() => { field.onChange(formatPhone(field.value ?? "")); field.onBlur(); }}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -631,7 +633,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                               <FormLabel>{t.fields.address} *</FormLabel>
                               <FormControl>
                                 <Input placeholder={t.placeholders.address} {...field}
-                                onChange={(e) => field.onChange(forceUpper(e.target.value))}
+                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -661,7 +663,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                                 <Input placeholder={t.placeholders.iban}
                                 maxLength={29}
                                 {...field}
-                                onChange={(e) => field.onChange(formatIBAN(e.target.value))}
+                                onBlur={() => { field.onChange(formatIBAN(field.value)); field.onBlur(); }}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -692,7 +694,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                                 placeholder={t.placeholders.signatureName}
                                 className="font-serif italic"
                                 {...field}
-                                onChange={(e) => field.onChange(forceUpper(e.target.value))}
+                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
                               />
                             </FormControl>
                             <FormMessage />
@@ -744,7 +746,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                       variant="cta"
                       size="lg"
                       className="w-full text-lg py-6"
-                      disabled={isSubmitting || !canSubmit}
+                      disabled={isSubmitting}
                     >
                       {isSubmitting ? (
                         <>
