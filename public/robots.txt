@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://futsalreus.cat/sitemap.xml
+Sitemap: https://fsmontsant.reus.workers.dev/sitemap.xml
