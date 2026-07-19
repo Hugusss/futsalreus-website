@@ -1,8 +1,8 @@
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-futsal.webp";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
-
-type Language = "ca" | "es";
+import type { Language } from "@/App";
 
 interface HeroProps {
   language?: Language;
@@ -35,7 +35,8 @@ export function Hero({ language = "ca" }: HeroProps) {
           src={heroImage}
           alt="Joves jugant futsal"
           className="w-full h-full object-cover"
-          fetchPriority="high"
+          // React 18 only honors the lowercase DOM attribute, but the types only know camelCase
+          {...({ fetchpriority: "high" } as object)}
           decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-maroon-dark/80 via-maroon/70 to-maroon-dark/90" />
@@ -56,7 +57,7 @@ export function Hero({ language = "ca" }: HeroProps) {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up-delay-2">
             <Button variant="hero" size="lg" asChild>
-              <a href="#contacte">{t.cta}</a>
+              <Link to="/inscripcio">{t.cta}</Link>
             </Button>
             <Button variant="heroOutline" size="lg" asChild>
               <a href="#qui-som">{t.discover}</a>
@@ -68,6 +69,7 @@ export function Hero({ language = "ca" }: HeroProps) {
       {/* Scroll Indicator */}
       <a
         href="#partits"
+        aria-label={t.discover}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/60 hover:text-primary-foreground transition-colors animate-float"
       >
         <ChevronDown size={32} />

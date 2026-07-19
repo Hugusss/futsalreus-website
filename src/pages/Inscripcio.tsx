@@ -19,6 +19,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { toast } from "@/components/ui/sonner";
+import { usePageTitle } from "@/hooks/use-page-title";
 import type { Language } from "@/App";
 
 interface InscripcioProps {
@@ -307,6 +308,7 @@ const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string
 const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
   const navigate = useNavigate();
   const t = texts[language];
+  usePageTitle(t.title);
   const schema = useMemo(() => buildSchema(t), [t]);
   const [submitted, setSubmitted] = useState(false);
   const honeypotRef = useRef<HTMLInputElement>(null);
@@ -549,7 +551,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                               <FormLabel>{t.fields.playerPhone}</FormLabel>
                               <FormControl>
                                 <Input type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} {...field}
-                                onBlur={() => { field.onChange(formatPhone(field.value ?? "")); field.onBlur(); }}
+                                onChange={(e) => field.onChange(formatPhone(e.target.value))}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -618,7 +620,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                               <FormLabel>{t.fields.guardianPhone} *</FormLabel>
                               <FormControl>
                                 <Input type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} {...field} 
-                                onBlur={() => { field.onChange(formatPhone(field.value ?? "")); field.onBlur(); }}
+                                onChange={(e) => field.onChange(formatPhone(e.target.value))}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -663,7 +665,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                                 <Input placeholder={t.placeholders.iban}
                                 maxLength={29}
                                 {...field}
-                                onBlur={() => { field.onChange(formatIBAN(field.value)); field.onBlur(); }}
+                                onChange={(e) => field.onChange(formatIBAN(e.target.value))}
                                 />
                               </FormControl>
                               <FormMessage />

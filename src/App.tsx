@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
@@ -12,7 +12,14 @@ import { ScrollToTop } from "./components/ScrollToTop";
 export type Language = "ca" | "es";
 
 const App = () => {
-  const [language, setLanguage] = useState<Language>("ca");
+  const [language, setLanguage] = useState<Language>(
+    () => (localStorage.getItem("language") === "es" ? "es" : "ca"),
+  );
+
+  useEffect(() => {
+    localStorage.setItem("language", language);
+    document.documentElement.lang = language;
+  }, [language]);
 
   return (
     <>
@@ -25,7 +32,7 @@ const App = () => {
             <Route path="/competicions" element={<Competicions language={language} onLanguageChange={setLanguage} />} />
             <Route path="/activitats" element={<Activitats language={language} onLanguageChange={setLanguage} />} />
             <Route path="/inscripcio" element={<Inscripcio language={language} onLanguageChange={setLanguage} />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<NotFound language={language} onLanguageChange={setLanguage} />} />
           </Routes>
         </BrowserRouter>
     </>

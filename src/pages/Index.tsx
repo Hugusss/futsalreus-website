@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { QuiSom } from "@/components/QuiSom";
 import { PartitsLink } from "@/components/PartitsLink";
 import { Footer } from "@/components/Footer";
+import { usePageTitle } from "@/hooks/use-page-title";
 import type { Language } from "@/App";
 
 interface IndexProps {
@@ -11,6 +12,8 @@ interface IndexProps {
 }
 
 const Index = ({ language, onLanguageChange }: IndexProps) => {
+  usePageTitle();
+
   return (
     <div className="min-h-screen bg-background">
       <Header language={language} onLanguageChange={onLanguageChange} />

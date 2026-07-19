@@ -1,7 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-type Language = "ca" | "es";
+import type { Language } from "@/App";
 
 interface PartitsLinkProps {
   language?: Language;

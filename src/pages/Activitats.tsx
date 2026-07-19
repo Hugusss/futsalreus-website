@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { ArrowLeft, CalendarHeart, Users, PartyPopper, Tent } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { usePageTitle } from "@/hooks/use-page-title";
 import teamActMain from "@/assets/activitats/act-Main.webp";
 import teamAct1 from "@/assets/activitats/act-sub1.jpg";
 import teamAct2 from "@/assets/activitats/act-sub2.jpg";
@@ -60,6 +61,7 @@ const texts = {
 const Activitats = ({ language, onLanguageChange }: ActivitatsProps) => {
   const navigate = useNavigate();
   const t = texts[language];
+  usePageTitle(t.title);
 
   return (
     <div className="min-h-screen bg-background">
@@ -100,8 +102,9 @@ const Activitats = ({ language, onLanguageChange }: ActivitatsProps) => {
                 </p>
               </section>
 
-              <img 
-                src={teamActMain} 
+              <img
+                src={teamActMain}
+                alt={language === "ca" ? "Jugadors del club durant una activitat" : "Jugadores del club durante una actividad"}
                 className="w-full h-96 object-cover rounded-2xl"
                 loading="lazy"
                 decoding="async"
@@ -128,9 +131,9 @@ const Activitats = ({ language, onLanguageChange }: ActivitatsProps) => {
 
               {/* Gallery placeholders */}
               <div className="grid sm:grid-cols-3 gap-4">
-                <img src={teamAct1} className="w-full h-full object-cover rounded-2xl" />
-                <img src={teamAct2} className="w-full h-full object-cover rounded-2xl" />
-                <img src={teamAct3} className="w-full h-full object-cover rounded-2xl" />
+                <img src={teamAct1} alt="" className="w-full h-full object-cover rounded-2xl" />
+                <img src={teamAct2} alt="" className="w-full h-full object-cover rounded-2xl" />
+                <img src={teamAct3} alt="" className="w-full h-full object-cover rounded-2xl" />
               </div>
 
               <section className="bg-muted/50 rounded-2xl p-6 md:p-8 border border-border text-center">

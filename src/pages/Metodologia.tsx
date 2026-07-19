@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { ArrowLeft, BookOpen, Heart, Users, MessageCircle, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { usePageTitle } from "@/hooks/use-page-title";
 import teamMethod from "@/assets/metodologia/team-train.jpg";
 import type { Language } from "@/App";
 
@@ -117,6 +118,7 @@ const texts = {
 const Metodologia = ({ language, onLanguageChange }: MetodologiaProps) => {
   const navigate = useNavigate();
   const t = texts[language];
+  usePageTitle(t.title);
 
   return (
     <div className="min-h-screen bg-background">
@@ -223,8 +225,9 @@ const Metodologia = ({ language, onLanguageChange }: MetodologiaProps) => {
                 </div>
               </section>
 
-              <img 
+              <img
                 src={teamMethod}
+                alt={language === "ca" ? "Entrenament de l'equip" : "Entrenamiento del equipo"}
                 className="w-full h-96 object-cover rounded-2xl"
               />
             </div>

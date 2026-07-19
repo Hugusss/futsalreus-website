@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import { Instagram, Twitch, Mail, Phone, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
+import type { Language } from "@/App";
 
 // TikTok icon (not in lucide-react)
 const TikTok = ({ size = 24, className }: { size?: number | string; className?: string }) => (
@@ -7,10 +10,6 @@ const TikTok = ({ size = 24, className }: { size?: number | string; className?: 
     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1Z"/>
   </svg>
 );
-import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo.png";
-
-type Language = "ca" | "es";
 
 interface FooterProps {
   language?: Language;
@@ -20,41 +19,12 @@ interface ContactItem {
   icon: React.ComponentType<{ size?: string | number; className?: string }>;
   text: string;
   href: string;
-  target?: string;
-  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => false;
+  external?: boolean;
 }
 
-// Function to get the appropriate map link based on device
-const getMapLink = (): string => {
-  const userAgent = navigator.userAgent.toLowerCase();
-  const isIOS = /iphone|ipad|ipod/.test(userAgent);
-  const encodedAddress = encodeURIComponent("Escola Montsant, Carrer de les Borges del Camp, 2, 43203 Reus, Tarragona");
-
-  if (isIOS) {
-    // Apple Maps for iOS
-    return `maps://maps.apple.com/?q=${encodedAddress}`;
-  } else {
-    // Google Maps for Android and other mobile devices
-    return `geo:0,0?q=${encodedAddress}`;
-  }
-};
-
-// Function to handle map link click with fallback
-const handleMapClick = (e: React.MouseEvent<HTMLAnchorElement>): false => {
-  e.preventDefault();
-  const mapUrl = getMapLink();
-  // If the user is on a desktop or if the map app fails to open, fallback URL to Google Maps in the browser
-  const fallbackUrl = "https://www.google.com/maps/search/?api=1&query=Escola+Montsant,+Carrer+de+les+Borges+del+Camp,+2,+43203+Reus,+Tarragona";
-
-  // Try to open the map link, and if it fails (e.g., on desktop), open the fallback URL after a short delay
-  setTimeout(() => {
-    window.open(fallbackUrl, "_blank");
-  }, 1000);
-
-  window.location.href = mapUrl;
-
-  return false;
-};
+// Android and iOS intercept Google Maps URLs and offer the native app.
+const MAPS_URL =
+  "https://www.google.com/maps/search/?api=1&query=Escola+Montsant,+Carrer+de+les+Borges+del+Camp,+2,+43203+Reus,+Tarragona";
 
 const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/fsmontsantreus/", label: "Instagram" },
@@ -65,7 +35,7 @@ const socialLinks = [
 const contactInfo: ContactItem[] = [
   { icon: Mail, text: "futsalmontsant@gmail.com", href: "mailto:futsalmontsant@gmail.com" },
   { icon: Phone, text: "+34 683 386 660", href: "tel:+34683386660" },
-  { icon: MapPin, text: "Carrer de les Borges del Camp, 2, 43203 Reus, Tarragona", href: "#", onClick: handleMapClick },
+  { icon: MapPin, text: "Carrer de les Borges del Camp, 2, 43203 Reus, Tarragona", href: MAPS_URL, external: true },
 ];
 
 const texts = {
@@ -135,9 +105,8 @@ export function Footer({ language = "ca" }: FooterProps) {
                 <a
                   key={index}
                   href={item.href}
-                  onClick={item.onClick}
-                  target={item.target}
-                  rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
                   className="flex items-center gap-3 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                 >
                   <item.icon size={18} className="text-accent" />

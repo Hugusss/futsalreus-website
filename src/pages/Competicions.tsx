@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { ArrowLeft, Trophy, Users, Baby, Rabbit, Squirrel, Sparkles, Venus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { usePageTitle } from "@/hooks/use-page-title";
 import teamCompetiMain from "@/assets/competicions/team-competi.jpg";
 import teamCeleb1 from "@/assets/competicions/team-celeb1.jpg";
 import teamCeleb2 from "@/assets/competicions/team-celeb2.jpg";
@@ -69,6 +70,7 @@ const texts = {
 const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
   const navigate = useNavigate();
   const t = texts[language];
+  usePageTitle(t.title);
 
   return (
     <div className="min-h-screen bg-background">
@@ -109,7 +111,11 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
                 </p>
               </section>
 
-              <img src={teamCompetiMain} className="w-full h-full object-cover rounded-2xl" />
+              <img
+                src={teamCompetiMain}
+                alt={language === "ca" ? "Equip del Club Futsal Montsant en competició" : "Equipo del Club Futsal Montsant en competición"}
+                className="w-full h-full object-cover rounded-2xl"
+              />
 
               <section>
                 <div className="flex items-center gap-3 mb-4">
@@ -159,10 +165,12 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
               <div className="grid md:grid-cols-2 gap-4">
                 <img
                   src={teamCeleb1}
+                  alt=""
                   className="w-full aspect-square object-cover rounded-2xl"
                 />
                 <img
                   src={teamCeleb2}
+                  alt=""
                   className="w-full aspect-square object-cover rounded-2xl"
                 />
               </div>

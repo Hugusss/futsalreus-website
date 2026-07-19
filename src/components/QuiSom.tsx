@@ -7,8 +7,7 @@ import navarroImg from "@/assets/fundadors/navarro_pfp.webp";
 import ricouImg from "@/assets/fundadors/ricou_pfp.webp";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Trophy, CalendarHeart, Users } from "lucide-react";
-
-type Language = "ca" | "es";
+import type { Language } from "@/App";
 
 interface QuiSomProps {
   language?: Language;
@@ -204,7 +203,7 @@ export function QuiSom({ language = "ca" }: QuiSomProps) {
                       {founder.name}
                     </p>
                     <p className="text-sm text-primary font-medium mt-0.5">
-                      {language === "ca" ? "Co-fundador" : "Co-fundador"}
+                      {language === "ca" ? "Co-fundador" : "Cofundador"}
                     </p>
                   </div>
                 </div>
