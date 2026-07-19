@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Keep anchored sections from hiding under the fixed header */
+html {
+  scroll-padding-top: 6rem;
+}
+
 @layer base {
   :root {
     --background: 30 20% 98%;
