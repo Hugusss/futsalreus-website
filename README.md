@@ -19,7 +19,7 @@ information and an online player registration form.
 - react-router-dom v6 client-side routing
 - react-hook-form + zod validation; submissions go to [Web3Forms](https://web3forms.com)
 - Installable as a home-screen app on iOS and Android via `public/manifest.webmanifest`
-  (no service worker — see `docs/pwa-standalone-research.md` for the platform notes)
+  (no service worker needed)
 - Hosted on Cloudflare Workers (static assets, SPA fallback)
 
 ## Development
