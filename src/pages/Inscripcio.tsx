@@ -346,6 +346,8 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: WEB3FORMS_ACCESS_KEY,
+          // Web3Forms discards submissions where botcheck is true server-side.
+          botcheck: honeypotRef.current?.checked ?? false,
           subject: `Nova inscripció: ${data.playerName} ${data.playerSurname}`,
           from_name: "Web Club Futsal Montsant Reus",
           replyto: data.email,
