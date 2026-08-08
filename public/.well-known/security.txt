@@ -1,4 +1,4 @@
 Contact: mailto:futsalmontsant@gmail.com
 Expires: 2027-12-31T23:59:00.000Z
 Preferred-Languages: ca, es, en
-Canonical: https://fsmontsant.reus.workers.dev/.well-known/security.txt
+Canonical: https://futsalmontsant.cat/.well-known/security.txt
