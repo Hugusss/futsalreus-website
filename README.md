@@ -4,7 +4,7 @@ Official website of Club Futsal Montsant, a grassroots futsal club in Reus
 (Catalonia). Bilingual Catalan/Spanish single-page application with club
 information and an online player registration form.
 
-**Live:** https://fsmontsant.reus.workers.dev
+**Live:** https://futsalmontsant.cat
 
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://fsmontsant.reus.workers.dev/</loc>
-    <lastmod>2026-07-19</lastmod>
+    <loc>https://futsalmontsant.cat/</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://fsmontsant.reus.workers.dev/metodologia</loc>
-    <lastmod>2026-07-19</lastmod>
+    <loc>https://futsalmontsant.cat/metodologia</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fsmontsant.reus.workers.dev/competicions</loc>
-    <lastmod>2026-07-19</lastmod>
+    <loc>https://futsalmontsant.cat/competicions</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fsmontsant.reus.workers.dev/activitats</loc>
-    <lastmod>2026-07-19</lastmod>
+    <loc>https://futsalmontsant.cat/activitats</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fsmontsant.reus.workers.dev/inscripcio</loc>
-    <lastmod>2026-07-19</lastmod>
+    <loc>https://futsalmontsant.cat/inscripcio</loc>
+    <lastmod>2026-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
