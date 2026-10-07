@@ -54,6 +54,8 @@ const founders = [
 
 const texts = {
   ca: {
+    photoAlt: "Joves jugadors a l'Escola Montsant",
+    boardAlt: "Directiva del club",
     badge: "EL NOSTRE CLUB",
     title: "Qui Som",
     description:
@@ -67,6 +69,8 @@ const texts = {
       "Quatre amics que van compartir els anys d'escola a l'Escola Montsant, no només com a alumnes sinó també com a jugadors de futbol sala. Avui, aquest vincle es transforma en un projecte compartit.",
   },
   es: {
+    photoAlt: "Jóvenes jugadores en la Escola Montsant",
+    boardAlt: "Directiva del club",
     badge: "NUESTRO CLUB",
     title: "Quiénes Somos",
     description:
@@ -133,7 +137,7 @@ export function QuiSom({ language }: QuiSomProps) {
             <div className="relative rounded-2xl overflow-hidden shadow-elevated group">
               <img
                 src={quiSomPhoto}
-                alt="Joves jugadors a l'Escola Montsant"
+                alt={t.photoAlt}
                 className="w-full h-64 lg:h-56 xl:h-64 object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
                 decoding="async"
@@ -153,7 +157,7 @@ export function QuiSom({ language }: QuiSomProps) {
             <div className="relative rounded-2xl overflow-hidden shadow-elevated group">
               <img
                 src={bossesImg}
-                alt="Directiva del Club"
+                alt={t.boardAlt}
                 className="w-full h-64 lg:h-56 xl:h-64 object-cover object-top transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-maroon-dark/70 to-transparent opacity-90" />

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { scrollBehavior } from "@/lib/utils";
 import { Menu, X, Globe } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
@@ -59,7 +60,7 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
     } else {
       // Already on home, just scroll
       const el = document.querySelector(href);
-      el?.scrollIntoView({ behavior: "smooth" });
+      el?.scrollIntoView({ behavior: scrollBehavior() });
     }
   };
 

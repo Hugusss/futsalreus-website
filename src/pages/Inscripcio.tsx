@@ -462,11 +462,11 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                         {t.playerSection}
                       </h2>
                       <div className="grid sm:grid-cols-2 gap-6">
-                        <TextField control={form.control} name="playerName" label={t.fields.playerName} upper />
-                        <TextField control={form.control} name="playerSurname" label={t.fields.playerSurname} upper />
-                        <TextField control={form.control} name="playerDni" label={t.fields.playerDni} upper placeholder={t.placeholders.playerDni} maxLength={9} />
-                        <TextField control={form.control} name="playerBirthdate" label={t.fields.playerBirthdate} type="date" max={TODAY_ISO} />
-                        <TextField control={form.control} name="playerPhone" label={t.fields.playerPhone} required={false} type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} format={formatPhone} />
+                        <TextField control={form.control} name="playerName" label={t.fields.playerName} autoComplete="off" upper />
+                        <TextField control={form.control} name="playerSurname" label={t.fields.playerSurname} autoComplete="off" upper />
+                        <TextField control={form.control} name="playerDni" label={t.fields.playerDni} autoComplete="off" upper placeholder={t.placeholders.playerDni} maxLength={9} />
+                        <TextField control={form.control} name="playerBirthdate" label={t.fields.playerBirthdate} autoComplete="off" type="date" max={TODAY_ISO} />
+                        <TextField control={form.control} name="playerPhone" label={t.fields.playerPhone} autoComplete="off" required={false} type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} format={formatPhone} />
                       </div>
                     </section>
 
@@ -476,13 +476,13 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                         {t.guardianSection}
                       </h2>
                       <div className="grid sm:grid-cols-2 gap-6">
-                        <TextField control={form.control} name="guardianName" label={t.fields.guardianName} upper />
-                        <TextField control={form.control} name="guardianSurname" label={t.fields.guardianSurname} upper />
-                        <TextField control={form.control} name="guardianDni" label={t.fields.guardianDni} upper placeholder={t.placeholders.guardianDni} maxLength={9} />
-                        <TextField control={form.control} name="guardianPhone" label={t.fields.guardianPhone} type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} format={formatPhone} />
-                        <TextField control={form.control} name="address" label={t.fields.address} upper placeholder={t.placeholders.address} />
-                        <TextField control={form.control} name="email" label={t.fields.email} type="email" placeholder={t.placeholders.email} />
-                        <TextField control={form.control} name="iban" label={t.fields.iban} placeholder={t.placeholders.iban} maxLength={29} format={formatIBAN} />
+                        <TextField control={form.control} name="guardianName" label={t.fields.guardianName} autoComplete="given-name" upper />
+                        <TextField control={form.control} name="guardianSurname" label={t.fields.guardianSurname} autoComplete="family-name" upper />
+                        <TextField control={form.control} name="guardianDni" label={t.fields.guardianDni} autoComplete="off" upper placeholder={t.placeholders.guardianDni} maxLength={9} />
+                        <TextField control={form.control} name="guardianPhone" label={t.fields.guardianPhone} autoComplete="tel" type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} format={formatPhone} />
+                        <TextField control={form.control} name="address" label={t.fields.address} autoComplete="street-address" upper placeholder={t.placeholders.address} />
+                        <TextField control={form.control} name="email" label={t.fields.email} autoComplete="email" type="email" placeholder={t.placeholders.email} />
+                        <TextField control={form.control} name="iban" label={t.fields.iban} autoComplete="off" placeholder={t.placeholders.iban} maxLength={29} format={formatIBAN} />
                       </div>
                     </section>
 
@@ -496,7 +496,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                         {t.bankText}
                       </p>
 
-                      <TextField control={form.control} name="signatureName" label={t.fields.signatureName} upper placeholder={t.placeholders.signatureName} className="font-serif italic" />
+                      <TextField control={form.control} name="signatureName" label={t.fields.signatureName} autoComplete="off" upper placeholder={t.placeholders.signatureName} className="font-serif italic" />
 
                       <FormField
                         control={form.control}

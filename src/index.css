@@ -41,7 +41,7 @@ html {
     --destructive-foreground: 0 0% 100%;
 
     --border: 30 15% 88%;
-    --input: 30 15% 88%;
+    --input: 30 10% 55%;
     --ring: 0 60% 30%;
 
     --radius: 0.75rem;
@@ -129,3 +129,14 @@ html {
   opacity: 0;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-slide-up,
+  .animate-slide-up-delay-1,
+  .animate-slide-up-delay-2 {
+    animation: none;
+    opacity: 1;
+  }
+}

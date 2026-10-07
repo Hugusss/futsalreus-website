@@ -10,11 +10,13 @@ interface HeroProps {
 
 const texts = {
   ca: {
+    imageAlt: "Joves jugant a futsal",
     slogan: "Som club, som futsal, som família i amics",
     cta: "Uneix-te al club",
     discover: "Descobreix-nos",
   },
   es: {
+    imageAlt: "Jóvenes jugando a fútbol sala",
     slogan: "Somos club, somos futsal, somos familia y amigos",
     cta: "Únete al club",
     discover: "Descúbrenos",
@@ -33,7 +35,7 @@ export function Hero({ language }: HeroProps) {
       <div className="absolute inset-0">
         <img
           src={heroImage}
-          alt="Joves jugant futsal"
+          alt={t.imageAlt}
           className="w-full h-full object-cover"
           // React 18 only honors the lowercase DOM attribute, but the types only know camelCase
           {...({ fetchpriority: "high" } as object)}
@@ -70,7 +72,7 @@ export function Hero({ language }: HeroProps) {
       <a
         href="#partits"
         aria-label={t.discover}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/60 hover:text-primary-foreground transition-colors animate-float"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/60 hover:text-primary-foreground transition-colors motion-safe:animate-float"
       >
         <ChevronDown size={32} />
       </a>

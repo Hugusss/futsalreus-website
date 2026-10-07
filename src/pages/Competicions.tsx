@@ -118,7 +118,7 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
                           size={64}
                         />
                         <div className="relative">
-                          <span className="block text-xs font-semibold uppercase tracking-wider text-primary/70 mb-1">
+                          <span className="block text-xs font-semibold uppercase tracking-wider text-primary mb-1">
                             {language === "ca" ? "Categoria" : "Categoría"}
                           </span>
                           <span className="block text-xl font-black text-foreground">
