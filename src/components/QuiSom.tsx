@@ -5,12 +5,11 @@ import angelImg from "@/assets/fundadors/angel_pfp.webp";
 import lupeImg from "@/assets/fundadors/lupe_pfp.webp";
 import navarroImg from "@/assets/fundadors/navarro_pfp.webp";
 import ricouImg from "@/assets/fundadors/ricou_pfp.webp";
-import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Trophy, CalendarHeart, Users } from "lucide-react";
 import type { Language } from "@/App";
 
 interface QuiSomProps {
-  language?: Language;
+  language: Language;
 }
 
 const categories = [
@@ -55,6 +54,8 @@ const founders = [
 
 const texts = {
   ca: {
+    photoAlt: "Joves jugadors a l'Escola Montsant",
+    boardAlt: "Directiva del club",
     badge: "EL NOSTRE CLUB",
     title: "Qui Som",
     description:
@@ -68,6 +69,8 @@ const texts = {
       "Quatre amics que van compartir els anys d'escola a l'Escola Montsant, no només com a alumnes sinó també com a jugadors de futbol sala. Avui, aquest vincle es transforma en un projecte compartit.",
   },
   es: {
+    photoAlt: "Jóvenes jugadores en la Escola Montsant",
+    boardAlt: "Directiva del club",
     badge: "NUESTRO CLUB",
     title: "Quiénes Somos",
     description:
@@ -82,7 +85,7 @@ const texts = {
   },
 };
 
-export function QuiSom({ language = "ca" }: QuiSomProps) {
+export function QuiSom({ language }: QuiSomProps) {
   const t = texts[language];
 
   return (
@@ -105,22 +108,22 @@ export function QuiSom({ language = "ca" }: QuiSomProps) {
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
           {categories.map((cat) => (
             <Link key={cat.id} to={cat.path} className="group rounded-lg">
-              <Card className="h-full border-none shadow-card group-hover:shadow-elevated transition-all group-hover:-translate-y-1 overflow-hidden">
+              <div className="h-full rounded-lg bg-card text-card-foreground shadow-card group-hover:shadow-elevated transition-all group-hover:-translate-y-1 overflow-hidden">
                 <div className="bg-gradient-hero h-40 flex items-center justify-center">
                   <cat.icon
                     className="text-primary-foreground/80 group-hover:scale-110 transition-transform"
                     size={64}
                   />
                 </div>
-                <CardContent className="p-6 text-center">
+                <div className="p-6 text-center">
                   <h3 className="font-bold text-lg text-foreground mb-2">
                     {cat.title[language]}
                   </h3>
                   <p className="text-sm text-muted-foreground">
                     {cat.description[language]}
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </Link>
           ))}
         </div>
@@ -134,7 +137,7 @@ export function QuiSom({ language = "ca" }: QuiSomProps) {
             <div className="relative rounded-2xl overflow-hidden shadow-elevated group">
               <img
                 src={quiSomPhoto}
-                alt="Joves jugadors a l'Escola Montsant"
+                alt={t.photoAlt}
                 className="w-full h-64 lg:h-56 xl:h-64 object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
                 decoding="async"
@@ -154,7 +157,7 @@ export function QuiSom({ language = "ca" }: QuiSomProps) {
             <div className="relative rounded-2xl overflow-hidden shadow-elevated group">
               <img
                 src={bossesImg}
-                alt="Directiva del Club"
+                alt={t.boardAlt}
                 className="w-full h-64 lg:h-56 xl:h-64 object-cover object-top transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-maroon-dark/70 to-transparent opacity-90" />

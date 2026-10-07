@@ -1,8 +1,5 @@
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { ArrowLeft, BookOpen, Heart, Users, MessageCircle, Shield } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { SubPage } from "@/components/SubPage";
+import { BookOpen, Heart, Users, MessageCircle, Shield } from "lucide-react";
 import { usePageTitle } from "@/hooks/use-page-title";
 import teamMethod from "@/assets/metodologia/team-train.jpg";
 import type { Language } from "@/App";
@@ -116,37 +113,18 @@ const texts = {
 };
 
 const Metodologia = ({ language, onLanguageChange }: MetodologiaProps) => {
-  const navigate = useNavigate();
   const t = texts[language];
   usePageTitle(t.title);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header language={language} onLanguageChange={onLanguageChange} />
-      <main className="pt-24 md:pt-28">
-        {/* Hero Banner */}
-        <div className="bg-gradient-hero py-16 md:py-24">
-          <div className="container mx-auto px-4 text-center">
-            <BookOpen className="mx-auto mb-4 text-primary-foreground/80" size={48} />
-            <h1 className="text-4xl md:text-5xl font-black text-primary-foreground mb-4">
-              {t.title}
-            </h1>
-            <p className="text-lg text-primary-foreground/80 max-w-2xl mx-auto">
-              {t.subtitle}
-            </p>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="container mx-auto px-4 py-12 md:py-16">
-          <Button
-            variant="ghost"
-            onClick={() => navigate("/")}
-            className="mb-8 gap-2 text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft size={18} />
-            {t.back}
-          </Button>
+    <SubPage
+      language={language}
+      onLanguageChange={onLanguageChange}
+      icon={BookOpen}
+      title={t.title}
+      subtitle={t.subtitle}
+      back={t.back}
+    >
 
           <article className="max-w-3xl mx-auto">
             <div className="space-y-10">
@@ -232,10 +210,7 @@ const Metodologia = ({ language, onLanguageChange }: MetodologiaProps) => {
               />
             </div>
           </article>
-        </div>
-      </main>
-      <Footer language={language} />
-    </div>
+    </SubPage>
   );
 };
 

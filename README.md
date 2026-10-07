@@ -38,6 +38,7 @@ Other scripts:
 bun run build           # production build to dist/
 bun run preview         # serve the production build locally
 bun run lint            # ESLint
+bun run typecheck       # TypeScript, no emit
 ```
 
 ### Environment
@@ -58,11 +59,11 @@ src/
 │   ├── Activitats.tsx   # Club activities and events
 │   ├── Inscripcio.tsx   # Registration form (Web3Forms) + printable PDF option
 │   └── NotFound.tsx
-├── components/          # Header, Hero, QuiSom, PartitsLink, Footer, ScrollToTop
+├── components/          # Header, Hero, QuiSom, PartitsLink, Footer, SubPage, ScrollToTop
 │   └── ui/              # shadcn/ui primitives in use
 ├── hooks/               # use-page-title
-├── lib/                 # cn() class-merge utility
-└── assets/              # Optimized images (WebP/JPEG)
+├── lib/                 # cn() class-merge utility, scroll helper
+└── assets/              # Optimized images (WebP/JPEG), self-hosted font
 public/
 ├── _headers             # Security headers (CSP, HSTS, …)
 ├── .well-known/security.txt
@@ -78,8 +79,11 @@ page keeps its copy in a local `texts` record keyed by language.
 
 ## Deployment
 
-Pushes to `main` are built and deployed by Cloudflare Workers Builds using
-`wrangler.json` (static assets with single-page-app fallback). Response
+Pushes to `main` are built (`bun run build`) and deployed (`wrangler deploy`)
+by Cloudflare Workers Builds using `wrangler.json` (static assets with
+single-page-app fallback). The Web3Forms key is set as a build variable in the
+Worker's Builds settings. Pull requests run lint, typecheck and build in GitHub
+Actions (`.github/workflows/ci.yml`); Dependabot keeps dependencies current. Response
 headers — including the Content-Security-Policy — are defined in
 `public/_headers`.
 

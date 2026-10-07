@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { scrollBehavior } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
 
 export function ScrollToTop() {
@@ -8,7 +9,7 @@ export function ScrollToTop() {
     if (hash) {
       // Wait a frame so the target page has rendered before scrolling to the section.
       requestAnimationFrame(() => {
-        document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
+        document.querySelector(hash)?.scrollIntoView({ behavior: scrollBehavior() });
       });
     } else {
       window.scrollTo(0, 0);
