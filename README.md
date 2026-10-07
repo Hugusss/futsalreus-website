@@ -24,7 +24,9 @@ information and an online player registration form.
 
 ## Development
 
-Requires [Bun](https://bun.sh).
+Requires [Bun](https://bun.sh) 1.4.2 (the version that writes `bun.lock`). The same
+version is pinned in CI and in Cloudflare Workers Builds (`BUN_VERSION` build
+variable); upgrade all three together.
 
 ```sh
 bun install
