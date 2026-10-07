@@ -13,6 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2 # keep in sync with BUN_VERSION in Cloudflare Workers Builds
       - run: bun install --frozen-lockfile
       - run: bun run lint
       - run: bun run typecheck
