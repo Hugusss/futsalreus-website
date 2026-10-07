@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import type { Language } from "@/App";
 
 interface PartitsLinkProps {
-  language?: Language;
+  language: Language;
 }
 
 const texts = {
@@ -21,7 +21,7 @@ const texts = {
   },
 };
 
-export function PartitsLink({ language = "ca" }: PartitsLinkProps) {
+export function PartitsLink({ language }: PartitsLinkProps) {
   const t = texts[language];
 
   return (

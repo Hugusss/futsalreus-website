@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import type { Language } from "@/App";
 
 interface HeroProps {
-  language?: Language;
+  language: Language;
 }
 
 const texts = {
@@ -21,7 +21,7 @@ const texts = {
   },
 };
 
-export function Hero({ language = "ca" }: HeroProps) {
+export function Hero({ language }: HeroProps) {
   const t = texts[language];
 
   return (

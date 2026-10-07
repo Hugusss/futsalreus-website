@@ -12,7 +12,7 @@ const TikTok = ({ size = 24, className }: { size?: number | string; className?: 
 );
 
 interface FooterProps {
-  language?: Language;
+  language: Language;
 }
 
 interface ContactItem {
@@ -59,7 +59,7 @@ const texts = {
   },
 };
 
-export function Footer({ language = "ca" }: FooterProps) {
+export function Footer({ language }: FooterProps) {
   const t = texts[language];
 
   return (

@@ -3,12 +3,6 @@ import { Menu, X, Globe } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import type { Language } from "@/App";
 
 const navLinks = [
@@ -18,24 +12,44 @@ const navLinks = [
   { href: "#contacte", label: { ca: "Contacte", es: "Contacto" } },
 ];
 
-const languages = [
+const languages: { code: Language; label: string }[] = [
   { code: "ca", label: "Català" },
   { code: "es", label: "Español" },
 ];
 
 interface HeaderProps {
-  language?: Language;
-  onLanguageChange?: (lang: Language) => void;
+  language: Language;
+  onLanguageChange: (lang: Language) => void;
 }
 
-export function Header({ language = "ca", onLanguageChange }: HeaderProps) {
+function LanguageSwitch({ language, onLanguageChange }: HeaderProps) {
+  return (
+    <div className="flex items-center gap-2">
+      <Globe size={20} className="text-muted-foreground" aria-hidden="true" />
+      {languages.map((lang) => (
+        <button
+          key={lang.code}
+          lang={lang.code}
+          aria-label={lang.label}
+          aria-pressed={language === lang.code}
+          onClick={() => onLanguageChange(lang.code)}
+          className={`px-3 py-1.5 rounded-md text-base font-semibold transition-colors ${
+            language === lang.code
+              ? "bg-primary text-primary-foreground"
+              : "bg-muted text-foreground hover:bg-muted/80"
+          }`}
+        >
+          {lang.code.toUpperCase()}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export function Header({ language, onLanguageChange }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const handleLanguageChange = (lang: Language) => {
-    onLanguageChange?.(lang);
-  };
 
   const handleNavClick = (href: string) => {
     setIsOpen(false);
@@ -87,28 +101,11 @@ export function Header({ language = "ca", onLanguageChange }: HeaderProps) {
               </button>
             ))}
             
-            {/* Language Switcher */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="default" className="ml-2 gap-2 text-base">
-                  <Globe size={20} />
-                  <span className="uppercase font-bold">{language}</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                {languages.map((lang) => (
-                  <DropdownMenuItem
-                    key={lang.code}
-                    onClick={() => handleLanguageChange(lang.code as Language)}
-                    className={`text-base ${language === lang.code ? "bg-primary/10 text-primary" : ""}`}
-                  >
-                    {lang.label}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="ml-2">
+              <LanguageSwitch language={language} onLanguageChange={onLanguageChange} />
+            </div>
 
-            <Button variant="cta" size="default" className="ml-4 text-base px-6 py-3" onClick={handleJoinClick}>
+            <Button variant="cta" className="ml-4 text-base px-6 py-3" onClick={handleJoinClick}>
               {language === "ca" ? "Uneix-te" : "Únete"}
             </Button>
           </nav>
@@ -117,7 +114,8 @@ export function Header({ language = "ca", onLanguageChange }: HeaderProps) {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-3 text-foreground hover:text-primary transition-colors"
-            aria-label="Toggle menu"
+            aria-label={language === "ca" ? "Obrir o tancar el menú" : "Abrir o cerrar el menú"}
+            aria-expanded={isOpen}
           >
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -137,24 +135,8 @@ export function Header({ language = "ca", onLanguageChange }: HeaderProps) {
                 </button>
               ))}
               
-              {/* Mobile Language Switcher */}
-              <div className="px-4 py-3 flex items-center gap-3">
-                <Globe size={20} className="text-muted-foreground" />
-                <div className="flex gap-2">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => handleLanguageChange(lang.code as Language)}
-                      className={`px-3 py-1.5 rounded-md text-base font-semibold transition-colors ${
-                        language === lang.code
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted text-muted-foreground hover:bg-muted/80"
-                      }`}
-                    >
-                      {lang.code.toUpperCase()}
-                    </button>
-                  ))}
-                </div>
+              <div className="px-4 py-3">
+                <LanguageSwitch language={language} onLanguageChange={onLanguageChange} />
               </div>
 
               <Button variant="cta" className="mt-2 mx-4 text-lg py-4" onClick={handleJoinClick}>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Metodologia from "./pages/Metodologia";
@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <>
-      <Sonner />
+      <Toaster />
       <BrowserRouter>
           <ScrollToTop />
           <Routes>

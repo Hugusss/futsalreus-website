@@ -1,12 +1,11 @@
 import { useMemo, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type Control } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, ClipboardList, CheckCircle2, Loader2, ShieldCheck, Download, FileText, Mail } from "lucide-react";
+import { ClipboardList, CheckCircle2, Loader2, ShieldCheck, Download, FileText, Mail } from "lucide-react";
 
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { SubPage } from "@/components/SubPage";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -46,8 +45,6 @@ const isValidIban = (iban: string) => {
 };
 
 // --- Formateadores visuales en tiempo real ---
-const forceUpper = (val: string) => val.toUpperCase();
-
 const formatIBAN = (val: string) => {
   // Quita todo lo que no sea número o letra y pasa a mayúsculas
   const cleaned = val.replace(/[^\dA-Za-z]/g, "").toUpperCase().slice(0, 24); // ES + 22 digits
@@ -70,134 +67,77 @@ const formatPhone = (val: string) => {
 };
 
 // --- Copy (Catalan / Spanish) ------------------------------------------
-interface Texts {
-  eyebrow: string;
-  title: string;
-  subtitle: string;
-  back: string;
-  intro: string;
-  pdfAlternativeTitle: string;
-  pdfAlternativeText: string;
-  pdfAlternativeButton: string;
-  pdfAlternativeNote: string;
-  playerSection: string;
-  guardianSection: string;
-  bankSection: string;
-  bankText: string;
+const ca = {
+  eyebrow: "TEMPORADA 2026-2027",
+  title: "Full d'Inscripció",
+  subtitle:
+    "Omple les dades del jugador/a i del pare, mare o tutor legal per formalitzar la inscripció al club.",
+  back: "Tornar a l'inici",
+  intro:
+    "Tots els camps marcats amb * són obligatoris. Les dades es tractaran de forma confidencial i només s'utilitzaran per a la gestió esportiva i administrativa del club.",
+  pdfAlternativeTitle: "Prefereixes fer-ho a mà?",
+  pdfAlternativeText: "Descarrega el full, imprimeix-lo, signa'l i fes-nos-el arribar.",
+  pdfAlternativeButton: "Descarregar PDF",
+  pdfAlternativeNote: "També pots portar-lo signat directament al club.",
+  playerSection: "Dades del jugador/a",
+  guardianSection: "Dades del pare/mare o representant legal",
+  bankSection: "Autorització de domiciliació bancària",
+  bankText:
+    "Mitjançant la signatura d'aquest formulari, autoritzo el CLUB FUTSAL MONTSANT DE REUS per a l'enviament d'ordres de domiciliació bancària a la seva entitat financera per carregar els imports corresponents a les quotes mensuals de l'activitat de futbol sala del meu fill/a.",
   fields: {
-    playerName: string;
-    playerSurname: string;
-    playerDni: string;
-    playerBirthdate: string;
-    playerPhone: string;
-    guardianName: string;
-    guardianSurname: string;
-    guardianDni: string;
-    address: string;
-    guardianPhone: string;
-    email: string;
-    iban: string;
-    signatureName: string;
-  };
+    playerName: "Nom",
+    playerSurname: "Cognoms",
+    playerDni: "DNI",
+    playerBirthdate: "Data de naixement",
+    playerPhone: "Telèfon de contacte (opcional)",
+    guardianName: "Nom",
+    guardianSurname: "Cognoms",
+    guardianDni: "DNI",
+    address: "Adreça",
+    guardianPhone: "Telèfon de contacte",
+    email: "E-mail",
+    iban: "IBAN",
+    signatureName: "Nom i cognoms (signatura digital)",
+  },
   placeholders: {
-    playerDni: string;
-    guardianDni: string;
-    guardianPhone: string;
-    email: string;
-    iban: string;
-    address: string;
-    signatureName: string;
-  };
-  acceptSepaLabel: string;
-  acceptPrivacyLabel: string;
-  submit: string;
-  submitting: string;
-  successTitle: string;
-  successText: string;
-  successBack: string;
-  toastSuccess: string;
-  toastError: string;
-  notConfigured: string;
+    playerDni: "12345678A",
+    guardianDni: "12345678A",
+    guardianPhone: "612 345 678",
+    email: "nom@exemple.com",
+    iban: "ES00 0000 0000 0000 0000 0000",
+    address: "Carrer, número, pis, Reus",
+    signatureName: "Escriu el teu nom complet",
+  },
+  acceptSepaLabel: "Accepto l'autorització de domiciliació bancària descrita anteriorment.",
+  acceptPrivacyLabel:
+    "Accepto que les meves dades i les del/de la menor siguin tractades pel Club Futsal Montsant de Reus per a la gestió de la inscripció, d'acord amb el RGPD i la LOPDGDD.",
+  submit: "Enviar inscripció",
+  submitting: "Enviant...",
+  successTitle: "Inscripció enviada correctament!",
+  successText:
+    "Hem rebut les dades. La junta directiva es posarà en contacte amb tu per confirmar la inscripció i els següents passos.",
+  successBack: "Tornar a l'inici",
+  toastSuccess: "Inscripció enviada correctament.",
+  toastError: "No s'ha pogut enviar el formulari. Torna-ho a provar o escriu-nos a futsalmontsant@gmail.com.",
+  notConfigured:
+    "El formulari encara no està connectat a cap servei d'enviament. Contacta amb la persona responsable del web per configurar la clau de Web3Forms.",
   errors: {
-    required: string;
-    minLength: string;
-    maxLength: string;
-    dni: string;
-    phone: string;
-    email: string;
-    iban: string;
-    checkbox: string;
-    birthdate: string;
-  };
-}
+    required: "Aquest camp és obligatori.",
+    minLength: "Aquest camp és massa curt.",
+    maxLength: "Aquest camp és massa llarg.",
+    dni: "Introdueix un DNI o NIE vàlid (12345678A o X1234567A).",
+    phone: "Introdueix un telèfon vàlid.",
+    email: "Introdueix un e-mail vàlid.",
+    iban: "Introdueix un IBAN vàlid (ES + 22 dígits).",
+    checkbox: "Cal acceptar aquesta condició per continuar.",
+    birthdate: "La data de naixement no pot ser futura.",
+  },
+};
+
+type Texts = typeof ca;
 
 const texts: Record<Language, Texts> = {
-  ca: {
-    eyebrow: "TEMPORADA 2026-2027",
-    title: "Full d'Inscripció",
-    subtitle:
-      "Omple les dades del jugador/a i del pare, mare o tutor legal per formalitzar la inscripció al club.",
-    back: "Tornar a l'inici",
-    intro:
-      "Tots els camps marcats amb * són obligatoris. Les dades es tractaran de forma confidencial i només s'utilitzaran per a la gestió esportiva i administrativa del club.",
-    pdfAlternativeTitle: "Prefereixes fer-ho a mà?",
-    pdfAlternativeText: "Descarrega el full, imprimeix-lo, signa'l i fes-nos-el arribar.",
-    pdfAlternativeButton: "Descarregar PDF",
-    pdfAlternativeNote: "També pots portar-lo signat directament al club.",
-    playerSection: "Dades del jugador/a",
-    guardianSection: "Dades del pare/mare o representant legal",
-    bankSection: "Autorització de domiciliació bancària",
-    bankText:
-      "Mitjançant la signatura d'aquest formulari, autoritzo el CLUB FUTSAL MONTSANT DE REUS per a l'enviament d'ordres de domiciliació bancària a la seva entitat financera per carregar els imports corresponents a les quotes mensuals de l'activitat de futbol sala del meu fill/a.",
-    fields: {
-      playerName: "Nom",
-      playerSurname: "Cognoms",
-      playerDni: "DNI",
-      playerBirthdate: "Data de naixement",
-      playerPhone: "Telèfon de contacte (opcional)",
-      guardianName: "Nom",
-      guardianSurname: "Cognoms",
-      guardianDni: "DNI",
-      address: "Adreça",
-      guardianPhone: "Telèfon de contacte",
-      email: "E-mail",
-      iban: "IBAN",
-      signatureName: "Nom i cognoms (signatura digital)",
-    },
-    placeholders: {
-      playerDni: "12345678A",
-      guardianDni: "12345678A",
-      guardianPhone: "612 345 678",
-      email: "nom@exemple.com",
-      iban: "ES00 0000 0000 0000 0000 0000",
-      address: "Carrer, número, pis, Reus",
-      signatureName: "Escriu el teu nom complet",
-    },
-    acceptSepaLabel: "Accepto l'autorització de domiciliació bancària descrita anteriorment.",
-    acceptPrivacyLabel:
-      "Accepto que les meves dades i les del/de la menor siguin tractades pel Club Futsal Montsant de Reus per a la gestió de la inscripció, d'acord amb el RGPD i la LOPDGDD.",
-    submit: "Enviar inscripció",
-    submitting: "Enviant...",
-    successTitle: "Inscripció enviada correctament!",
-    successText:
-      "Hem rebut les dades. La junta directiva es posarà en contacte amb tu per confirmar la inscripció i els següents passos.",
-    successBack: "Tornar a l'inici",
-    toastSuccess: "Inscripció enviada correctament.",
-    toastError: "No s'ha pogut enviar el formulari. Torna-ho a provar o escriu-nos a futsalmontsant@gmail.com.",
-    notConfigured:
-      "El formulari encara no està connectat a cap servei d'enviament. Contacta amb la persona responsable del web per configurar la clau de Web3Forms.",
-    errors: {
-      required: "Aquest camp és obligatori.",
-      minLength: "Aquest camp és massa curt.",
-      maxLength: "Aquest camp és massa llarg.",
-      dni: "Introdueix un DNI o NIE vàlid (12345678A o X1234567A).",
-      phone: "Introdueix un telèfon vàlid.",
-      email: "Introdueix un e-mail vàlid.",
-      iban: "Introdueix un IBAN vàlid (ES + 22 dígits).",
-      checkbox: "Cal acceptar aquesta condició per continuar.",
-      birthdate: "La data de naixement no pot ser futura.",
-    },
-  },
+  ca,
   es: {
     eyebrow: "TEMPORADA 2026-2027",
     title: "Hoja de Inscripción",
@@ -314,6 +254,50 @@ function buildSchema(t: Texts) {
 
 type FormValues = z.infer<ReturnType<typeof buildSchema>>;
 
+// --- Text field: label + input + validation message ---------------------
+type TextFieldName = Exclude<keyof FormValues, "acceptSepa" | "acceptPrivacy">;
+
+interface TextFieldProps extends Omit<React.ComponentProps<typeof Input>, "name"> {
+  control: Control<FormValues>;
+  name: TextFieldName;
+  label: string;
+  required?: boolean;
+  /** Uppercase the value when the field loses focus. */
+  upper?: boolean;
+  /** Reformat the value on every keystroke (phone, IBAN). */
+  format?: (value: string) => string;
+}
+
+function TextField({ control, name, label, required = true, upper, format, ...inputProps }: TextFieldProps) {
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>
+            {label}
+            {required && " *"}
+          </FormLabel>
+          <FormControl>
+            <Input
+              {...inputProps}
+              {...field}
+              value={field.value ?? ""}
+              onChange={(e) => field.onChange(format ? format(e.target.value) : e.target.value)}
+              onBlur={() => {
+                if (upper) field.onChange((field.value ?? "").toUpperCase());
+                field.onBlur();
+              }}
+            />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+}
+
 // Public Web3Forms access key — safe to expose client-side by design
 // (it's an alias for the destination inbox, not a secret).
 const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string | undefined;
@@ -365,8 +349,8 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: WEB3FORMS_ACCESS_KEY,
-          // Web3Forms discards submissions where botcheck is true server-side.
-          botcheck: honeypotRef.current?.checked ?? false,
+          // Honeypot already checked above; Web3Forms also filters on this field.
+          botcheck: false,
           subject: `Nova inscripció: ${data.playerName} ${data.playerSurname}`,
           from_name: "Web Club Futsal Montsant Reus",
           replyto: data.email,
@@ -401,34 +385,14 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header language={language} onLanguageChange={onLanguageChange} />
-      <main className="pt-24 md:pt-28">
-        {/* Hero Banner */}
-        <div className="bg-gradient-hero py-16 md:py-24">
-          <div className="container mx-auto px-4 text-center">
-            <ClipboardList className="mx-auto mb-4 text-primary-foreground/80" size={48} />
-            <span className="inline-block px-4 py-1.5 bg-primary-foreground/10 text-primary-foreground text-sm font-bold rounded-full mb-4">
-              {t.eyebrow}
-            </span>
-            <h1 className="text-4xl md:text-5xl font-black text-primary-foreground mb-4">
-              {t.title}
-            </h1>
-            <p className="text-lg text-primary-foreground/80 max-w-2xl mx-auto">
-              {t.subtitle}
-            </p>
-          </div>
-        </div>
-
-        <div className="container mx-auto px-4 py-12 md:py-16">
-          <Button
-            variant="ghost"
-            onClick={() => navigate("/")}
-            className="mb-8 gap-2 text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft size={18} />
-            {t.back}
-          </Button>
+    <SubPage
+      language={language}
+      onLanguageChange={onLanguageChange}
+      icon={ClipboardList} eyebrow={t.eyebrow}
+      title={t.title}
+      subtitle={t.subtitle}
+      back={t.back}
+    >
 
           <div className="max-w-2xl mx-auto">
             {submitted ? (
@@ -498,79 +462,11 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                         {t.playerSection}
                       </h2>
                       <div className="grid sm:grid-cols-2 gap-6">
-                        <FormField
-                          control={form.control}
-                          name="playerName"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>{t.fields.playerName} *</FormLabel>
-                              <FormControl>
-                                <Input {...field}
-                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="playerSurname"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>{t.fields.playerSurname} *</FormLabel>
-                              <FormControl>
-                                <Input {...field}
-                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="playerDni"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>{t.fields.playerDni} *</FormLabel>
-                              <FormControl>
-                                <Input placeholder={t.placeholders.playerDni} maxLength={9} {...field}
-                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="playerBirthdate"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>{t.fields.playerBirthdate} *</FormLabel>
-                              <FormControl>
-                                <Input type="date" max={TODAY_ISO} {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="playerPhone"
-                          render={({ field }) => (
-                            <FormItem className="sm:col-span-2">
-                              <FormLabel>{t.fields.playerPhone}</FormLabel>
-                              <FormControl>
-                                <Input type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} {...field}
-                                onChange={(e) => field.onChange(formatPhone(e.target.value))}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                        <TextField control={form.control} name="playerName" label={t.fields.playerName} upper />
+                        <TextField control={form.control} name="playerSurname" label={t.fields.playerSurname} upper />
+                        <TextField control={form.control} name="playerDni" label={t.fields.playerDni} upper placeholder={t.placeholders.playerDni} maxLength={9} />
+                        <TextField control={form.control} name="playerBirthdate" label={t.fields.playerBirthdate} type="date" max={TODAY_ISO} />
+                        <TextField control={form.control} name="playerPhone" label={t.fields.playerPhone} required={false} type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} format={formatPhone} />
                       </div>
                     </section>
 
@@ -580,111 +476,13 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                         {t.guardianSection}
                       </h2>
                       <div className="grid sm:grid-cols-2 gap-6">
-                        <FormField
-                          control={form.control}
-                          name="guardianName"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>{t.fields.guardianName} *</FormLabel>
-                              <FormControl>
-                                <Input {...field} 
-                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="guardianSurname"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>{t.fields.guardianSurname} *</FormLabel>
-                              <FormControl>
-                                <Input {...field} 
-                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="guardianDni"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>{t.fields.guardianDni} *</FormLabel>
-                              <FormControl>
-                                <Input placeholder={t.placeholders.guardianDni} maxLength={9} {...field} 
-                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="guardianPhone"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>{t.fields.guardianPhone} *</FormLabel>
-                              <FormControl>
-                                <Input type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} {...field} 
-                                onChange={(e) => field.onChange(formatPhone(e.target.value))}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="address"
-                          render={({ field }) => (
-                            <FormItem className="sm:col-span-2">
-                              <FormLabel>{t.fields.address} *</FormLabel>
-                              <FormControl>
-                                <Input placeholder={t.placeholders.address} {...field}
-                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="email"
-                          render={({ field }) => (
-                            <FormItem className="sm:col-span-2">
-                              <FormLabel>{t.fields.email} *</FormLabel>
-                              <FormControl>
-                                <Input type="email" placeholder={t.placeholders.email} {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="iban"
-                          render={({ field }) => (
-                            <FormItem className="sm:col-span-2">
-                              <FormLabel>{t.fields.iban} *</FormLabel>
-                              <FormControl>
-                                <Input placeholder={t.placeholders.iban}
-                                maxLength={29}
-                                {...field}
-                                onChange={(e) => field.onChange(formatIBAN(e.target.value))}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                        <TextField control={form.control} name="guardianName" label={t.fields.guardianName} upper />
+                        <TextField control={form.control} name="guardianSurname" label={t.fields.guardianSurname} upper />
+                        <TextField control={form.control} name="guardianDni" label={t.fields.guardianDni} upper placeholder={t.placeholders.guardianDni} maxLength={9} />
+                        <TextField control={form.control} name="guardianPhone" label={t.fields.guardianPhone} type="tel" inputMode="tel" placeholder={t.placeholders.guardianPhone} format={formatPhone} />
+                        <TextField control={form.control} name="address" label={t.fields.address} upper placeholder={t.placeholders.address} />
+                        <TextField control={form.control} name="email" label={t.fields.email} type="email" placeholder={t.placeholders.email} />
+                        <TextField control={form.control} name="iban" label={t.fields.iban} placeholder={t.placeholders.iban} maxLength={29} format={formatIBAN} />
                       </div>
                     </section>
 
@@ -698,24 +496,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
                         {t.bankText}
                       </p>
 
-                      <FormField
-                        control={form.control}
-                        name="signatureName"
-                        render={({ field }) => (
-                          <FormItem className="mb-6">
-                            <FormLabel>{t.fields.signatureName} *</FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder={t.placeholders.signatureName}
-                                className="font-serif italic"
-                                {...field}
-                                onBlur={() => { field.onChange(forceUpper(field.value)); field.onBlur(); }}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                      <TextField control={form.control} name="signatureName" label={t.fields.signatureName} upper placeholder={t.placeholders.signatureName} className="font-serif italic" />
 
                       <FormField
                         control={form.control}
@@ -777,10 +558,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
               </>
             )}
           </div>
-        </div>
-      </main>
-      <Footer language={language} />
-    </div>
+    </SubPage>
   );
 };
 
