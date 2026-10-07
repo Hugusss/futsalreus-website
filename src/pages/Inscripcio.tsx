@@ -121,6 +121,7 @@ interface Texts {
   errors: {
     required: string;
     minLength: string;
+    maxLength: string;
     dni: string;
     phone: string;
     email: string;
@@ -188,7 +189,8 @@ const texts: Record<Language, Texts> = {
     errors: {
       required: "Aquest camp és obligatori.",
       minLength: "Aquest camp és massa curt.",
-      dni: "Introdueix un DNI vàlid (8 números + 1 lletra).",
+      maxLength: "Aquest camp és massa llarg.",
+      dni: "Introdueix un DNI o NIE vàlid (12345678A o X1234567A).",
       phone: "Introdueix un telèfon vàlid.",
       email: "Introdueix un e-mail vàlid.",
       iban: "Introdueix un IBAN vàlid (ES + 22 dígits).",
@@ -253,7 +255,8 @@ const texts: Record<Language, Texts> = {
     errors: {
       required: "Este campo es obligatorio.",
       minLength: "Este campo es demasiado corto.",
-      dni: "Introduce un DNI válido (8 números + 1 letra).",
+      maxLength: "Este campo es demasiado largo.",
+      dni: "Introduce un DNI o NIE válido (12345678A o X1234567A).",
       phone: "Introduce un teléfono válido.",
       email: "Introduce un e-mail válido.",
       iban: "Introduce un IBAN válido (ES + 22 dígitos).",
@@ -266,8 +269,8 @@ const texts: Record<Language, Texts> = {
 // Schema factory so validation messages follow the selected language.
 function buildSchema(t: Texts) {
   return z.object({
-    playerName: z.string().trim().min(2, t.errors.minLength),
-    playerSurname: z.string().trim().min(2, t.errors.minLength),
+    playerName: z.string().trim().min(2, t.errors.minLength).max(100, t.errors.maxLength),
+    playerSurname: z.string().trim().min(2, t.errors.minLength).max(100, t.errors.maxLength),
     playerDni: z
       .string()
       .trim()
@@ -282,19 +285,19 @@ function buildSchema(t: Texts) {
       .trim()
       .optional()
       .refine((v) => !v || PHONE_REGEX.test(normalizeSpaces(v)), t.errors.phone),
-    guardianName: z.string().trim().min(2, t.errors.minLength),
-    guardianSurname: z.string().trim().min(2, t.errors.minLength),
+    guardianName: z.string().trim().min(2, t.errors.minLength).max(100, t.errors.maxLength),
+    guardianSurname: z.string().trim().min(2, t.errors.minLength).max(100, t.errors.maxLength),
     guardianDni: z
       .string()
       .trim()
       .toUpperCase()
       .refine((v) => DNI_REGEX.test(v), t.errors.dni),
-    address: z.string().trim().min(5, t.errors.minLength),
+    address: z.string().trim().min(5, t.errors.minLength).max(200, t.errors.maxLength),
     guardianPhone: z
       .string()
       .trim()
       .refine((v) => PHONE_REGEX.test(normalizeSpaces(v)), t.errors.phone),
-    email: z.string().trim().email(t.errors.email),
+    email: z.string().trim().max(254, t.errors.maxLength).email(t.errors.email),
     iban: z
       .string()
       .trim()
@@ -303,7 +306,7 @@ function buildSchema(t: Texts) {
         const iban = normalizeSpaces(v);
         return IBAN_REGEX.test(iban) && isValidIban(iban);
       }, t.errors.iban),
-    signatureName: z.string().trim().min(3, t.errors.minLength),
+    signatureName: z.string().trim().min(3, t.errors.minLength).max(100, t.errors.maxLength),
     acceptSepa: z.boolean().refine((v) => v === true, t.errors.checkbox),
     acceptPrivacy: z.boolean().refine((v) => v === true, t.errors.checkbox),
   });
