@@ -10,5 +10,9 @@
     "not_found_handling": "single-page-application"
   },
   "workers_dev": true,
-  "preview_urls": true
+  "preview_urls": true,
+  "routes": [
+    { "pattern": "futsalmontsant.cat", "custom_domain": true },
+    { "pattern": "www.futsalmontsant.cat", "custom_domain": true }
+  ]
 }
