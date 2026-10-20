@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Twitch, Mail, Phone, MapPin } from "lucide-react";
+import { Instagram, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import type { Language } from "@/App";
@@ -29,7 +29,6 @@ const MAPS_URL =
 const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/fsmontsantreus/", label: "Instagram" },
   { icon: TikTok, href: "https://www.tiktok.com/@fsmontsantreus", label: "TikTok" },
-  { icon: Twitch, href: "https://www.twitch.tv/fsmontsantreus", label: "Twitch" },
 ];
 
 const contactInfo: ContactItem[] = [
