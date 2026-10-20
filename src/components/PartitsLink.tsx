@@ -1,5 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FCF_CLUB_URL } from "@/lib/links";
 import type { Language } from "@/App";
 
 interface PartitsLinkProps {
@@ -43,7 +44,7 @@ export function PartitsLink({ language }: PartitsLinkProps) {
           asChild
         >
           <a
-            href="https://www.fcf.cat/ff-pb-minipb-fs"
+            href={FCF_CLUB_URL}
             target="_blank"
             rel="noopener noreferrer"
           >

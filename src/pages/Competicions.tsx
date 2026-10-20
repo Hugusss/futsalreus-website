@@ -1,6 +1,8 @@
 import { SubPage } from "@/components/SubPage";
-import { Trophy, Users, Baby, Rabbit, Squirrel, Sparkles, Venus } from "lucide-react";
+import { Trophy, Users, Baby, Rabbit, Squirrel, Sparkles, Venus, ExternalLink } from "lucide-react";
 import { usePageTitle } from "@/hooks/use-page-title";
+import { Button } from "@/components/ui/button";
+import { FCF_CLUB_URL } from "@/lib/links";
 import teamCompetiMain from "@/assets/competicions/team-competi.jpg";
 import teamCeleb1 from "@/assets/competicions/team-celeb1.jpg";
 import teamCeleb2 from "@/assets/competicions/team-celeb2.jpg";
@@ -138,6 +140,21 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
                 <p className="text-muted-foreground leading-relaxed text-lg">
                   {t.future}
                 </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                  {t.calendarTitle}
+                </h2>
+                <p className="text-muted-foreground leading-relaxed text-lg mb-6">
+                  {t.calendarDesc}
+                </p>
+                <Button variant="cta" size="lg" className="gap-3" asChild>
+                  <a href={FCF_CLUB_URL} target="_blank" rel="noopener noreferrer">
+                    {t.calendarButton}
+                    <ExternalLink size={20} />
+                  </a>
+                </Button>
               </section>
 
               <div className="grid md:grid-cols-2 gap-4">
