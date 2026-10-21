@@ -11,6 +11,7 @@
   },
   "workers_dev": true,
   "preview_urls": true,
+  "previews": {},
   "routes": [
     { "pattern": "futsalmontsant.cat", "custom_domain": true },
     { "pattern": "www.futsalmontsant.cat", "custom_domain": true }

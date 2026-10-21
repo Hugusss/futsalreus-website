@@ -17,7 +17,7 @@ information and an online player registration form.
 - React 18 + TypeScript, built with Vite (SWC)
 - Tailwind CSS 3, shadcn/ui primitives on Radix UI, lucide-react icons
 - react-router-dom v6 client-side routing
-- react-hook-form + zod validation; submissions go to [Web3Forms](https://web3forms.com)
+- Registration by printable PDF (`public/inscripcio.pdf`), no online form
 - Installable as a home-screen app on iOS and Android via `public/manifest.webmanifest`
   (no service worker needed)
 - Hosted on Cloudflare Workers (static assets, SPA fallback)
@@ -30,7 +30,6 @@ variable); upgrade all three together.
 
 ```sh
 bun install
-cp .env.example .env    # then fill in the Web3Forms key
 bun run dev             # http://localhost:8080
 ```
 
@@ -43,12 +42,6 @@ bun run lint            # ESLint
 bun run typecheck       # TypeScript, no emit
 ```
 
-### Environment
-
-| Variable | Purpose |
-| --- | --- |
-| `VITE_WEB3FORMS_ACCESS_KEY` | Web3Forms access key for the registration form. Public by design (baked into the client bundle); it identifies the destination inbox. Without it the form renders a "not configured" notice and refuses to submit. |
-
 ## Project structure
 
 ```text
@@ -59,7 +52,7 @@ src/
 │   ├── Metodologia.tsx  # Training philosophy
 │   ├── Competicions.tsx # Team categories, FCF calendar link
 │   ├── Activitats.tsx   # Club activities and events
-│   ├── Inscripcio.tsx   # Registration form (Web3Forms) + printable PDF option
+│   ├── Inscripcio.tsx   # Registration: printable PDF download
 │   └── NotFound.tsx
 ├── components/          # Header, Hero, QuiSom, PartitsLink, Footer, SubPage, ScrollToTop
 │   └── ui/              # shadcn/ui primitives in use
@@ -83,8 +76,7 @@ page keeps its copy in a local `texts` record keyed by language.
 
 Pushes to `main` are built (`bun run build`) and deployed (`wrangler deploy`)
 by Cloudflare Workers Builds using `wrangler.json` (static assets with
-single-page-app fallback). The Web3Forms key is set as a build variable in the
-Worker's Builds settings. Pull requests run lint, typecheck and build in GitHub
+single-page-app fallback). Every other branch gets a preview URL. Pull requests run lint, typecheck and build in GitHub
 Actions (`.github/workflows/ci.yml`); Dependabot keeps dependencies current. Response
 headers — including the Content-Security-Policy — are defined in
 `public/_headers`.
