@@ -2,7 +2,7 @@
 
 Official website of Club Futsal Montsant, a grassroots futsal club in Reus
 (Catalonia). Bilingual Catalan/Spanish single-page application with club
-information and an online player registration form.
+information and a printable registration form (PDF).
 
 **Live:** https://futsalmontsant.cat
 
@@ -77,7 +77,8 @@ page keeps its copy in a local `texts` record keyed by language.
 Pushes to `main` are built (`bun run build`) and deployed (`wrangler deploy`)
 by Cloudflare Workers Builds using `wrangler.json` (static assets with
 single-page-app fallback). Every other branch gets a preview URL. Pull requests run lint, typecheck and build in GitHub
-Actions (`.github/workflows/ci.yml`); Dependabot keeps dependencies current. Response
+Actions (`.github/workflows/ci.yml`); Dependabot keeps dependencies current with a 7-day
+cooldown, and `bunfig.toml` applies the same minimum release age to local installs. Response
 headers — including the Content-Security-Policy — are defined in
 `public/_headers`.
 
