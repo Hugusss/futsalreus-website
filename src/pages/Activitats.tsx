@@ -2,8 +2,8 @@ import { SubPage } from "@/components/SubPage";
 import { CalendarHeart, Users, PartyPopper, Tent } from "lucide-react";
 import { usePageTitle } from "@/hooks/use-page-title";
 import teamActMain from "@/assets/activitats/act-Main.webp";
-import teamAct1 from "@/assets/activitats/act-sub1.jpg";
-import teamAct2 from "@/assets/activitats/act-sub2.jpg";
+import teamAct1 from "@/assets/activitats/act-sub1.webp";
+import teamAct2 from "@/assets/activitats/act-sub2.webp";
 import teamAct3 from "@/assets/activitats/act-sub3.webp";
 import type { Language } from "@/App";
 

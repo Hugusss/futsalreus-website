@@ -1,7 +1,7 @@
 import { SubPage } from "@/components/SubPage";
 import { BookOpen, Heart, Users, MessageCircle, Shield } from "lucide-react";
 import { usePageTitle } from "@/hooks/use-page-title";
-import teamMethod from "@/assets/metodologia/team-train.jpg";
+import teamMethod from "@/assets/metodologia/team-train.webp";
 import type { Language } from "@/App";
 
 interface MetodologiaProps {

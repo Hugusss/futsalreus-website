@@ -3,9 +3,9 @@ import { Trophy, Users, Baby, Rabbit, Squirrel, Sparkles, Venus, ExternalLink } 
 import { usePageTitle } from "@/hooks/use-page-title";
 import { Button } from "@/components/ui/button";
 import { FCF_CLUB_URL } from "@/lib/links";
-import teamCompetiMain from "@/assets/competicions/team-competi.jpg";
-import teamCeleb1 from "@/assets/competicions/team-celeb1.jpg";
-import teamCeleb2 from "@/assets/competicions/team-celeb2.jpg";
+import teamCompetiMain from "@/assets/competicions/team-competi.webp";
+import teamCeleb1 from "@/assets/competicions/team-celeb1.webp";
+import teamCeleb2 from "@/assets/competicions/team-celeb2.webp";
 import type { Language } from "@/App";
 
 interface CompetitionsProps {
