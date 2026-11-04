@@ -64,7 +64,7 @@ const Activitats = ({ language, onLanguageChange }: PageProps) => {
       back={t.back}
     >
       <article className="max-w-3xl mx-auto">
-        <div className="reveal-stack space-y-10">
+        <div className="space-y-10">
           <section>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
               {t.introTitle}
@@ -77,7 +77,7 @@ const Activitats = ({ language, onLanguageChange }: PageProps) => {
           <img
             src={teamActMain}
             alt={language === "ca" ? "Jugadors del club durant una activitat" : "Jugadores del club durante una actividad"}
-            className="w-full h-96 object-cover rounded-2xl"
+            className="reveal w-full h-96 object-cover rounded-2xl"
             loading="lazy"
             decoding="async"
           />

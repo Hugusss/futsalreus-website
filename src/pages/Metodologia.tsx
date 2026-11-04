@@ -121,11 +121,11 @@ const Metodologia = ({ language, onLanguageChange }: PageProps) => {
       back={t.back}
     >
       <article className="max-w-3xl mx-auto">
-        <div className="reveal-stack space-y-10">
+        <div className="space-y-10">
           {/* Motto */}
           <div className="text-center py-6 border-y border-border">
             <p className="text-xl md:text-2xl font-bold text-primary italic">
-              "{t.motto}"
+              «{t.motto}»
             </p>
           </div>
 
@@ -200,7 +200,7 @@ const Metodologia = ({ language, onLanguageChange }: PageProps) => {
           <img
             src={teamMethod}
             alt={language === "ca" ? "Entrenament de l'equip" : "Entrenamiento del equipo"}
-            className="w-full h-96 object-cover rounded-2xl"
+            className="reveal w-full h-96 object-cover rounded-2xl"
             loading="lazy"
             decoding="async"
           />

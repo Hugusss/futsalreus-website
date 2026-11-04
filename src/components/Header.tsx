@@ -79,7 +79,7 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
               alt="Club Futsal Montsant Reus"
               width={512}
               height={362}
-              className="h-20 md:h-24 w-auto transition-transform group-hover:scale-105"
+              className="h-20 md:h-24 w-auto"
             />
             <div className="hidden sm:block md:hidden lg:block">
               <span className="block text-base md:text-lg font-bold text-primary leading-tight">

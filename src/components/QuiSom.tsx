@@ -92,7 +92,7 @@ export function QuiSom({ language }: QuiSomProps) {
     <section id="qui-som" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="reveal text-center mb-12">
+        <div className="text-center mb-12">
           <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-bold rounded-full mb-4">
             {t.badge}
           </span>
@@ -108,7 +108,7 @@ export function QuiSom({ language }: QuiSomProps) {
         <div className="reveal-group grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
           {categories.map((cat) => (
             <Link key={cat.id} to={cat.path} className="group rounded-lg" viewTransition>
-              <div className="h-full rounded-lg bg-card text-card-foreground shadow-card group-hover:shadow-elevated transition-all group-hover:-translate-y-1 overflow-hidden">
+              <div className="h-full rounded-lg bg-card text-card-foreground shadow-card group-hover:shadow-elevated transition group-hover:-translate-y-1 overflow-hidden">
                 <div className="bg-gradient-hero h-40 flex items-center justify-center">
                   <cat.icon
                     className="text-primary-foreground/80 group-hover:scale-110 transition-transform"
@@ -191,7 +191,7 @@ export function QuiSom({ language }: QuiSomProps) {
               {founders.map((founder) => (
                 <div
                   key={founder.name}
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-card border border-border shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-card border border-border shadow-sm hover:shadow-md transition hover:-translate-y-1"
                 >
                   <div className="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-primary/20 bg-muted">
                     <img

@@ -10,7 +10,7 @@ const Index = ({ language, onLanguageChange }: PageProps) => {
   usePageTitle();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-svh bg-background">
       <Header language={language} onLanguageChange={onLanguageChange} />
       <main id="contingut">
         <Hero language={language} />

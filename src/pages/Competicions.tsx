@@ -75,7 +75,7 @@ const Competicions = ({ language, onLanguageChange }: PageProps) => {
       back={t.back}
     >
       <article className="max-w-3xl mx-auto">
-        <div className="reveal-stack space-y-10">
+        <div className="space-y-10">
           <section>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
               {t.introTitle}
@@ -88,7 +88,7 @@ const Competicions = ({ language, onLanguageChange }: PageProps) => {
           <img
             src={teamCompetiMain}
             alt={language === "ca" ? "Equip del Club Futsal Montsant en competició" : "Equipo del Club Futsal Montsant en competición"}
-            className="w-full aspect-video object-cover rounded-2xl"
+            className="reveal w-full aspect-video object-cover rounded-2xl"
             loading="lazy"
             decoding="async"
           />
@@ -109,10 +109,10 @@ const Competicions = ({ language, onLanguageChange }: PageProps) => {
                 return (
                   <div
                     key={cat.key}
-                    className="group relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-card to-card p-5 shadow-card transition-all hover:-translate-y-1 hover:shadow-lg hover:border-primary/40"
+                    className="group relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-card to-card p-5 shadow-card transition hover:-translate-y-1 hover:shadow-lg hover:border-primary/40"
                   >
                     <CatIcon
-                      className="absolute -right-2 -top-2 text-primary/10 transition-all group-hover:text-primary/30 group-hover:rotate-12 group-hover:scale-110"
+                      className="absolute -right-2 -top-2 text-primary/10 transition group-hover:text-primary/30 group-hover:rotate-12 group-hover:scale-110"
                       size={64}
                     />
                     <div className="relative">

@@ -31,7 +31,7 @@ export function Hero({ language }: HeroProps) {
   return (
     <section
       id="inici"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
+      className="relative min-h-svh flex items-center justify-center overflow-hidden pt-16"
     >
       {/* Background Image */}
       <div className="absolute inset-0">
@@ -76,7 +76,7 @@ export function Hero({ language }: HeroProps) {
       <a
         href="#partits"
         aria-label={t.discover}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/60 hover:text-primary-foreground transition-colors motion-safe:animate-float"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/60 hover:text-primary-foreground transition-colors"
       >
         <ChevronDown size={32} />
       </a>

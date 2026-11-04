@@ -109,15 +109,6 @@ html {
   }
 
 
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
 }
 
 @keyframes slide-up {
@@ -153,8 +144,8 @@ html {
   from { opacity: 0; transform: translateY(12px); }
 }
 
-/* Reveal on scroll, driven by the element's own view timeline: no JavaScript.
-   An ancestor with overflow: hidden would become the scroller and the element would never
+/* Reveal on scroll for photos and card grids only, driven by the element's own view
+   timeline: no JavaScript. An ancestor with overflow: hidden would become the scroller and the element would never
    reveal, so keep these classes outside such boxes. */
 @keyframes reveal {
   from { opacity: 0; transform: translateY(1.5rem); }
@@ -171,8 +162,7 @@ html {
 
   @supports (animation-timeline: view()) {
     .reveal,
-    .reveal-group > *,
-    .reveal-stack > :not(.reveal-group):not(:has(.reveal-group)) {
+    .reveal-group > * {
       animation: reveal linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 40%;

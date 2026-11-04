@@ -19,7 +19,7 @@ interface SubPageProps {
 
 export function SubPage({ language, onLanguageChange, icon: Icon, eyebrow, title, subtitle, back, children }: SubPageProps) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-svh bg-background">
       <Header language={language} onLanguageChange={onLanguageChange} />
       <main id="contingut" className="pt-24 md:pt-28">
         <div className="bg-gradient-hero py-16 md:py-24">
