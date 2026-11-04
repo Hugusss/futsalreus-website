@@ -26,6 +26,10 @@ interface ContactItem {
 const MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=Escola+Montsant,+Carrer+de+les+Borges+del+Camp,+2,+43203+Reus,+Tarragona";
 
+const FOUNDED = 2024;
+const currentYear = new Date().getFullYear();
+const copyrightYears = currentYear > FOUNDED ? `${FOUNDED}–${currentYear}` : `${FOUNDED}`;
+
 const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/fsmontsantreus/", label: "Instagram" },
   { icon: TikTok, href: "https://www.tiktok.com/@fsmontsantreus", label: "TikTok" },
@@ -43,7 +47,7 @@ const texts = {
     contact: "Contacta'ns",
     joinClub: "Inscriu-te al club",
     sendMessage: "Envia'ns un missatge",
-    copyright: "© 2024 Club Futsal Montsant Reus. Tots els drets reservats.",
+    copyright: "Club Futsal Montsant Reus. Tots els drets reservats.",
     madeWith: "Fet amb",
     inReus: "a Reus",
   },
@@ -52,7 +56,7 @@ const texts = {
     contact: "Contáctanos",
     joinClub: "Inscríbete al club",
     sendMessage: "Envíanos un mensaje",
-    copyright: "© 2024 Club Futsal Montsant Reus. Todos los derechos reservados.",
+    copyright: "Club Futsal Montsant Reus. Todos los derechos reservados.",
     madeWith: "Hecho con",
     inReus: "en Reus",
   },
@@ -69,7 +73,7 @@ export function Footer({ language }: FooterProps) {
           {/* Left - Info */}
           <div>
             <div className="flex items-center gap-4 mb-6">
-              <img src={logo} alt="Club Futsal Montsant Reus" className="h-24 w-auto" />
+              <img src={logo} alt="Club Futsal Montsant Reus" width={512} height={362} className="h-24 w-auto" />
               <div>
                 <h2 className="text-2xl font-black">CLUB FUTSAL</h2>
                 <p className="text-primary-foreground/80 font-semibold">MONTSANT REUS</p>
@@ -127,7 +131,7 @@ export function Footer({ language }: FooterProps) {
       <div className="border-t border-primary-foreground/10">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-primary-foreground/60">
-            <p>{t.copyright}</p>
+            <p>© {copyrightYears} {t.copyright}</p>
             <p>
               {t.madeWith} <span className="text-accent">♥</span> {t.inReus}
             </p>

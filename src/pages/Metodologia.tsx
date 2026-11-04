@@ -207,6 +207,8 @@ const Metodologia = ({ language, onLanguageChange }: MetodologiaProps) => {
                 src={teamMethod}
                 alt={language === "ca" ? "Entrenament de l'equip" : "Entrenamiento del equipo"}
                 className="w-full h-96 object-cover rounded-2xl"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </article>

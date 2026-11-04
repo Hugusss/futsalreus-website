@@ -159,6 +159,8 @@ export function QuiSom({ language }: QuiSomProps) {
                 src={bossesImg}
                 alt={t.boardAlt}
                 className="w-full h-64 lg:h-56 xl:h-64 object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-maroon-dark/70 to-transparent opacity-90" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
@@ -196,6 +198,8 @@ export function QuiSom({ language }: QuiSomProps) {
                       src={founder.image}
                       alt={`Foto de ${founder.name}`}
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <div className="flex flex-col">

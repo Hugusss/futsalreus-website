@@ -94,7 +94,9 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
               <img
                 src={teamCompetiMain}
                 alt={language === "ca" ? "Equip del Club Futsal Montsant en competició" : "Equipo del Club Futsal Montsant en competición"}
-                className="w-full h-full object-cover rounded-2xl"
+                className="w-full aspect-video object-cover rounded-2xl"
+                loading="lazy"
+                decoding="async"
               />
 
               <section>
@@ -162,11 +164,15 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
                   src={teamCeleb1}
                   alt=""
                   className="w-full aspect-square object-cover rounded-2xl"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <img
                   src={teamCeleb2}
                   alt=""
                   className="w-full aspect-square object-cover rounded-2xl"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>

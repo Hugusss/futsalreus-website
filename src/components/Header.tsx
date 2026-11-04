@@ -71,13 +71,21 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-card">
+      <a
+        href="#contingut"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:font-semibold focus:text-primary-foreground"
+      >
+        {language === "ca" ? "Salta al contingut" : "Saltar al contenido"}
+      </a>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
           <button onClick={() => handleNavClick("#inici")} className="flex items-center gap-3 group">
-            <img 
-              src={logo} 
-              alt="Club Futsal Montsant Reus" 
+            <img
+              src={logo}
+              alt="Club Futsal Montsant Reus"
+              width={512}
+              height={362}
               className="h-20 md:h-24 w-auto transition-transform group-hover:scale-105"
             />
             <div className="hidden sm:block md:hidden lg:block">

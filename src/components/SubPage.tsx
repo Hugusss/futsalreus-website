@@ -21,7 +21,7 @@ export function SubPage({ language, onLanguageChange, icon: Icon, eyebrow, title
   return (
     <div className="min-h-screen bg-background">
       <Header language={language} onLanguageChange={onLanguageChange} />
-      <main className="pt-24 md:pt-28">
+      <main id="contingut" className="pt-24 md:pt-28">
         <div className="bg-gradient-hero py-16 md:py-24">
           <div className="container mx-auto px-4 text-center">
             <Icon className="mx-auto mb-4 text-primary-foreground/80" size={48} aria-hidden="true" />

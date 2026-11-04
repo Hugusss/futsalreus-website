@@ -10,13 +10,26 @@ import { ScrollToTop } from "./components/ScrollToTop";
 
 export type Language = "ca" | "es";
 
+const STORAGE_KEY = "language";
+
+// Storage access can throw (blocked site data, some private modes); the site must still render.
+function readStoredLanguage(): Language {
+  try {
+    return localStorage.getItem(STORAGE_KEY) === "es" ? "es" : "ca";
+  } catch {
+    return "ca";
+  }
+}
+
 const App = () => {
-  const [language, setLanguage] = useState<Language>(
-    () => (localStorage.getItem("language") === "es" ? "es" : "ca"),
-  );
+  const [language, setLanguage] = useState<Language>(readStoredLanguage);
 
   useEffect(() => {
-    localStorage.setItem("language", language);
+    try {
+      localStorage.setItem(STORAGE_KEY, language);
+    } catch {
+      // Storage unavailable: the choice lasts for this visit only.
+    }
     document.documentElement.lang = language;
   }, [language]);
 

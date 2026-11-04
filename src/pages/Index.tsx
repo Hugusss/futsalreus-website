@@ -17,7 +17,7 @@ const Index = ({ language, onLanguageChange }: IndexProps) => {
   return (
     <div className="min-h-screen bg-background">
       <Header language={language} onLanguageChange={onLanguageChange} />
-      <main>
+      <main id="contingut">
         <Hero language={language} />
         <QuiSom language={language} />
         <PartitsLink language={language} />

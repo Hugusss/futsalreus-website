@@ -109,9 +109,9 @@ const Activitats = ({ language, onLanguageChange }: ActivitatsProps) => {
 
               {/* Gallery placeholders */}
               <div className="grid sm:grid-cols-3 gap-4">
-                <img src={teamAct1} alt="" className="w-full h-full object-cover rounded-2xl" />
-                <img src={teamAct2} alt="" className="w-full h-full object-cover rounded-2xl" />
-                <img src={teamAct3} alt="" className="w-full h-full object-cover rounded-2xl" />
+                <img src={teamAct1} alt="" className="w-full aspect-[4/3] object-cover rounded-2xl" loading="lazy" decoding="async" />
+                <img src={teamAct2} alt="" className="w-full aspect-[4/3] object-cover rounded-2xl" loading="lazy" decoding="async" />
+                <img src={teamAct3} alt="" className="w-full aspect-[4/3] object-cover rounded-2xl" loading="lazy" decoding="async" />
               </div>
 
               <section className="bg-muted/50 rounded-2xl p-6 md:p-8 border border-border text-center">
