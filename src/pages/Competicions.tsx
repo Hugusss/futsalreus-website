@@ -81,7 +81,7 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
     >
 
           <article className="max-w-3xl mx-auto">
-            <div className="space-y-10">
+            <div className="reveal-stack space-y-10">
               <section>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                   {t.introTitle}
@@ -109,7 +109,7 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
                 <p className="text-muted-foreground leading-relaxed text-lg mb-6">
                   {t.categoriesDesc}
                 </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div className="reveal-group grid grid-cols-2 sm:grid-cols-3 gap-4">
                   {t.categories.map((cat) => {
                     const CatIcon = cat.Icon;
                     return (
@@ -159,7 +159,7 @@ const Competicions = ({ language, onLanguageChange }: CompetitionsProps) => {
                 </Button>
               </section>
 
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="reveal-group grid md:grid-cols-2 gap-4">
                 <img
                   src={teamCeleb1}
                   alt=""

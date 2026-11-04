@@ -118,7 +118,7 @@ export function Footer({ language }: FooterProps) {
               ))}
             </div>
             <Button variant="cta" className="w-full mb-3" asChild>
-              <Link to="/inscripcio">{t.joinClub}</Link>
+              <Link to="/inscripcio" viewTransition>{t.joinClub}</Link>
             </Button>
             <Button variant="hero" className="w-full" asChild>
               <a href="mailto:futsalmontsant@gmail.com">{t.sendMessage}</a>

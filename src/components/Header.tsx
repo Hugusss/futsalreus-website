@@ -56,7 +56,7 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
     setIsOpen(false);
     if (location.pathname !== "/") {
       // Navigate to home page first, then scroll to section
-      navigate("/" + href);
+      navigate("/" + href, { viewTransition: true });
     } else {
       // Already on home, just scroll
       const el = document.querySelector(href);
@@ -66,11 +66,11 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
 
   const handleJoinClick = () => {
     setIsOpen(false);
-    navigate("/inscripcio");
+    navigate("/inscripcio", { viewTransition: true });
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-card">
+    <header className="site-header fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-card">
       <a
         href="#contingut"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:font-semibold focus:text-primary-foreground"
@@ -133,7 +133,7 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
         {/* Mobile Navigation */}
         {isOpen && (
           <nav className="md:hidden py-4 border-t border-border">
-            <div className="flex flex-col gap-2">
+            <div className="menu-enter flex flex-col gap-2">
               {navLinks.map((link) => (
                 <button
                   key={link.href}

@@ -92,7 +92,7 @@ export function QuiSom({ language }: QuiSomProps) {
     <section id="qui-som" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="reveal text-center mb-12">
           <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-bold rounded-full mb-4">
             {t.badge}
           </span>
@@ -105,9 +105,9 @@ export function QuiSom({ language }: QuiSomProps) {
         </div>
 
         {/* Category Cards */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
+        <div className="reveal-group grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
           {categories.map((cat) => (
-            <Link key={cat.id} to={cat.path} className="group rounded-lg">
+            <Link key={cat.id} to={cat.path} className="group rounded-lg" viewTransition>
               <div className="h-full rounded-lg bg-card text-card-foreground shadow-card group-hover:shadow-elevated transition-all group-hover:-translate-y-1 overflow-hidden">
                 <div className="bg-gradient-hero h-40 flex items-center justify-center">
                   <cat.icon
@@ -134,7 +134,7 @@ export function QuiSom({ language }: QuiSomProps) {
           {/* Left Column: Images */}
           <div className="flex flex-col gap-6">
             {/* Children photo */}
-            <div className="relative rounded-2xl overflow-hidden shadow-elevated group">
+            <div className="reveal relative rounded-2xl overflow-hidden shadow-elevated group">
               <img
                 src={quiSomPhoto}
                 alt={t.photoAlt}
@@ -154,7 +154,7 @@ export function QuiSom({ language }: QuiSomProps) {
             </div>
 
             {/* Bosses photo */}
-            <div className="relative rounded-2xl overflow-hidden shadow-elevated group">
+            <div className="reveal relative rounded-2xl overflow-hidden shadow-elevated group">
               <img
                 src={bossesImg}
                 alt={t.boardAlt}
@@ -187,7 +187,7 @@ export function QuiSom({ language }: QuiSomProps) {
             </p>
             
             {/* Founders Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="reveal-group grid grid-cols-1 sm:grid-cols-2 gap-4">
               {founders.map((founder) => (
                 <div
                   key={founder.name}

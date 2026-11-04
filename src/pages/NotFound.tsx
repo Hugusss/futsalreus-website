@@ -43,7 +43,7 @@ const NotFound = ({ language, onLanguageChange }: NotFoundProps) => {
           <h1 className="mb-4 text-6xl font-black text-primary">404</h1>
           <p className="mb-8 text-xl text-muted-foreground">{t.message}</p>
           <Button variant="cta" asChild>
-            <Link to="/">{t.back}</Link>
+            <Link to="/" viewTransition>{t.back}</Link>
           </Button>
         </div>
       </main>

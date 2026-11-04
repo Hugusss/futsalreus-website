@@ -27,7 +27,7 @@ export function PartitsLink({ language }: PartitsLinkProps) {
 
   return (
     <section id="partits" className="py-16 md:py-24 bg-secondary">
-      <div className="container mx-auto px-4 text-center">
+      <div className="reveal container mx-auto px-4 text-center">
         <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-bold rounded-full mb-4">
           {t.badge}
         </span>

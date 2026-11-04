@@ -127,7 +127,7 @@ const Metodologia = ({ language, onLanguageChange }: MetodologiaProps) => {
     >
 
           <article className="max-w-3xl mx-auto">
-            <div className="space-y-10">
+            <div className="reveal-stack space-y-10">
               {/* Motto */}
               <div className="text-center py-6 border-y border-border">
                 <p className="text-xl md:text-2xl font-bold text-primary italic">
@@ -187,7 +187,7 @@ const Metodologia = ({ language, onLanguageChange }: MetodologiaProps) => {
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8">
                   {t.howTitle}
                 </h2>
-                <div className="grid sm:grid-cols-2 gap-6">
+                <div className="reveal-group grid sm:grid-cols-2 gap-6">
                   {t.howItems.map((item, idx) => (
                     <div
                       key={idx}

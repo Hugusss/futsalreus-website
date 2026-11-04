@@ -70,7 +70,7 @@ const Activitats = ({ language, onLanguageChange }: ActivitatsProps) => {
     >
 
           <article className="max-w-3xl mx-auto">
-            <div className="space-y-10">
+            <div className="reveal-stack space-y-10">
               <section>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                   {t.introTitle}
@@ -89,7 +89,7 @@ const Activitats = ({ language, onLanguageChange }: ActivitatsProps) => {
               />
 
               {/* Activity cards */}
-              <div className="grid sm:grid-cols-3 gap-6">
+              <div className="reveal-group grid sm:grid-cols-3 gap-6">
                 <div className="p-6 rounded-2xl bg-card border border-border shadow-card text-center">
                   <PartyPopper className="mx-auto text-primary mb-3" size={32} />
                   <h3 className="font-bold text-foreground mb-2">{t.socialTitle}</h3>
@@ -108,7 +108,7 @@ const Activitats = ({ language, onLanguageChange }: ActivitatsProps) => {
               </div>
 
               {/* Gallery placeholders */}
-              <div className="grid sm:grid-cols-3 gap-4">
+              <div className="reveal-group grid sm:grid-cols-3 gap-4">
                 <img src={teamAct1} alt="" className="w-full aspect-[4/3] object-cover rounded-2xl" loading="lazy" decoding="async" />
                 <img src={teamAct2} alt="" className="w-full aspect-[4/3] object-cover rounded-2xl" loading="lazy" decoding="async" />
                 <img src={teamAct3} alt="" className="w-full aspect-[4/3] object-cover rounded-2xl" loading="lazy" decoding="async" />

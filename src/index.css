@@ -77,6 +77,16 @@ html {
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
 }
 
 @layer utilities {
@@ -129,6 +139,74 @@ html {
   opacity: 0;
 }
 
+/* Page transitions (View Transitions API, started by React Router's viewTransition).
+   The header is its own transition group, so it stays put while the page cross-fades. */
+.site-header {
+  view-transition-name: site-header;
+}
+
+@keyframes vt-out {
+  to { opacity: 0; }
+}
+
+@keyframes vt-in {
+  from { opacity: 0; transform: translateY(12px); }
+}
+
+/* Reveal on scroll, driven by the element's own view timeline: no JavaScript.
+   An ancestor with overflow: hidden would become the scroller and the element would never
+   reveal, so keep these classes outside such boxes. */
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(1.5rem); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vt-out 160ms cubic-bezier(0.4, 0, 1, 1) both;
+  }
+
+  ::view-transition-new(root) {
+    animation: vt-in 260ms cubic-bezier(0.2, 0, 0, 1) both;
+  }
+
+  @supports (animation-timeline: view()) {
+    .reveal,
+    .reveal-group > *,
+    .reveal-stack > :not(.reveal-group):not(:has(.reveal-group)) {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+
+    /* Grids: each card finishes a little after the previous one. */
+    .reveal-group > :nth-child(2) { animation-range: entry 10% entry 50%; }
+    .reveal-group > :nth-child(3) { animation-range: entry 20% entry 60%; }
+    .reveal-group > :nth-child(4) { animation-range: entry 30% entry 70%; }
+    .reveal-group > :nth-child(n + 5) { animation-range: entry 40% entry 80%; }
+  }
+
+  /* Mobile menu: items slide in one after another from the first frame after mount. */
+  .menu-enter > * {
+    transition:
+      opacity 250ms ease-out var(--menu-delay, 0ms),
+      translate 250ms ease-out var(--menu-delay, 0ms),
+      color 150ms,
+      background-color 150ms;
+  }
+  .menu-enter > :nth-child(2) { --menu-delay: 40ms; }
+  .menu-enter > :nth-child(3) { --menu-delay: 80ms; }
+  .menu-enter > :nth-child(4) { --menu-delay: 120ms; }
+  .menu-enter > :nth-child(5) { --menu-delay: 160ms; }
+  .menu-enter > :nth-child(n + 6) { --menu-delay: 200ms; }
+
+  @starting-style {
+    .menu-enter > * {
+      opacity: 0;
+      translate: 0 -0.5rem;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -138,5 +216,10 @@ html {
   .animate-slide-up-delay-2 {
     animation: none;
     opacity: 1;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }

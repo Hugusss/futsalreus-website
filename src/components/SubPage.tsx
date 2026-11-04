@@ -37,7 +37,7 @@ export function SubPage({ language, onLanguageChange, icon: Icon, eyebrow, title
 
         <div className="container mx-auto px-4 py-12 md:py-16">
           <Button variant="ghost" asChild className="mb-8 gap-2 text-muted-foreground hover:text-foreground">
-            <Link to="/">
+            <Link to="/" viewTransition>
               <ArrowLeft size={18} />
               {back}
             </Link>

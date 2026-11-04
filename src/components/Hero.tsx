@@ -59,7 +59,7 @@ export function Hero({ language }: HeroProps) {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up-delay-2">
             <Button variant="hero" size="lg" asChild>
-              <Link to="/inscripcio">{t.cta}</Link>
+              <Link to="/inscripcio" viewTransition>{t.cta}</Link>
             </Button>
             <Button variant="heroOutline" size="lg" asChild>
               <a href="#qui-som">{t.discover}</a>
