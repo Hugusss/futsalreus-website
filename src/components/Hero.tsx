@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-futsal.webp";
+import heroImage1280 from "@/assets/hero-futsal-1280.webp";
+import heroImage960 from "@/assets/hero-futsal-960.webp";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
-import type { Language } from "@/App";
+import type { Language } from "@/lib/language";
 
 interface HeroProps {
   language: Language;
@@ -35,6 +37,8 @@ export function Hero({ language }: HeroProps) {
       <div className="absolute inset-0">
         <img
           src={heroImage}
+          srcSet={`${heroImage960} 960w, ${heroImage1280} 1280w, ${heroImage} 1920w`}
+          sizes="100vw"
           alt={t.imageAlt}
           className="w-full h-full object-cover"
           // React 18 only honors the lowercase DOM attribute, but the types only know camelCase

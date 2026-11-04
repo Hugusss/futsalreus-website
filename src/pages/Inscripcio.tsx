@@ -2,12 +2,7 @@ import { ClipboardList, Download, FileText, Mail } from "lucide-react";
 import { SubPage } from "@/components/SubPage";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/use-page-title";
-import type { Language } from "@/App";
-
-interface InscripcioProps {
-  language: Language;
-  onLanguageChange: (lang: Language) => void;
-}
+import type { PageProps } from "@/lib/language";
 
 const CLUB_EMAIL = "futsalmontsant@gmail.com";
 
@@ -38,7 +33,7 @@ const texts = {
   },
 };
 
-const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
+const Inscripcio = ({ language, onLanguageChange }: PageProps) => {
   const t = texts[language];
   usePageTitle(t.title);
 
@@ -76,7 +71,7 @@ const Inscripcio = ({ language, onLanguageChange }: InscripcioProps) => {
 
             <Button variant="cta" className="w-full sm:w-auto shrink-0" asChild>
               <a href="/inscripcio.pdf" download="Inscripcio_Futsal_Montsant.pdf">
-                <Download className="mr-2 h-4 w-4" />
+                <Download />
                 {t.pdfButton}
               </a>
             </Button>

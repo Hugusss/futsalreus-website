@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Instagram, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
-import type { Language } from "@/App";
+import type { Language } from "@/lib/language";
 
 // TikTok icon (not in lucide-react)
 const TikTok = ({ size = 24, className }: { size?: number | string; className?: string }) => (

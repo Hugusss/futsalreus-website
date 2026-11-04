@@ -57,7 +57,7 @@ src/
 ├── components/          # Header, Hero, QuiSom, PartitsLink, Footer, SubPage, ScrollToTop
 │   └── ui/              # shadcn/ui primitives in use
 ├── hooks/               # use-page-title
-├── lib/                 # cn() class-merge utility, scroll helper
+├── lib/                 # cn() class-merge utility, scroll helper, language type and storage
 └── assets/              # Optimized images (WebP/JPEG), self-hosted font
 public/
 ├── _headers             # Security headers (CSP, HSTS, …)
@@ -68,9 +68,10 @@ public/
 
 ## Internationalization
 
-Catalan (default) and Spanish. The selected language is React state in
-`App.tsx`, persisted to `localStorage` and mirrored to `<html lang>`; each
-page keeps its copy in a local `texts` record keyed by language.
+Catalan (default) and Spanish. The selected language is state in the root
+layout route (`App.tsx`), persisted to `localStorage` and mirrored to
+`<html lang>`; pages receive it as props and keep their copy in a local
+`texts` record keyed by language.
 
 ## Deployment
 

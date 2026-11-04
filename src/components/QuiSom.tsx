@@ -6,7 +6,7 @@ import lupeImg from "@/assets/fundadors/lupe_pfp.webp";
 import navarroImg from "@/assets/fundadors/navarro_pfp.webp";
 import ricouImg from "@/assets/fundadors/ricou_pfp.webp";
 import { BookOpen, Trophy, CalendarHeart, Users } from "lucide-react";
-import type { Language } from "@/App";
+import type { Language } from "@/lib/language";
 
 interface QuiSomProps {
   language: Language;

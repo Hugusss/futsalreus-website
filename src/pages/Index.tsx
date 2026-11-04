@@ -4,14 +4,9 @@ import { QuiSom } from "@/components/QuiSom";
 import { PartitsLink } from "@/components/PartitsLink";
 import { Footer } from "@/components/Footer";
 import { usePageTitle } from "@/hooks/use-page-title";
-import type { Language } from "@/App";
+import type { PageProps } from "@/lib/language";
 
-interface IndexProps {
-  language: Language;
-  onLanguageChange: (lang: Language) => void;
-}
-
-const Index = ({ language, onLanguageChange }: IndexProps) => {
+const Index = ({ language, onLanguageChange }: PageProps) => {
   usePageTitle();
 
   return (

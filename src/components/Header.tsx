@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import { scrollBehavior } from "@/lib/utils";
 import { Menu, X, Globe } from "lucide-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
-import type { Language } from "@/App";
+import type { Language } from "@/lib/language";
 
 const navLinks = [
   { href: "#inici", label: { ca: "Inici", es: "Inicio" } },
@@ -49,24 +49,17 @@ function LanguageSwitch({ language, onLanguageChange }: HeaderProps) {
 
 export function Header({ language, onLanguageChange }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation();
+  const closeMenu = () => setIsOpen(false);
 
-  const handleNavClick = (href: string) => {
-    setIsOpen(false);
-    if (location.pathname !== "/") {
-      // Navigate to home page first, then scroll to section
-      navigate("/" + href, { viewTransition: true });
-    } else {
-      // Already on home, just scroll
-      const el = document.querySelector(href);
-      el?.scrollIntoView({ behavior: scrollBehavior() });
+  // Section links are real links to /#section, so they work for crawlers and in a new tab.
+  // On the home page a same-document hash change would not scroll, so scroll by hand there.
+  const handleSectionClick = (event: MouseEvent, href: string) => {
+    closeMenu();
+    if (location.pathname === "/") {
+      event.preventDefault();
+      document.querySelector(href)?.scrollIntoView({ behavior: scrollBehavior() });
     }
-  };
-
-  const handleJoinClick = () => {
-    setIsOpen(false);
-    navigate("/inscripcio", { viewTransition: true });
   };
 
   return (
@@ -80,7 +73,7 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
-          <button onClick={() => handleNavClick("#inici")} className="flex items-center gap-3 group">
+          <Link to="/" viewTransition onClick={(event) => handleSectionClick(event, "#inici")} className="flex items-center gap-3 group">
             <img
               src={logo}
               alt="Club Futsal Montsant Reus"
@@ -96,26 +89,30 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
                 MONTSANT REUS
               </span>
             </div>
-          </button>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-2">
             {navLinks.map((link) => (
-              <button
+              <Link
                 key={link.href}
-                onClick={() => handleNavClick(link.href)}
+                to={"/" + link.href}
+                viewTransition
+                onClick={(event) => handleSectionClick(event, link.href)}
                 className="px-5 py-2.5 text-base font-semibold text-foreground/80 hover:text-primary transition-colors rounded-lg hover:bg-primary/5"
               >
                 {link.label[language]}
-              </button>
+              </Link>
             ))}
             
             <div className="ml-2">
               <LanguageSwitch language={language} onLanguageChange={onLanguageChange} />
             </div>
 
-            <Button variant="cta" className="ml-4 text-base px-6 py-3" onClick={handleJoinClick}>
-              {language === "ca" ? "Uneix-te" : "Únete"}
+            <Button variant="cta" className="ml-4 text-base px-6 py-3" asChild>
+              <Link to="/inscripcio" viewTransition onClick={closeMenu}>
+                {language === "ca" ? "Uneix-te" : "Únete"}
+              </Link>
             </Button>
           </nav>
 
@@ -135,21 +132,25 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
           <nav className="md:hidden py-4 border-t border-border">
             <div className="menu-enter flex flex-col gap-2">
               {navLinks.map((link) => (
-                <button
+                <Link
                   key={link.href}
-                  onClick={() => handleNavClick(link.href)}
-                  className="px-4 py-3 text-lg font-semibold text-foreground/80 hover:text-primary hover:bg-primary/5 rounded-lg transition-colors text-left"
+                  to={"/" + link.href}
+                  viewTransition
+                  onClick={(event) => handleSectionClick(event, link.href)}
+                  className="px-4 py-3 text-lg font-semibold text-foreground/80 hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
                 >
                   {link.label[language]}
-                </button>
+                </Link>
               ))}
               
               <div className="px-4 py-3">
                 <LanguageSwitch language={language} onLanguageChange={onLanguageChange} />
               </div>
 
-              <Button variant="cta" className="mt-2 mx-4 text-lg py-4" onClick={handleJoinClick}>
-                {language === "ca" ? "Uneix-te al club" : "Únete al club"}
+              <Button variant="cta" className="mt-2 mx-4 text-lg py-4" asChild>
+                <Link to="/inscripcio" viewTransition onClick={closeMenu}>
+                  {language === "ca" ? "Uneix-te al club" : "Únete al club"}
+                </Link>
               </Button>
             </div>
           </nav>

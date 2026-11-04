@@ -4,12 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/use-page-title";
-import type { Language } from "@/App";
-
-interface NotFoundProps {
-  language: Language;
-  onLanguageChange: (lang: Language) => void;
-}
+import type { PageProps } from "@/lib/language";
 
 const texts = {
   ca: {
@@ -22,7 +17,7 @@ const texts = {
   },
 };
 
-const NotFound = ({ language, onLanguageChange }: NotFoundProps) => {
+const NotFound = ({ language, onLanguageChange }: PageProps) => {
   const t = texts[language];
   usePageTitle("404");
 

@@ -1,7 +1,7 @@
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FCF_CLUB_URL } from "@/lib/links";
-import type { Language } from "@/App";
+import type { Language } from "@/lib/language";
 
 interface PartitsLinkProps {
   language: Language;
@@ -49,7 +49,7 @@ export function PartitsLink({ language }: PartitsLinkProps) {
             rel="noopener noreferrer"
           >
             {t.button}
-            <ExternalLink size={20} />
+            <ExternalLink />
           </a>
         </Button>
       </div>

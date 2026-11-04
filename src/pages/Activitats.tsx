@@ -5,12 +5,7 @@ import teamActMain from "@/assets/activitats/act-Main.webp";
 import teamAct1 from "@/assets/activitats/act-sub1.webp";
 import teamAct2 from "@/assets/activitats/act-sub2.webp";
 import teamAct3 from "@/assets/activitats/act-sub3.webp";
-import type { Language } from "@/App";
-
-interface ActivitatsProps {
-  language: Language;
-  onLanguageChange: (lang: Language) => void;
-}
+import type { PageProps } from "@/lib/language";
 
 const texts = {
   ca: {
@@ -55,7 +50,7 @@ const texts = {
   },
 };
 
-const Activitats = ({ language, onLanguageChange }: ActivitatsProps) => {
+const Activitats = ({ language, onLanguageChange }: PageProps) => {
   const t = texts[language];
   usePageTitle(t.title);
 
@@ -68,61 +63,60 @@ const Activitats = ({ language, onLanguageChange }: ActivitatsProps) => {
       subtitle={t.subtitle}
       back={t.back}
     >
+      <article className="max-w-3xl mx-auto">
+        <div className="reveal-stack space-y-10">
+          <section>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+              {t.introTitle}
+            </h2>
+            <p className="text-muted-foreground leading-relaxed text-lg">
+              {t.intro}
+            </p>
+          </section>
 
-          <article className="max-w-3xl mx-auto">
-            <div className="reveal-stack space-y-10">
-              <section>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  {t.introTitle}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed text-lg">
-                  {t.intro}
-                </p>
-              </section>
+          <img
+            src={teamActMain}
+            alt={language === "ca" ? "Jugadors del club durant una activitat" : "Jugadores del club durante una actividad"}
+            className="w-full h-96 object-cover rounded-2xl"
+            loading="lazy"
+            decoding="async"
+          />
 
-              <img
-                src={teamActMain}
-                alt={language === "ca" ? "Jugadors del club durant una activitat" : "Jugadores del club durante una actividad"}
-                className="w-full h-96 object-cover rounded-2xl"
-                loading="lazy"
-                decoding="async"
-              />
-
-              {/* Activity cards */}
-              <div className="reveal-group grid sm:grid-cols-3 gap-6">
-                <div className="p-6 rounded-2xl bg-card border border-border shadow-card text-center">
-                  <PartyPopper className="mx-auto text-primary mb-3" size={32} />
-                  <h3 className="font-bold text-foreground mb-2">{t.socialTitle}</h3>
-                  <p className="text-sm text-muted-foreground">{t.socialDesc}</p>
-                </div>
-                <div className="p-6 rounded-2xl bg-card border border-border shadow-card text-center">
-                  <Tent className="mx-auto text-primary mb-3" size={32} />
-                  <h3 className="font-bold text-foreground mb-2">{t.campusTitle}</h3>
-                  <p className="text-sm text-muted-foreground">{t.campusDesc}</p>
-                </div>
-                <div className="p-6 rounded-2xl bg-card border border-border shadow-card text-center">
-                  <Users className="mx-auto text-primary mb-3" size={32} />
-                  <h3 className="font-bold text-foreground mb-2">{t.communityTitle}</h3>
-                  <p className="text-sm text-muted-foreground">{t.communityDesc}</p>
-                </div>
-              </div>
-
-              {/* Gallery placeholders */}
-              <div className="reveal-group grid sm:grid-cols-3 gap-4">
-                <img src={teamAct1} alt="" className="w-full aspect-[4/3] object-cover rounded-2xl" loading="lazy" decoding="async" />
-                <img src={teamAct2} alt="" className="w-full aspect-[4/3] object-cover rounded-2xl" loading="lazy" decoding="async" />
-                <img src={teamAct3} alt="" className="w-full aspect-[4/3] object-cover rounded-2xl" loading="lazy" decoding="async" />
-              </div>
-
-              <section className="bg-muted/50 rounded-2xl p-6 md:p-8 border border-border text-center">
-                <CalendarHeart className="mx-auto text-primary mb-3" size={32} />
-                <h2 className="text-xl font-bold text-foreground mb-3">
-                  {t.upcoming}
-                </h2>
-                <p className="text-muted-foreground">{t.upcomingDesc}</p>
-              </section>
+          {/* Activity cards */}
+          <div className="reveal-group grid sm:grid-cols-3 gap-6">
+            <div className="p-6 rounded-2xl bg-card border border-border shadow-card text-center">
+              <PartyPopper className="mx-auto text-primary mb-3" size={32} />
+              <h3 className="font-bold text-foreground mb-2">{t.socialTitle}</h3>
+              <p className="text-sm text-muted-foreground">{t.socialDesc}</p>
             </div>
-          </article>
+            <div className="p-6 rounded-2xl bg-card border border-border shadow-card text-center">
+              <Tent className="mx-auto text-primary mb-3" size={32} />
+              <h3 className="font-bold text-foreground mb-2">{t.campusTitle}</h3>
+              <p className="text-sm text-muted-foreground">{t.campusDesc}</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-card border border-border shadow-card text-center">
+              <Users className="mx-auto text-primary mb-3" size={32} />
+              <h3 className="font-bold text-foreground mb-2">{t.communityTitle}</h3>
+              <p className="text-sm text-muted-foreground">{t.communityDesc}</p>
+            </div>
+          </div>
+
+          {/* Gallery placeholders */}
+          <div className="reveal-group grid sm:grid-cols-3 gap-4">
+            <img src={teamAct1} alt="" className="w-full aspect-[4/3] object-cover rounded-2xl" loading="lazy" decoding="async" />
+            <img src={teamAct2} alt="" className="w-full aspect-[4/3] object-cover rounded-2xl" loading="lazy" decoding="async" />
+            <img src={teamAct3} alt="" className="w-full aspect-[4/3] object-cover rounded-2xl" loading="lazy" decoding="async" />
+          </div>
+
+          <section className="bg-muted/50 rounded-2xl p-6 md:p-8 border border-border text-center">
+            <CalendarHeart className="mx-auto text-primary mb-3" size={32} />
+            <h2 className="text-xl font-bold text-foreground mb-3">
+              {t.upcoming}
+            </h2>
+            <p className="text-muted-foreground">{t.upcomingDesc}</p>
+          </section>
+        </div>
+      </article>
     </SubPage>
   );
 };
