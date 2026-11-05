@@ -53,6 +53,7 @@ const texts = {
     madeWith: "Fet amb",
     inReus: "a Reus",
     shopDemo: "Botiga (demostració)",
+    lab: "Laboratori",
   },
   es: {
     description: "Somos un club de futsal de Reus fundado en 2024 con el objetivo de promover el deporte y los valores entre los más jóvenes de nuestra comunidad.",
@@ -63,6 +64,7 @@ const texts = {
     madeWith: "Hecho con",
     inReus: "en Reus",
     shopDemo: "Tienda (demostración)",
+    lab: "Laboratorio",
   },
 };
 
@@ -137,9 +139,14 @@ export function Footer({ language }: FooterProps) {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-primary-foreground/60">
             <p>© {copyrightYears} {t.copyright}</p>
             {isDemoHost() && (
-              <Link to="/botiga" viewTransition className="underline underline-offset-4 hover:text-primary-foreground">
-                {t.shopDemo}
-              </Link>
+              <span className="flex gap-4">
+                <Link to="/botiga" viewTransition className="underline underline-offset-4 hover:text-primary-foreground">
+                  {t.shopDemo}
+                </Link>
+                <Link to="/laboratori" viewTransition className="underline underline-offset-4 hover:text-primary-foreground">
+                  {t.lab}
+                </Link>
+              </span>
             )}
             <p>
               {t.madeWith} <span className="text-accent">♥</span> {t.inReus}

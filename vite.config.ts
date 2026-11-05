@@ -6,7 +6,7 @@ import react from "@vitejs/plugin-react-swc";
 // Branch previews (wrangler preview) answer 404 for a path without a file, so reloading or
 // sharing a deep link fails there. Each route gets its own copy of index.html, served at /route.
 // Production keeps the single-page fallback for anything not listed; keep this in step with the router.
-const ROUTES = ["metodologia", "competicions", "activitats", "inscripcio", "botiga"];
+const ROUTES = ["metodologia", "competicions", "activitats", "inscripcio", "botiga", "laboratori"];
 
 function routePages(): Plugin {
   let outDir = "";

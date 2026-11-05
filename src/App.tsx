@@ -38,6 +38,8 @@ function withLanguage(Page: (props: PageProps) => ReactElement) {
 const router = createBrowserRouter([
   {
     element: <Root />,
+    // Nothing to show while a lazy route loads on the first visit; avoids the router's hydration warning.
+    HydrateFallback: () => null,
     children: [
       { path: "/", Component: withLanguage(Index) },
       { path: "/metodologia", Component: withLanguage(Metodologia) },
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
       { path: "/inscripcio", Component: withLanguage(Inscripcio) },
       // Shop demo: not linked from the navigation and not in the sitemap until the directors decide.
       { path: "/botiga", Component: withLanguage(Botiga) },
+      // Technology experiments: lazy, so their libraries stay out of every other page.
+      {
+        path: "/laboratori",
+        lazy: async () => {
+          const { default: Laboratori } = await import("./pages/Laboratori");
+          return { Component: withLanguage(Laboratori) };
+        },
+      },
       { path: "*", Component: withLanguage(NotFound) },
     ],
   },
