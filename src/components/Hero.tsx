@@ -54,7 +54,7 @@ export function Hero({ language }: HeroProps) {
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-primary-foreground mb-6 animate-slide-up leading-tight">
             CLUB FUTSAL
             <br />
-            <span className="text-gradient">MONTSANT REUS</span>
+            <span className="text-accent">MONTSANT REUS</span>
           </h1>
           
           <p className="text-xl sm:text-2xl md:text-3xl font-medium text-primary-foreground/90 mb-8 animate-slide-up-delay-1">

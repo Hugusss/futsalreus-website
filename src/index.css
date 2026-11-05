@@ -55,7 +55,6 @@ html {
 
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(var(--maroon-dark)) 0%, hsl(var(--maroon)) 50%, hsl(var(--maroon-light)) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-dark)) 100%);
     
     /* Shadows */
     --shadow-card: 0 4px 20px -4px hsl(var(--maroon) / 0.15);
@@ -90,11 +89,6 @@ html {
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-gold);
-  }
-
   .bg-gradient-hero {
     background: var(--gradient-hero);
   }
@@ -194,6 +188,14 @@ html {
       opacity: 0;
       translate: 0 -0.5rem;
     }
+  }
+}
+
+/* Print has no scroll position, so nothing may stay in its hidden "before reveal" state. */
+@media print {
+  .reveal,
+  .reveal-group > * {
+    animation: none !important;
   }
 }
 

@@ -56,7 +56,6 @@ const texts = {
   ca: {
     photoAlt: "Joves jugadors a l'Escola Montsant",
     boardAlt: "Directiva del club",
-    badge: "EL NOSTRE CLUB",
     title: "Qui Som",
     description:
       "Som una família unida per l'amor al futsal. Des de Reus, treballem cada dia per formar jugadors i persones amb valors.",
@@ -71,7 +70,6 @@ const texts = {
   es: {
     photoAlt: "Jóvenes jugadores en la Escola Montsant",
     boardAlt: "Directiva del club",
-    badge: "NUESTRO CLUB",
     title: "Quiénes Somos",
     description:
       "Somos una familia unida por el amor al futsal. Desde Reus, trabajamos cada día para formar jugadores y personas con valores.",
@@ -93,9 +91,6 @@ export function QuiSom({ language }: QuiSomProps) {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-bold rounded-full mb-4">
-            {t.badge}
-          </span>
           <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
             {t.title}
           </h2>
