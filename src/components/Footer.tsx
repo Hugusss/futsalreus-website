@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Instagram, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { isDemoHost } from "@/lib/environment";
 import { CLUB_EMAIL } from "@/lib/links";
 import logo from "@/assets/logo.png";
 import type { Language } from "@/lib/language";
@@ -51,6 +52,7 @@ const texts = {
     copyright: "Club Futsal Montsant Reus. Tots els drets reservats.",
     madeWith: "Fet amb",
     inReus: "a Reus",
+    shopDemo: "Botiga (demostració)",
   },
   es: {
     description: "Somos un club de futsal de Reus fundado en 2024 con el objetivo de promover el deporte y los valores entre los más jóvenes de nuestra comunidad.",
@@ -60,6 +62,7 @@ const texts = {
     copyright: "Club Futsal Montsant Reus. Todos los derechos reservados.",
     madeWith: "Hecho con",
     inReus: "en Reus",
+    shopDemo: "Tienda (demostración)",
   },
 };
 
@@ -133,6 +136,11 @@ export function Footer({ language }: FooterProps) {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-primary-foreground/60">
             <p>© {copyrightYears} {t.copyright}</p>
+            {isDemoHost() && (
+              <Link to="/botiga" viewTransition className="underline underline-offset-4 hover:text-primary-foreground">
+                {t.shopDemo}
+              </Link>
+            )}
             <p>
               {t.madeWith} <span className="text-accent">♥</span> {t.inReus}
             </p>
