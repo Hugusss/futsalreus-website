@@ -6,7 +6,7 @@ import lupeImg from "@/assets/fundadors/lupe_pfp.webp";
 import navarroImg from "@/assets/fundadors/navarro_pfp.webp";
 import ricouImg from "@/assets/fundadors/ricou_pfp.webp";
 import { BookOpen, Trophy, CalendarHeart, Users } from "lucide-react";
-import type { Language } from "@/App";
+import type { Language } from "@/lib/language";
 
 interface QuiSomProps {
   language: Language;
@@ -56,7 +56,6 @@ const texts = {
   ca: {
     photoAlt: "Joves jugadors a l'Escola Montsant",
     boardAlt: "Directiva del club",
-    badge: "EL NOSTRE CLUB",
     title: "Qui Som",
     description:
       "Som una família unida per l'amor al futsal. Des de Reus, treballem cada dia per formar jugadors i persones amb valors.",
@@ -71,7 +70,6 @@ const texts = {
   es: {
     photoAlt: "Jóvenes jugadores en la Escola Montsant",
     boardAlt: "Directiva del club",
-    badge: "NUESTRO CLUB",
     title: "Quiénes Somos",
     description:
       "Somos una familia unida por el amor al futsal. Desde Reus, trabajamos cada día para formar jugadores y personas con valores.",
@@ -93,9 +91,6 @@ export function QuiSom({ language }: QuiSomProps) {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-bold rounded-full mb-4">
-            {t.badge}
-          </span>
           <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
             {t.title}
           </h2>
@@ -105,10 +100,10 @@ export function QuiSom({ language }: QuiSomProps) {
         </div>
 
         {/* Category Cards */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
+        <div className="reveal-group grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
           {categories.map((cat) => (
-            <Link key={cat.id} to={cat.path} className="group rounded-lg">
-              <div className="h-full rounded-lg bg-card text-card-foreground shadow-card group-hover:shadow-elevated transition-all group-hover:-translate-y-1 overflow-hidden">
+            <Link key={cat.id} to={cat.path} className="group rounded-lg" viewTransition>
+              <div className="h-full rounded-lg bg-card text-card-foreground shadow-card group-hover:shadow-elevated transition group-hover:-translate-y-1 overflow-hidden">
                 <div className="bg-gradient-hero h-40 flex items-center justify-center">
                   <cat.icon
                     className="text-primary-foreground/80 group-hover:scale-110 transition-transform"
@@ -134,7 +129,7 @@ export function QuiSom({ language }: QuiSomProps) {
           {/* Left Column: Images */}
           <div className="flex flex-col gap-6">
             {/* Children photo */}
-            <div className="relative rounded-2xl overflow-hidden shadow-elevated group">
+            <div className="reveal relative rounded-2xl overflow-hidden shadow-elevated group">
               <img
                 src={quiSomPhoto}
                 alt={t.photoAlt}
@@ -154,11 +149,13 @@ export function QuiSom({ language }: QuiSomProps) {
             </div>
 
             {/* Bosses photo */}
-            <div className="relative rounded-2xl overflow-hidden shadow-elevated group">
+            <div className="reveal relative rounded-2xl overflow-hidden shadow-elevated group">
               <img
                 src={bossesImg}
                 alt={t.boardAlt}
                 className="w-full h-64 lg:h-56 xl:h-64 object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-maroon-dark/70 to-transparent opacity-90" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
@@ -185,17 +182,19 @@ export function QuiSom({ language }: QuiSomProps) {
             </p>
             
             {/* Founders Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="reveal-group grid grid-cols-1 sm:grid-cols-2 gap-4">
               {founders.map((founder) => (
                 <div
                   key={founder.name}
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-card border border-border shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-card border border-border shadow-sm hover:shadow-md transition hover:-translate-y-1"
                 >
                   <div className="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-primary/20 bg-muted">
                     <img
                       src={founder.image}
                       alt={`Foto de ${founder.name}`}
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <div className="flex flex-col">

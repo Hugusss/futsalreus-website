@@ -4,20 +4,15 @@ import { QuiSom } from "@/components/QuiSom";
 import { PartitsLink } from "@/components/PartitsLink";
 import { Footer } from "@/components/Footer";
 import { usePageTitle } from "@/hooks/use-page-title";
-import type { Language } from "@/App";
+import type { PageProps } from "@/lib/language";
 
-interface IndexProps {
-  language: Language;
-  onLanguageChange: (lang: Language) => void;
-}
-
-const Index = ({ language, onLanguageChange }: IndexProps) => {
+const Index = ({ language, onLanguageChange }: PageProps) => {
   usePageTitle();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-svh bg-background">
       <Header language={language} onLanguageChange={onLanguageChange} />
-      <main>
+      <main id="contingut">
         <Hero language={language} />
         <QuiSom language={language} />
         <PartitsLink language={language} />

@@ -7,12 +7,19 @@ on:
 permissions:
   contents: read
 
+# A new push to the same PR cancels the run still going for the previous one.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
-      - uses: oven-sh/setup-bun@v2
+      # Actions pinned to a commit (Dependabot keeps the version comment in step).
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
           bun-version: 1.4.2 # keep in sync with BUN_VERSION in Cloudflare Workers Builds
       - run: bun install --frozen-lockfile

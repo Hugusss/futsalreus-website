@@ -2,7 +2,7 @@
 
 Official website of Club Futsal Montsant, a grassroots futsal club in Reus
 (Catalonia). Bilingual Catalan/Spanish single-page application with club
-information and an online player registration form.
+information and a printable registration form (PDF).
 
 **Live:** https://futsalmontsant.cat
 
@@ -53,11 +53,12 @@ src/
 │   ├── Competicions.tsx # Team categories, FCF calendar link
 │   ├── Activitats.tsx   # Club activities and events
 │   ├── Inscripcio.tsx   # Registration: printable PDF download
+│   ├── Botiga.tsx       # Shop demo (unlinked, noindex); products live in src/data/botiga.ts
 │   └── NotFound.tsx
 ├── components/          # Header, Hero, QuiSom, PartitsLink, Footer, SubPage, ScrollToTop
 │   └── ui/              # shadcn/ui primitives in use
 ├── hooks/               # use-page-title
-├── lib/                 # cn() class-merge utility, scroll helper
+├── lib/                 # cn() class-merge utility, scroll helper, language type and storage
 └── assets/              # Optimized images (WebP/JPEG), self-hosted font
 public/
 ├── _headers             # Security headers (CSP, HSTS, …)
@@ -68,16 +69,20 @@ public/
 
 ## Internationalization
 
-Catalan (default) and Spanish. The selected language is React state in
-`App.tsx`, persisted to `localStorage` and mirrored to `<html lang>`; each
-page keeps its copy in a local `texts` record keyed by language.
+Catalan (default) and Spanish. The selected language is state in the root
+layout route (`App.tsx`), persisted to `localStorage` and mirrored to
+`<html lang>`; pages receive it as props and keep their copy in a local
+`texts` record keyed by language.
 
 ## Deployment
 
 Pushes to `main` are built (`bun run build`) and deployed (`wrangler deploy`)
 by Cloudflare Workers Builds using `wrangler.json` (static assets with
-single-page-app fallback). Every other branch gets a preview URL. Pull requests run lint, typecheck and build in GitHub
-Actions (`.github/workflows/ci.yml`); Dependabot keeps dependencies current. Response
+single-page-app fallback). The build also writes one HTML file per route
+(`ROUTES` in `vite.config.ts`, keep it in step with the router), because
+branch previews answer 404 for a path without a file. Every other branch gets a preview URL. Pull requests run lint, typecheck and build in GitHub
+Actions (`.github/workflows/ci.yml`); Dependabot keeps dependencies current with a 7-day
+cooldown, and `bunfig.toml` applies the same minimum release age to local installs. Response
 headers — including the Content-Security-Policy — are defined in
 `public/_headers`.
 

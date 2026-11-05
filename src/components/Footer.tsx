@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Instagram, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { isDemoHost } from "@/lib/environment";
+import { CLUB_EMAIL } from "@/lib/links";
 import logo from "@/assets/logo.png";
-import type { Language } from "@/App";
+import type { Language } from "@/lib/language";
 
 // TikTok icon (not in lucide-react)
 const TikTok = ({ size = 24, className }: { size?: number | string; className?: string }) => (
@@ -26,13 +28,17 @@ interface ContactItem {
 const MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=Escola+Montsant,+Carrer+de+les+Borges+del+Camp,+2,+43203+Reus,+Tarragona";
 
+const FOUNDED = 2024;
+const currentYear = new Date().getFullYear();
+const copyrightYears = currentYear > FOUNDED ? `${FOUNDED}–${currentYear}` : `${FOUNDED}`;
+
 const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/fsmontsantreus/", label: "Instagram" },
   { icon: TikTok, href: "https://www.tiktok.com/@fsmontsantreus", label: "TikTok" },
 ];
 
 const contactInfo: ContactItem[] = [
-  { icon: Mail, text: "futsalmontsant@gmail.com", href: "mailto:futsalmontsant@gmail.com" },
+  { icon: Mail, text: CLUB_EMAIL, href: `mailto:${CLUB_EMAIL}` },
   { icon: Phone, text: "+34 683 386 660", href: "tel:+34683386660" },
   { icon: MapPin, text: "Carrer de les Borges del Camp, 2, 43203 Reus, Tarragona", href: MAPS_URL, external: true },
 ];
@@ -43,18 +49,20 @@ const texts = {
     contact: "Contacta'ns",
     joinClub: "Inscriu-te al club",
     sendMessage: "Envia'ns un missatge",
-    copyright: "© 2024 Club Futsal Montsant Reus. Tots els drets reservats.",
+    copyright: "Club Futsal Montsant Reus. Tots els drets reservats.",
     madeWith: "Fet amb",
     inReus: "a Reus",
+    shopDemo: "Botiga (demostració)",
   },
   es: {
     description: "Somos un club de futsal de Reus fundado en 2024 con el objetivo de promover el deporte y los valores entre los más jóvenes de nuestra comunidad.",
     contact: "Contáctanos",
     joinClub: "Inscríbete al club",
     sendMessage: "Envíanos un mensaje",
-    copyright: "© 2024 Club Futsal Montsant Reus. Todos los derechos reservados.",
+    copyright: "Club Futsal Montsant Reus. Todos los derechos reservados.",
     madeWith: "Hecho con",
     inReus: "en Reus",
+    shopDemo: "Tienda (demostración)",
   },
 };
 
@@ -69,7 +77,7 @@ export function Footer({ language }: FooterProps) {
           {/* Left - Info */}
           <div>
             <div className="flex items-center gap-4 mb-6">
-              <img src={logo} alt="Club Futsal Montsant Reus" className="h-24 w-auto" />
+              <img src={logo} alt="Club Futsal Montsant Reus" width={512} height={362} className="h-24 w-auto" />
               <div>
                 <h2 className="text-2xl font-black">CLUB FUTSAL</h2>
                 <p className="text-primary-foreground/80 font-semibold">MONTSANT REUS</p>
@@ -114,10 +122,10 @@ export function Footer({ language }: FooterProps) {
               ))}
             </div>
             <Button variant="cta" className="w-full mb-3" asChild>
-              <Link to="/inscripcio">{t.joinClub}</Link>
+              <Link to="/inscripcio" viewTransition>{t.joinClub}</Link>
             </Button>
             <Button variant="hero" className="w-full" asChild>
-              <a href="mailto:futsalmontsant@gmail.com">{t.sendMessage}</a>
+              <a href={`mailto:${CLUB_EMAIL}`}>{t.sendMessage}</a>
             </Button>
           </div>
         </div>
@@ -127,7 +135,12 @@ export function Footer({ language }: FooterProps) {
       <div className="border-t border-primary-foreground/10">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-primary-foreground/60">
-            <p>{t.copyright}</p>
+            <p>© {copyrightYears} {t.copyright}</p>
+            {isDemoHost() && (
+              <Link to="/botiga" viewTransition className="underline underline-offset-4 hover:text-primary-foreground">
+                {t.shopDemo}
+              </Link>
+            )}
             <p>
               {t.madeWith} <span className="text-accent">♥</span> {t.inReus}
             </p>

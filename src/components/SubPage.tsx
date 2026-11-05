@@ -4,7 +4,7 @@ import { ArrowLeft, type LucideIcon } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import type { Language } from "@/App";
+import type { Language } from "@/lib/language";
 
 interface SubPageProps {
   language: Language;
@@ -19,9 +19,9 @@ interface SubPageProps {
 
 export function SubPage({ language, onLanguageChange, icon: Icon, eyebrow, title, subtitle, back, children }: SubPageProps) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-svh bg-background">
       <Header language={language} onLanguageChange={onLanguageChange} />
-      <main className="pt-24 md:pt-28">
+      <main id="contingut" className="pt-24 md:pt-28">
         <div className="bg-gradient-hero py-16 md:py-24">
           <div className="container mx-auto px-4 text-center">
             <Icon className="mx-auto mb-4 text-primary-foreground/80" size={48} aria-hidden="true" />
@@ -37,8 +37,8 @@ export function SubPage({ language, onLanguageChange, icon: Icon, eyebrow, title
 
         <div className="container mx-auto px-4 py-12 md:py-16">
           <Button variant="ghost" asChild className="mb-8 gap-2 text-muted-foreground hover:text-foreground">
-            <Link to="/">
-              <ArrowLeft size={18} />
+            <Link to="/" viewTransition>
+              <ArrowLeft />
               {back}
             </Link>
           </Button>

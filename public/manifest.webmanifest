@@ -1,6 +1,8 @@
 {
+  "id": "/",
   "name": "Club Futsal Montsant Reus",
   "short_name": "FS Montsant",
+  "description": "Club de futsal de Reus fundat el 2024: metodologia, competicions, activitats i inscripcions.",
   "lang": "ca",
   "start_url": "/",
   "display": "standalone",

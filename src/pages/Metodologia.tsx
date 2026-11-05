@@ -1,13 +1,8 @@
 import { SubPage } from "@/components/SubPage";
 import { BookOpen, Heart, Users, MessageCircle, Shield } from "lucide-react";
 import { usePageTitle } from "@/hooks/use-page-title";
-import teamMethod from "@/assets/metodologia/team-train.jpg";
-import type { Language } from "@/App";
-
-interface MetodologiaProps {
-  language: Language;
-  onLanguageChange: (lang: Language) => void;
-}
+import teamMethod from "@/assets/metodologia/team-train.webp";
+import type { PageProps } from "@/lib/language";
 
 const texts = {
   ca: {
@@ -112,7 +107,7 @@ const texts = {
   },
 };
 
-const Metodologia = ({ language, onLanguageChange }: MetodologiaProps) => {
+const Metodologia = ({ language, onLanguageChange }: PageProps) => {
   const t = texts[language];
   usePageTitle(t.title);
 
@@ -125,91 +120,92 @@ const Metodologia = ({ language, onLanguageChange }: MetodologiaProps) => {
       subtitle={t.subtitle}
       back={t.back}
     >
+      <article className="max-w-3xl mx-auto">
+        <div className="space-y-10">
+          {/* Motto */}
+          <div className="text-center py-6 border-y border-border">
+            <p className="text-xl md:text-2xl font-bold text-primary italic">
+              «{t.motto}»
+            </p>
+          </div>
 
-          <article className="max-w-3xl mx-auto">
-            <div className="space-y-10">
-              {/* Motto */}
-              <div className="text-center py-6 border-y border-border">
-                <p className="text-xl md:text-2xl font-bold text-primary italic">
-                  "{t.motto}"
-                </p>
-              </div>
+          {/* Mission */}
+          <section>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+              {t.missionTitle}
+            </h2>
+            <p className="text-muted-foreground leading-relaxed text-lg">
+              {t.mission}
+            </p>
+          </section>
 
-              {/* Mission */}
-              <section>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  {t.missionTitle}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed text-lg">
-                  {t.mission}
-                </p>
-              </section>
+          {/* Vision */}
+          <section>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+              {t.visionTitle}
+            </h2>
+            <p className="text-muted-foreground leading-relaxed text-lg">
+              {t.vision}
+            </p>
+          </section>
 
-              {/* Vision */}
-              <section>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  {t.visionTitle}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed text-lg">
-                  {t.vision}
-                </p>
-              </section>
-
-              {/* Values */}
-              <section>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
-                  {t.valuesTitle}
-                </h2>
-                <div className="flex flex-wrap gap-3">
-                  {t.values.map((val) => (
-                    <span
-                      key={val}
-                      className="px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm"
-                    >
-                      {val}
-                    </span>
-                  ))}
-                </div>
-              </section>
-
-              {/* Dedication */}
-              <section className="bg-muted/50 rounded-2xl p-6 md:p-8 border border-border">
-                <h2 className="text-2xl font-bold text-foreground mb-4">
-                  {t.dedicationTitle}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  {t.dedication}
-                </p>
-              </section>
-
-              {/* How we act */}
-              <section>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8">
-                  {t.howTitle}
-                </h2>
-                <div className="grid sm:grid-cols-2 gap-6">
-                  {t.howItems.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="p-6 rounded-2xl bg-card border border-border shadow-card"
-                    >
-                      <item.icon className="text-primary mb-3" size={28} />
-                      <h3 className="font-bold text-foreground mb-2">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {item.text}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              <img
-                src={teamMethod}
-                alt={language === "ca" ? "Entrenament de l'equip" : "Entrenamiento del equipo"}
-                className="w-full h-96 object-cover rounded-2xl"
-              />
+          {/* Values */}
+          <section>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
+              {t.valuesTitle}
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              {t.values.map((val) => (
+                <span
+                  key={val}
+                  className="px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm"
+                >
+                  {val}
+                </span>
+              ))}
             </div>
-          </article>
+          </section>
+
+          {/* Dedication */}
+          <section className="bg-muted/50 rounded-2xl p-6 md:p-8 border border-border">
+            <h2 className="text-2xl font-bold text-foreground mb-4">
+              {t.dedicationTitle}
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              {t.dedication}
+            </p>
+          </section>
+
+          {/* How we act */}
+          <section>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8">
+              {t.howTitle}
+            </h2>
+            <div className="reveal-group grid sm:grid-cols-2 gap-6">
+              {t.howItems.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="p-6 rounded-2xl bg-card border border-border shadow-card"
+                >
+                  <item.icon className="text-primary mb-3" size={28} />
+                  <h3 className="font-bold text-foreground mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {item.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <img
+            src={teamMethod}
+            alt={language === "ca" ? "Entrenament de l'equip" : "Entrenamiento del equipo"}
+            className="reveal w-full h-96 object-cover rounded-2xl"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </article>
     </SubPage>
   );
 };

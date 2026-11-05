@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-futsal.webp";
+import heroImage1280 from "@/assets/hero-futsal-1280.webp";
+import heroImage960 from "@/assets/hero-futsal-960.webp";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
-import type { Language } from "@/App";
+import type { Language } from "@/lib/language";
 
 interface HeroProps {
   language: Language;
@@ -29,12 +31,14 @@ export function Hero({ language }: HeroProps) {
   return (
     <section
       id="inici"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
+      className="relative min-h-svh flex items-center justify-center overflow-hidden pt-16"
     >
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
           src={heroImage}
+          srcSet={`${heroImage960} 960w, ${heroImage1280} 1280w, ${heroImage} 1920w`}
+          sizes="100vw"
           alt={t.imageAlt}
           className="w-full h-full object-cover"
           // React 18 only honors the lowercase DOM attribute, but the types only know camelCase
@@ -50,7 +54,7 @@ export function Hero({ language }: HeroProps) {
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-primary-foreground mb-6 animate-slide-up leading-tight">
             CLUB FUTSAL
             <br />
-            <span className="text-gradient">MONTSANT REUS</span>
+            <span className="text-accent">MONTSANT REUS</span>
           </h1>
           
           <p className="text-xl sm:text-2xl md:text-3xl font-medium text-primary-foreground/90 mb-8 animate-slide-up-delay-1">
@@ -59,7 +63,7 @@ export function Hero({ language }: HeroProps) {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up-delay-2">
             <Button variant="hero" size="lg" asChild>
-              <Link to="/inscripcio">{t.cta}</Link>
+              <Link to="/inscripcio" viewTransition>{t.cta}</Link>
             </Button>
             <Button variant="heroOutline" size="lg" asChild>
               <a href="#qui-som">{t.discover}</a>
@@ -72,7 +76,7 @@ export function Hero({ language }: HeroProps) {
       <a
         href="#partits"
         aria-label={t.discover}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/60 hover:text-primary-foreground transition-colors motion-safe:animate-float"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/60 hover:text-primary-foreground transition-colors"
       >
         <ChevronDown size={32} />
       </a>

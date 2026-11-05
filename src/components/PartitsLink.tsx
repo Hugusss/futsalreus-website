@@ -1,7 +1,7 @@
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FCF_CLUB_URL } from "@/lib/links";
-import type { Language } from "@/App";
+import type { Language } from "@/lib/language";
 
 interface PartitsLinkProps {
   language: Language;
@@ -9,13 +9,11 @@ interface PartitsLinkProps {
 
 const texts = {
   ca: {
-    badge: "CALENDARI OFICIAL",
     title: "Partits",
     description: "Consulta els resultats i calendaris oficials de la Federació Catalana de Futbol.",
     button: "Veure calendari oficial",
   },
   es: {
-    badge: "CALENDARIO OFICIAL",
     title: "Partidos",
     description: "Consulta los resultados y calendarios oficiales de la Federación Catalana de Fútbol.",
     button: "Ver calendario oficial",
@@ -28,9 +26,6 @@ export function PartitsLink({ language }: PartitsLinkProps) {
   return (
     <section id="partits" className="py-16 md:py-24 bg-secondary">
       <div className="container mx-auto px-4 text-center">
-        <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-bold rounded-full mb-4">
-          {t.badge}
-        </span>
         <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
           {t.title}
         </h2>
@@ -49,7 +44,7 @@ export function PartitsLink({ language }: PartitsLinkProps) {
             rel="noopener noreferrer"
           >
             {t.button}
-            <ExternalLink size={20} />
+            <ExternalLink />
           </a>
         </Button>
       </div>
