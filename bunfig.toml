@@ -1,0 +1,6 @@
+[install]
+# Supply-chain guard: ignore package versions published less than 7 days ago when
+# resolving (bun add / bun update). The recent npm worm waves were pulled from the
+# registry within days, so a short delay avoids installing a hijacked release.
+# Installs from the lockfile (bun install --frozen-lockfile) are not affected.
+minimumReleaseAge = 604800
