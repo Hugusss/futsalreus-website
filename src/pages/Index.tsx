@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { QuiSom } from "@/components/QuiSom";
 import { PartitsLink } from "@/components/PartitsLink";
 import { Footer } from "@/components/Footer";
+import { PreviewExtras } from "@/components/PreviewExtras";
 import { usePageTitle } from "@/hooks/use-page-title";
 import type { PageProps } from "@/lib/language";
 
@@ -18,6 +19,7 @@ const Index = ({ language, onLanguageChange }: PageProps) => {
         <PartitsLink language={language} />
       </main>
       <Footer language={language} />
+      <PreviewExtras language={language} />
     </div>
   );
 };

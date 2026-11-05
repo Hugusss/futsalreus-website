@@ -1,20 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import { Mesh, Program, Renderer, Texture, Triangle } from "ogl";
-import heroImage from "@/assets/hero-futsal-1280.webp";
-import type { Language } from "@/lib/language";
-
-const texts = {
-  ca: {
-    alt: "Joves jugant a futsal",
-    hint: "Passa el ratolí o el dit per sobre de la imatge",
-    fallback: "Aquest navegador mostra la imatge fixa: sense WebGL o amb moviment reduït.",
-  },
-  es: {
-    alt: "Jóvenes jugando a fútbol sala",
-    hint: "Pasa el ratón o el dedo por encima de la imagen",
-    fallback: "Este navegador muestra la imagen fija: sin WebGL o con movimiento reducido.",
-  },
-};
 
 const vertex = /* glsl */ `
 attribute vec2 uv;
@@ -25,7 +10,8 @@ void main() {
   gl_Position = vec4(position, 0.0, 1.0);
 }`;
 
-// A ripple that spreads from the pointer and fades, over the photo (object-fit: cover), tinted like the hero.
+// A ripple that spreads from the pointer and fades, over the hero photo (object-fit: cover). The hero's own
+// gradient is drawn on top of this canvas, so the tint stays in CSS.
 const fragment = /* glsl */ `
 precision highp float;
 uniform sampler2D uTex;
@@ -46,34 +32,28 @@ void main() {
   vec2 d = vUv - uPointer;
   d.x *= uRes.x / uRes.y;
   float dist = length(d);
-  float wave = sin(dist * 38.0 - uTime * 6.0) * exp(-dist * 7.0) * uEnergy;
-  vec2 uv = vUv + normalize(d + 1e-4) * wave * 0.03;
+  float wave = sin(dist * 34.0 - uTime * 6.0) * exp(-dist * 6.0) * uEnergy;
+  vec2 uv = vUv + normalize(d + 1e-4) * wave * 0.04;
   vec3 color = texture2D(uTex, coverUv(uv)).rgb;
-  color = mix(color, color * vec3(0.78, 0.36, 0.36), 0.6);
-  color += wave * 0.12;
+  color += wave * 0.35;
   gl_FragColor = vec4(color, 1.0);
 }`;
 
-type Mode = "loading" | "webgl" | "static";
-
-export default function ShaderHero({ language }: { language: Language }) {
-  const t = texts[language];
+// Draws over the hero photo and listens on the whole hero section (its content sits above the canvas).
+// At rest nothing is drawn, so the page costs nothing; without WebGL the photo underneath simply stays.
+export default function HeroRipple({ imageRef }: { imageRef: RefObject<HTMLImageElement> }) {
   const hostRef = useRef<HTMLDivElement>(null);
-  const [mode, setMode] = useState<Mode>("loading");
 
   useEffect(() => {
     const host = hostRef.current;
-    if (!host) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setMode("static");
-      return;
-    }
+    const img = imageRef.current;
+    const section = host?.closest("section");
+    if (!host || !img || !section) return;
 
     let renderer: Renderer;
     try {
       renderer = new Renderer({ dpr: Math.min(window.devicePixelRatio, 1.5), alpha: false, antialias: false, powerPreference: "low-power" });
     } catch {
-      setMode("static");
       return;
     }
     const gl = renderer.gl;
@@ -98,6 +78,7 @@ export default function ShaderHero({ language }: { language: Language }) {
 
     let frame = 0;
     let energy = 0;
+    let ready = false;
     const pointer = { x: 0.5, y: 0.5 };
 
     const draw = (time: number) => {
@@ -108,68 +89,61 @@ export default function ShaderHero({ language }: { language: Language }) {
       program.uniforms.uEnergy.value = energy;
       program.uniforms.uPointer.value = [pointer.x, pointer.y];
       renderer.render({ scene: mesh });
-      // Render only while the ripple is alive: at rest the page costs nothing.
       if (energy > 0) frame = requestAnimationFrame(draw);
     };
     const wake = () => {
-      if (!frame) frame = requestAnimationFrame(draw);
+      if (ready && !frame) frame = requestAnimationFrame(draw);
     };
-
     const resize = () => {
       const { width, height } = host.getBoundingClientRect();
       if (width === 0 || height === 0) return;
       renderer.setSize(width, height);
       program.uniforms.uRes.value = [width, height];
-      wake();
+      if (ready) renderer.render({ scene: mesh });
     };
     const observer = new ResizeObserver(resize);
     observer.observe(host);
 
-    const onPointerMove = (event: PointerEvent) => {
+    const onPointer = (event: PointerEvent) => {
       const rect = host.getBoundingClientRect();
       pointer.x = (event.clientX - rect.left) / rect.width;
       pointer.y = 1 - (event.clientY - rect.top) / rect.height;
       energy = 1;
       wake();
     };
-    host.addEventListener("pointermove", onPointerMove);
+    section.addEventListener("pointermove", onPointer);
+    section.addEventListener("pointerdown", onPointer);
 
     const onContextLost = (event: Event) => {
       event.preventDefault();
       cancelAnimationFrame(frame);
-      setMode("static");
+      canvas.remove();
     };
     canvas.addEventListener("webglcontextlost", onContextLost);
 
-    const image = new Image();
-    image.onload = () => {
-      texture.image = image;
-      program.uniforms.uImg.value = [image.naturalWidth, image.naturalHeight];
+    // Use the photo that is already on screen as the texture: no second request.
+    const start = () => {
+      texture.image = img;
+      program.uniforms.uImg.value = [img.naturalWidth, img.naturalHeight];
       host.appendChild(canvas);
+      ready = true;
       resize();
       renderer.render({ scene: mesh });
-      setMode("webgl");
     };
-    image.onerror = () => setMode("static");
-    image.src = heroImage;
+    if (img.complete && img.naturalWidth > 0) start();
+    else img.addEventListener("load", start, { once: true });
 
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
-      host.removeEventListener("pointermove", onPointerMove);
+      section.removeEventListener("pointermove", onPointer);
+      section.removeEventListener("pointerdown", onPointer);
+      img.removeEventListener("load", start);
       canvas.removeEventListener("webglcontextlost", onContextLost);
       canvas.remove();
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, []);
+  }, [imageRef]);
 
-  return (
-    <div>
-      <div ref={hostRef} className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted sm:aspect-[16/9]">
-        {mode !== "webgl" && <img src={heroImage} alt={t.alt} className="absolute inset-0 h-full w-full object-cover" />}
-        {mode === "webgl" && <span className="sr-only">{t.alt}</span>}
-      </div>
-      <p className="mt-3 text-sm text-muted-foreground">{mode === "static" ? t.fallback : t.hint}</p>
-    </div>
-  );
+  return <div ref={hostRef} aria-hidden="true" className="pointer-events-none absolute inset-0" />;
 }

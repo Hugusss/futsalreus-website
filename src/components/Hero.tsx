@@ -1,10 +1,16 @@
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-futsal.webp";
 import heroImage1280 from "@/assets/hero-futsal-1280.webp";
 import heroImage960 from "@/assets/hero-futsal-960.webp";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
+import { isDemoHost } from "@/lib/environment";
 import type { Language } from "@/lib/language";
+
+// A WebGL ripple over the photo, trialled on previews only. Its chunk is requested after the page is idle, never
+// on the production domain, and never with reduced motion or data saving on.
+const HeroRipple = lazy(() => import("@/lab/HeroRipple"));
 
 interface HeroProps {
   language: Language;
@@ -27,6 +33,15 @@ const texts = {
 
 export function Hero({ language }: HeroProps) {
   const t = texts[language];
+  const imageRef = useRef<HTMLImageElement>(null);
+  const [ripple, setRipple] = useState(false);
+
+  useEffect(() => {
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    if (!isDemoHost() || connection?.saveData || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setTimeout(() => setRipple(true), 1200);
+    return () => window.clearTimeout(id);
+  }, []);
 
   return (
     <section
@@ -36,6 +51,7 @@ export function Hero({ language }: HeroProps) {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
+          ref={imageRef}
           src={heroImage}
           srcSet={`${heroImage960} 960w, ${heroImage1280} 1280w, ${heroImage} 1920w`}
           sizes="100vw"
@@ -45,6 +61,11 @@ export function Hero({ language }: HeroProps) {
           {...({ fetchpriority: "high" } as object)}
           decoding="async"
         />
+        {ripple && (
+          <Suspense fallback={null}>
+            <HeroRipple imageRef={imageRef} />
+          </Suspense>
+        )}
         <div className="absolute inset-0 bg-gradient-to-b from-maroon-dark/80 via-maroon/70 to-maroon-dark/90" />
       </div>
 

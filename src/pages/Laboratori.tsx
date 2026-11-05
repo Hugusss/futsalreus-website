@@ -1,14 +1,16 @@
 import { lazy, Suspense, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { FlaskConical } from "lucide-react";
 import { SubPage } from "@/components/SubPage";
+import { Button } from "@/components/ui/button";
 import { useNoIndex } from "@/hooks/use-no-index";
 import { usePageTitle } from "@/hooks/use-page-title";
 import type { PageProps } from "@/lib/language";
 
 // Each experiment, with its library, is its own chunk: nothing here reaches the other pages.
+// The ball and the ripple live on the real pages (the ball button on every page, the ripple on the home page),
+// so this page only explains them and links to them.
 const TacticsBoard = lazy(() => import("@/lab/TacticsBoard"));
-const BallTextFlow = lazy(() => import("@/lab/BallTextFlow"));
-const ShaderHero = lazy(() => import("@/lab/ShaderHero"));
 
 const texts = {
   ca: {
@@ -16,26 +18,29 @@ const texts = {
     title: "Laboratori",
     subtitle: "Tres experiments amb tecnologies web modernes, per decidir amb una prova a la mà abans d'afegir res a la web.",
     back: "Tornar a l'inici",
-    notice: "Pàgina de proves: no s'indexa ni surt al menú. No es publicarà tal qual.",
+    notice: "Pàgina de proves: no s'indexa ni surt al menú, i els experiments només es veuen en aquesta versió de prova. No es publicarà tal qual.",
     loading: "Carregant l'experiment…",
     verdict: "Valoració",
     tactics: {
-      title: "Pissarra tàctica",
+      title: "Pissarra tàctica interactiva",
       lib: "Anime.js",
-      idea: "Idea per a Metodologia: ensenyar una jugada en lloc de descriure-la. Les línies de la pista es dibuixen amb el scroll i una línia de temps mou els jugadors i la pilota.",
-      verdict: "Encaixa. Només es carregaria a Metodologia i, amb moviment reduït, la pista es veu sencera i la jugada no es reprodueix sola.",
+      idea: "Idea per a Metodologia: ensenyar una jugada en lloc de descriure-la. Arrossega els jugadors i la pilota, guarda cada moment com un pas, afegeix-ne o treu-ne, i reprodueix la jugada. Les línies de la pista es dibuixen amb el scroll.",
+      verdict: "Encaixa i ja és una eina de veritat: un entrenador pot muntar una jugada i ensenyar-la. Només es carregaria a Metodologia. Pendent de decidir: guardar o compartir jugades, que necessita un lloc on desar-les (avui la web no en té).",
     },
-    flow: {
-      title: "Text que envolta la pilota",
-      lib: "Pretext",
-      idea: "Pretext mesura el text sense tocar el DOM i deixa que cada línia tingui una amplada diferent. Aquí el text s'obre a banda i banda de la pilota mentre l'arrossegues.",
-      verdict: "Vistós però sense necessitat real: avui el CSS cobreix el que fa la web. Tindria sentit amb una galeria o un llistat molt llarg.",
+    ball: {
+      title: "La pilota sobre el text",
+      lib: "Pretext + canvas",
+      idea: "Una pilota realista, dibuixada pixel a pixel, és un botó rodó a la cantonada de cada pàgina. Prem-lo i la pilota surt: arrossega-la i llança-la, toca-la per xutar (hi ha un comptador de tocs) i el text de la pàgina s'obre al voltant seu. Torna a prémer el botó per guardar-la.",
+      verdict: "És un detall per jugar i per marcar personalitat, no informació: el client decideix si el vol i a quines pàgines. No es descarrega res fins que algú prem el botó. Amb moviment reduït no té gravetat ni inèrcia: només va on l'arrossegues.",
+      metodologia: "Prova-ho a Metodologia",
+      competicions: "Prova-ho a Competicions",
     },
     shader: {
-      title: "Foto amb ona",
+      title: "Ona sobre la foto de la portada",
       lib: "WebGL, amb OGL",
-      idea: "Una ona surt del punter sobre la foto de la portada. Només es dibuixa mentre l'ona és viva; amb moviment reduït o sense WebGL es veu la foto fixa.",
-      verdict: "Decoratiu. Es pot fer, però costa bateria i complexitat i no aporta contingut: no el recomano per a la portada.",
+      idea: "Una ona surt del punter sobre la foto de la portada i s'esvaeix. Només es dibuixa mentre l'ona és viva; amb moviment reduït, estalvi de dades o sense WebGL es veu la foto fixa de sempre.",
+      verdict: "Decoratiu: gasta una mica de bateria mentre l'ona és viva i no aporta contingut. Es pot deixar o treure sense tocar res més. Es carrega després que la pàgina estigui llesta, així que no frena la portada.",
+      home: "Veure-ho a la portada",
     },
   },
   es: {
@@ -43,26 +48,29 @@ const texts = {
     title: "Laboratorio",
     subtitle: "Tres experimentos con tecnologías web modernas, para decidir con una prueba en la mano antes de añadir nada a la web.",
     back: "Volver al inicio",
-    notice: "Página de pruebas: no se indexa ni sale en el menú. No se publicará tal cual.",
+    notice: "Página de pruebas: no se indexa ni sale en el menú, y los experimentos solo se ven en esta versión de prueba. No se publicará tal cual.",
     loading: "Cargando el experimento…",
     verdict: "Valoración",
     tactics: {
-      title: "Pizarra táctica",
+      title: "Pizarra táctica interactiva",
       lib: "Anime.js",
-      idea: "Idea para Metodología: enseñar una jugada en lugar de describirla. Las líneas de la pista se dibujan con el scroll y una línea de tiempo mueve a los jugadores y el balón.",
-      verdict: "Encaja. Solo se cargaría en Metodología y, con movimiento reducido, la pista se ve entera y la jugada no se reproduce sola.",
+      idea: "Idea para Metodología: enseñar una jugada en lugar de describirla. Arrastra a los jugadores y el balón, guarda cada momento como un paso, añade o quita pasos y reproduce la jugada. Las líneas de la pista se dibujan con el scroll.",
+      verdict: "Encaja y ya es una herramienta de verdad: un entrenador puede montar una jugada y enseñarla. Solo se cargaría en Metodología. Pendiente de decidir: guardar o compartir jugadas, que necesita un sitio donde guardarlas (hoy la web no lo tiene).",
     },
-    flow: {
-      title: "Texto que rodea el balón",
-      lib: "Pretext",
-      idea: "Pretext mide el texto sin tocar el DOM y deja que cada línea tenga un ancho distinto. Aquí el texto se abre a ambos lados del balón mientras lo arrastras.",
-      verdict: "Vistoso pero sin necesidad real: hoy el CSS cubre lo que hace la web. Tendría sentido con una galería o un listado muy largo.",
+    ball: {
+      title: "El balón sobre el texto",
+      lib: "Pretext + canvas",
+      idea: "Un balón realista, dibujado píxel a píxel, es un botón redondo en la esquina de cada página. Púlsalo y el balón sale: arrástralo y lánzalo, tócalo para chutar (hay un contador de toques) y el texto de la página se abre a su alrededor. Vuelve a pulsar el botón para guardarlo.",
+      verdict: "Es un detalle para jugar y dar personalidad, no información: el cliente decide si lo quiere y en qué páginas. No se descarga nada hasta que alguien pulsa el botón. Con movimiento reducido no tiene gravedad ni inercia: solo va donde lo arrastras.",
+      metodologia: "Pruébalo en Metodología",
+      competicions: "Pruébalo en Competiciones",
     },
     shader: {
-      title: "Foto con onda",
+      title: "Onda sobre la foto de la portada",
       lib: "WebGL, con OGL",
-      idea: "Una onda sale del puntero sobre la foto de la portada. Solo se dibuja mientras la onda está viva; con movimiento reducido o sin WebGL se ve la foto fija.",
-      verdict: "Decorativo. Se puede hacer, pero cuesta batería y complejidad y no aporta contenido: no lo recomiendo para la portada.",
+      idea: "Una onda sale del puntero sobre la foto de la portada y se desvanece. Solo se dibuja mientras la onda está viva; con movimiento reducido, ahorro de datos o sin WebGL se ve la foto fija de siempre.",
+      verdict: "Decorativo: gasta algo de batería mientras la onda está viva y no aporta contenido. Se puede dejar o quitar sin tocar nada más. Se carga cuando la página ya está lista, así que no frena la portada.",
+      home: "Verlo en la portada",
     },
   },
 };
@@ -100,15 +108,26 @@ const Laboratori = ({ language, onLanguageChange }: PageProps) => {
             <TacticsBoard language={language} />
           </Suspense>
         </Experiment>
-        <Experiment title={t.flow.title} lib={t.flow.lib} idea={t.flow.idea} verdictLabel={t.verdict} verdict={t.flow.verdict}>
-          <Suspense fallback={loading}>
-            <BallTextFlow language={language} />
-          </Suspense>
+        <Experiment title={t.ball.title} lib={t.ball.lib} idea={t.ball.idea} verdictLabel={t.verdict} verdict={t.ball.verdict}>
+          <div className="flex flex-wrap gap-3">
+            <Button variant="outline" asChild>
+              <Link to="/metodologia" viewTransition>
+                {t.ball.metodologia}
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link to="/competicions" viewTransition>
+                {t.ball.competicions}
+              </Link>
+            </Button>
+          </div>
         </Experiment>
         <Experiment title={t.shader.title} lib={t.shader.lib} idea={t.shader.idea} verdictLabel={t.verdict} verdict={t.shader.verdict}>
-          <Suspense fallback={loading}>
-            <ShaderHero language={language} />
-          </Suspense>
+          <Button variant="outline" asChild>
+            <Link to="/" viewTransition>
+              {t.shader.home}
+            </Link>
+          </Button>
         </Experiment>
       </div>
     </SubPage>

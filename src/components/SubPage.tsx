@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, type LucideIcon } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { PreviewExtras } from "@/components/PreviewExtras";
 import { Button } from "@/components/ui/button";
 import type { Language } from "@/lib/language";
 
@@ -46,6 +47,7 @@ export function SubPage({ language, onLanguageChange, icon: Icon, eyebrow, title
         </div>
       </main>
       <Footer language={language} />
+      <PreviewExtras language={language} />
     </div>
   );
 }
