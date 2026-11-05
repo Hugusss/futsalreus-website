@@ -53,6 +53,7 @@ src/
 │   ├── Competicions.tsx # Team categories, FCF calendar link
 │   ├── Activitats.tsx   # Club activities and events
 │   ├── Inscripcio.tsx   # Registration: printable PDF download
+│   ├── Botiga.tsx       # Shop demo (unlinked, noindex); products live in src/data/botiga.ts
 │   └── NotFound.tsx
 ├── components/          # Header, Hero, QuiSom, PartitsLink, Footer, SubPage, ScrollToTop
 │   └── ui/              # shadcn/ui primitives in use

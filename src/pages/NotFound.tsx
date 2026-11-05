@@ -1,8 +1,8 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { useNoIndex } from "@/hooks/use-no-index";
 import { usePageTitle } from "@/hooks/use-page-title";
 import type { PageProps } from "@/lib/language";
 
@@ -20,15 +20,7 @@ const texts = {
 const NotFound = ({ language, onLanguageChange }: PageProps) => {
   const t = texts[language];
   usePageTitle("404");
-
-  // The SPA fallback answers 200 for unknown paths, so tell crawlers not to index this page.
-  useEffect(() => {
-    const meta = document.createElement("meta");
-    meta.name = "robots";
-    meta.content = "noindex";
-    document.head.append(meta);
-    return () => meta.remove();
-  }, []);
+  useNoIndex();
 
   return (
     <div className="min-h-svh bg-background flex flex-col">

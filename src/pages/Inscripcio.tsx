@@ -2,9 +2,8 @@ import { ClipboardList, Download, FileText, Mail } from "lucide-react";
 import { SubPage } from "@/components/SubPage";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/use-page-title";
+import { CLUB_EMAIL } from "@/lib/links";
 import type { PageProps } from "@/lib/language";
-
-const CLUB_EMAIL = "futsalmontsant@gmail.com";
 
 const texts = {
   ca: {

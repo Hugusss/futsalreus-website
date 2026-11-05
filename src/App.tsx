@@ -5,6 +5,7 @@ import Metodologia from "./pages/Metodologia";
 import Competicions from "./pages/Competicions";
 import Activitats from "./pages/Activitats";
 import Inscripcio from "./pages/Inscripcio";
+import Botiga from "./pages/Botiga";
 import NotFound from "./pages/NotFound";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { readStoredLanguage, storeLanguage, type Language, type PageProps } from "./lib/language";
@@ -43,6 +44,8 @@ const router = createBrowserRouter([
       { path: "/competicions", Component: withLanguage(Competicions) },
       { path: "/activitats", Component: withLanguage(Activitats) },
       { path: "/inscripcio", Component: withLanguage(Inscripcio) },
+      // Shop demo: not linked from the navigation and not in the sitemap until the directors decide.
+      { path: "/botiga", Component: withLanguage(Botiga) },
       { path: "*", Component: withLanguage(NotFound) },
     ],
   },

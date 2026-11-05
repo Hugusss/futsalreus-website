@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Instagram, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CLUB_EMAIL } from "@/lib/links";
 import logo from "@/assets/logo.png";
 import type { Language } from "@/lib/language";
 
@@ -36,7 +37,7 @@ const socialLinks = [
 ];
 
 const contactInfo: ContactItem[] = [
-  { icon: Mail, text: "futsalmontsant@gmail.com", href: "mailto:futsalmontsant@gmail.com" },
+  { icon: Mail, text: CLUB_EMAIL, href: `mailto:${CLUB_EMAIL}` },
   { icon: Phone, text: "+34 683 386 660", href: "tel:+34683386660" },
   { icon: MapPin, text: "Carrer de les Borges del Camp, 2, 43203 Reus, Tarragona", href: MAPS_URL, external: true },
 ];
@@ -121,7 +122,7 @@ export function Footer({ language }: FooterProps) {
               <Link to="/inscripcio" viewTransition>{t.joinClub}</Link>
             </Button>
             <Button variant="hero" className="w-full" asChild>
-              <a href="mailto:futsalmontsant@gmail.com">{t.sendMessage}</a>
+              <a href={`mailto:${CLUB_EMAIL}`}>{t.sendMessage}</a>
             </Button>
           </div>
         </div>
